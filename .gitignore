@@ -8,6 +8,7 @@ node_modules
 
 # testing
 /coverage
+nginx-1.19.1
 
 # production
 /build
