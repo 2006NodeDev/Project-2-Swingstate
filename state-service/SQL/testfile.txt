@@ -1,15 +1,30 @@
-Emma 7/27/20. SQL for setup of polling table in state service
+Emma 7/27/20. SQL for setup of polling table AND dummy data in state service
 
 set schema 'state-services'; --or whatever the state service schema is called
+drop table poll_table;
 create table poll_table(
 	poll_id serial primary key,
 	poll_name text,
 	poll_date timestamp,
 	democratic_percent int,
 	republican_percent int,
-	state_id int,
+	state_id int references swingstate_state_service.states ("state_ID"),
 	margin int
 );
+
+insert into poll_table(poll_name, poll_date, democratic_percent, republican_percent, state_id, margin)
+	values ('YouGov', now(), 51, 40, 1, 51-40),
+			('Public Policy Polling', now(), 47, 39, 2, 47-39),
+			('YouGov', now(), 46, 42, 3, 46-42),
+			('Public Policy Polling', now(), 46, 42, 4, 46-42),
+			('East Carolina University', now(), 41, 41, 5, 0),
+			('GQR Research', now(), 49, 47, 6, 2),
+			('Public Policy Polling', now(), 46, 44, 7, 2),
+			('Public Policy Polling', now(), 20, 21, 8, -1),
+			('Fox News', now(), 42, 45, 9, -3),
+			('Auburn University', now(), 36, 44, 10, -8),
+			('Civiqs', now(), 42, 42, 11, 0);
+
 
 Cecilia 7/27/20. SQL for states in state service
 
