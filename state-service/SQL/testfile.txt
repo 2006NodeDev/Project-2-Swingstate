@@ -25,6 +25,7 @@ insert into poll_table(poll_name, poll_date, democratic_percent, republican_perc
 			('Auburn University', now(), 36, 44, 10, -8),
 			('Civiqs', now(), 42, 42, 11, 0);
 
+
 Cecilia 7/27/20. SQL for states in state service
 
 create table states (
