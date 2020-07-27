@@ -1,0 +1,6 @@
+create table user_state_bridge(
+	"user_ID" int references users ("user_ID"),
+	"state_ID" int references swingstate_state_service.states ("state_ID"),
+	"updateFrequency" int not null,
+	"pollingThreshold" int not null
+);
