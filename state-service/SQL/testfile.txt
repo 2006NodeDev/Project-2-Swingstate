@@ -1,0 +1,9 @@
+create table states (
+	"state_id" serial primary key,
+	"state_name" text not null unique,
+	"democrat_candidate" text not null,
+	"republican_candidate" text not null,
+	"registration_link" text not null,
+	"voting_location" text,
+	"picture_path" text
+);
