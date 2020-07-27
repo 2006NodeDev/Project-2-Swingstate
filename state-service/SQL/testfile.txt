@@ -1,0 +1,12 @@
+Emma 7/27/20. SQL for setup of polling table in state service
+
+set schema 'state-services'; --or whatever the state service schema is called
+create table poll_table(
+	poll_id serial primary key,
+	poll_name text,
+	poll_date timestamp,
+	democratic_percent int,
+	republican_percent int,
+	state_id int,
+	margin int
+);
