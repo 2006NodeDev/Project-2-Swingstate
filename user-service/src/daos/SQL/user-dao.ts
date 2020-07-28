@@ -13,7 +13,7 @@ export async function getAllUsers(): Promise<User[]> {
     try {
         client = await connectionPool.connect() 
      
-        let results = await client.query(`select u."user_id", u."username" , u."password" , u."first_name", u."last_name", u."email" ,r."role_id" , r."role_name", u."image" from flamehazesociety.users u left join flamehazesociety.roles r on u."role" = r."role_id";`)
+        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."homeState", u."userImage" from swingstate_user_service.users u;`)
         return results.rows.map(UserDTOtoUserConvertor)
 
     } catch (e) {
@@ -32,8 +32,7 @@ export async function getUserById(id: number):Promise<User> {
       
         client = await connectionPool.connect()
       
-        let results = await client.query(`select u."user_id", u."username" , u."password" , u."first_name", u."last_name", u."email" ,r."role_id" , r."role_name", u."image" from flamehazesociety.users u left join flamehazesociety.roles r on u."role" = r."role_id" where u."user_id" = $1;`,
-            [id])
+        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."homeState", u."userImage" from swingstate_user_service.users u where u."user_id" = $1;`,[id])
         
         if(results.rowCount === 0){
             throw new Error('User Not Found')
@@ -59,7 +58,7 @@ export async function getUserByUsernameAndPassword(username:string, password:str
     try {
         client = await connectionPool.connect()
 
-        let results = await client.query(`select u."user_id", u."username" , u."password" , u."first_name", u."last_name", u."email" ,r."role_id" , r."role_name", u."image" from flamehazesociety.users u left join flamehazesociety.roles r on u."role" = r."role_id" where u."username" = $1 and u."password" = $2;`,[username, password])
+        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."homeState", u."userImage" from swingstate_user_service.users u where u."username" = $1 and u."password" = $2;`,[username, password])
         
         if(results.rowCount === 0){
             throw new Error('User Not Found')
@@ -87,16 +86,10 @@ export async function saveOneUser(newUser:User):Promise<User>{
 
         await client.query('BEGIN;')
 
-        let role = await client.query(`select r."role_id" from flamehazesociety.roles r where r."role_name" = $1 and role_id = $2`, [newUser.role["role"], newUser.role["roleId"]])
-        if(role.rowCount === 0){
-            throw new Error('Role Not Found')
-        }
-        role = role.rows[0].role_id
-
-        let results = await client.query(`insert into flamehazesociety.users ("username", "password", "first_name", "last_name", "email", "role", "image")
-            values($1,$2,$3,$4,$5,$6,$7) returning "user_id" `, [newUser.username, newUser.password, newUser.firstName, newUser.lastName, newUser.email, role, newUser.image])
+        let results = await client.query(`insert into swingstate_user_service.users ("username","password","email","homeState","userImage")
+            values($1,$2,$3,$4,$5) returning "user_id" `, [newUser.username, newUser.password, newUser.email, newUser.homeState, newUser.userImage])
         
-        newUser.userId = results.rows[0].user_id
+        newUser.user_id = results.rows[0].user_id
 
         await client.query('COMMIT;')
 
@@ -108,7 +101,7 @@ export async function saveOneUser(newUser:User):Promise<User>{
 
     }catch(e){
         client && client.query('ROLLBACK;')
-        if(e.message === 'Role Not Found' || 'Not Submitted'){
+        if(e.message === 'Not Submitted'){
             throw new InvalidEntryError()
         }
         console.log(e)
@@ -128,7 +121,7 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         await client.query('BEGIN;')
     
         if (updatedUser.username) {
-            let results = await client.query(`update flamehazesociety.users set "username" = $1 where "user_id" = $2;`, [updatedUser.username, updatedUser.userId])
+            let results = await client.query(`update swingstate_user_service.users set "username" = $1 where "user_id" = $2;`, [updatedUser.username, updatedUser.user_id])
 
            if(results.rowCount === 0){
                 throw new Error('User not found')
@@ -136,23 +129,7 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         }
 
         if (updatedUser.password) {
-            let results = await client.query(`update flamehazesociety.users set "password" = $1 where "user_id" = $2;`, [updatedUser.password, updatedUser.userId])
-
-            if(results.rowCount === 0){
-                throw new Error('User not found')
-            }
-        }
-
-        if (updatedUser.firstName) {
-            let results = await client.query(`update flamehazesociety.users set "first_name" = $1 where "user_id" = $2;`, [updatedUser.firstName, updatedUser.userId])
-
-            if(results.rowCount === 0){
-                throw new Error('User not found')
-            }
-        }
-
-        if (updatedUser.lastName) {
-            let results = await client.query(`update flamehazesociety.users set "last_name" = $1 where "user_id" = $2;`, [updatedUser.lastName, updatedUser.userId])
+            let results = await client.query(`update swingstate_user_service.users set "password" = $1 where "user_id" = $2;`, [updatedUser.password, updatedUser.user_id])
 
             if(results.rowCount === 0){
                 throw new Error('User not found')
@@ -160,31 +137,23 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         }
 
         if (updatedUser.email) {
-            let results = await client.query(`update flamehazesociety.users set "email" = $1 where "user_id" = $2;`, [updatedUser.email, updatedUser.userId])
+            let results = await client.query(`update swingstate_user_service.users set "email" = $1 where "user_id" = $2;`, [updatedUser.email, updatedUser.user_id])
 
             if(results.rowCount === 0){
                 throw new Error('User not found')
             }
         }
 
-        if (updatedUser.role) {
+        if (updatedUser.homeState) {
+            let results = await client.query(`update swingstate_user_service.users set "homeState" = $1 where "user_id" = $2;`, [updatedUser.homeState, updatedUser.user_id])
 
-            await client.query('BEGIN;')
-            let role = await client.query(`select r."role_id" from flamehazesociety.roles r where r."role_name" = $1 and role_id = $2`, [updatedUser.role["role"], updatedUser.role["roleId"]])
-        if(role.rowCount === 0){
-            throw new Error('Role Not Found')
-        }
-        role = role.rows[0].role_id
-        
-            let results = await client.query(`update flamehazesociety.users set "role" = $1 where "user_id" = $2;`, [role, updatedUser.userId])
-
-            if(results.rowCount === 0){
+           if(results.rowCount === 0){
                 throw new Error('User not found')
             }
         }
 
-        if (updatedUser.image) {
-            let results = await client.query(`update flamehazesociety.users set "image" = $1 where "user_id" = $2;`, [updatedUser.image, updatedUser.userId])
+        if (updatedUser.userImage) {
+            let results = await client.query(`update swingstate_user_service.users set "userImage" = $1 where "user_id" = $2;`, [updatedUser.userImage, updatedUser.user_id])
 
            if(results.rowCount === 0){
                 throw new Error('User not found')
@@ -198,7 +167,7 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
     }catch(e){
         client && client.query('ROLLBACK;')
         
-        if (e.message === 'Role Not Found' || 'User not found') {
+        if (e.message === 'User not found') {
             throw new UserNotFoundError()
         }
         console.log(e)
@@ -215,7 +184,7 @@ export async function deleteUser(deletedUser:User):Promise<User>{
     try{
         client = await connectionPool.connect()
       
-        let results = await client.query(`delete from flamehazesociety.users where "user_id" = $1`, [deletedUser.userId])
+        let results = await client.query(`delete from swingstate_user_service.users where "user_id" = $1`, [deletedUser.user_id])
 
         if(results.rowCount === 0){
             throw new Error('User not found')

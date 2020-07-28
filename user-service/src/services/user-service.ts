@@ -1,8 +1,8 @@
 import { getAllUsers, getUserById, saveOneUser } from "../daos/SQL/user-dao";
 import { User } from "../models/User";
-import { saveProfilePicture } from "../daos/CloudStorage/user-images";
-import { bucketBaseUrl } from "../daos/CloudStorage";
-import { expressEventEmitter, customExpressEvents } from "../event-listeners";
+// import { saveProfilePicture } from "../daos/CloudStorage/user-images";
+// import { bucketBaseUrl } from "../daos/CloudStorage";
+// import { expressEventEmitter, customExpressEvents } from "../event-listeners";
 
 export async function getAllUsersService(): Promise<User[]> {
     return await getAllUsers()
@@ -16,18 +16,18 @@ export async function getUserByIDService(id: number): Promise<User> {
 export async function saveOneUserService(newUser: User): Promise<User> {
 
     try {
-        let base64Image = newUser.image
-        let [dataType, imageBase64Data] = base64Image.split(';base64,')
+    //     let base64Image = newUser.userImage
+    //     let [dataType, imageBase64Data] = base64Image.split(';base64,')
 
-        let contentType = dataType.split('/').pop()
-        if (newUser.image) {
-            newUser.image = `${bucketBaseUrl}/users/${newUser.username}/profile.${contentType}`
-        }
+    //     let contentType = dataType.split('/').pop()
+    //     if (newUser.userImage) {
+    //         newUser.userImage = `${bucketBaseUrl}/users/${newUser.username}/profile.${contentType}`
+    //     }
 
         let savedUser = await saveOneUser(newUser)
 
-        await saveProfilePicture(contentType, imageBase64Data, `users/${newUser.username}/profile.${contentType}`)
-        expressEventEmitter.emit(customExpressEvents.NEW_USER, newUser)
+        // await saveProfilePicture(contentType, imageBase64Data, `users/${newUser.username}/profile.${contentType}`)
+        // expressEventEmitter.emit(customExpressEvents.NEW_USER, newUser)
         return savedUser
     } catch (e) {
         console.log(e)

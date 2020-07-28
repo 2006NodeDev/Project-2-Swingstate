@@ -1,8 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express'
-import { User, Role } from '../models/User'
-import {updateOneUser, deleteUser } from '../daos/SQL/user-dao'
+import { User } from '../models/User'
+import { updateOneUser, deleteUser } from '../daos/SQL/user-dao'
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
-import { authorizationMiddleware } from '../middleware/authorization-middleware'
+// import { authorizationMiddleware } from '../middleware/authorization-middleware'
 import { saveOneUserService, getUserByIDService, getAllUsersService } from '../services/user-service'
 
 
@@ -15,9 +15,9 @@ export const userRouter = express.Router()
 
 // Get All Users
 userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
-    
+
     try {
-        let allUsers = await getAllUsersService() 
+        let allUsers = await getAllUsersService()
         res.json(allUsers)
     } catch (e) {
         next(e)
@@ -26,10 +26,10 @@ userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
 //Get Users by id
 userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
-    
+
     let { id } = req.params
-    
-    if(isNaN(+id)){
+
+    if (isNaN(+id)) {
         res.status(400).send('Id must be a number')
     } else {
         try {
@@ -43,20 +43,18 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
 
 // Save a New User
 userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
-   
-    let { username, password, firstName, lastName, email, role, image } = req.body
 
-    if((username = String && username) && (password = String && password) && (firstName = String && firstName) && (lastName = String && lastName) && (email = String && email) && (role.role = String && role.role) && (role.roleId = Number && role.roleId)) {
-        
+    let { username, password, email, homeState, userImage } = req.body
+
+    if ((username = String && username) && (password = String && password) && (email = String && email)) {
+
         let newUser: User = {
-            userId: 0,
+            user_id: 0,
             username,
             password,
-            firstName,
-            lastName,
             email,
-            role,
-            image,
+            homeState,
+            userImage,
         }
 
         try {
@@ -65,85 +63,66 @@ userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
         } catch (e) {
             next(e)
         }
-    } else if((!username)){
-        res.status(400).send("You must include a username. This username must be unique, not that I think you are or anything.")
-    }else if((!password)){
-        res.status(400).send("You must include a password. Don't use sappy stuff, I'm judging you.")
-    }
-    else if((!firstName)){
-        res.status(400).send("You must include your first name. Not that I mind calling you swine.")
-    }
-    else if((!lastName)){
-        res.status(400).send("You must include your last name. I need to know who to look up if you cross me.")
-    }
-    else if((!email)){
-        res.status(400).send("You must include an email. Your last name, first initial and @fhs.net is the only valid option.")
-    }
-    else if((!role.role)){
-        res.status(400).send("You must include a role. Valid roles are Admin(1), Finance Manager(2), Employee(3). Know your place.")
-    }
-    else if((!role.roleId)){
-        res.status(400).send("You must include a roleId. Valid roles are Admin(1), Finance Manager(2), Employee(3). Only the Admin, a.k.a myself can update this info, so who's the real baka here?")
+    } else if ((!username)) {
+        res.status(400).send("You must include a username.")
+    } else if ((!password)) {
+        res.status(400).send("You must include a password.")
+    } else if ((!email)) {
+        res.status(400).send("You must include an email.")
     }
 })
-    
+
 // Update a User
 userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) => {
-    
-        let { userId, username, password, firstName, lastName, email, role, image} = req.body
-        
-        if((userId = Number && userId))  {
-            let updatedUser: User = {
-                username,
-                password,
-                firstName,
-                lastName,
-                role,
-                userId,
-                email,
-                image
-            }
-            updatedUser.email = email || undefined
-            updatedUser.username = username || undefined
-            updatedUser.password = password || undefined
-            updatedUser.role = role || undefined
-            updatedUser.userId = userId || undefined
-            updatedUser.firstName = firstName || undefined
-            updatedUser.lastName = lastName || undefined
-        
+
+    let { user_id, username, password, email, homeState, userImage } = req.body
+
+    if ((user_id = Number && user_id)) {
+        let updatedUser: User = {
+            user_id,
+            username,
+            password,
+            email,
+            homeState,
+            userImage,
+        }
+        updatedUser.email = email || undefined
+        updatedUser.username = username || undefined
+        updatedUser.password = password || undefined
+        updatedUser.user_id = user_id || undefined
+
         try {
             await updateOneUser(updatedUser)
 
             res.send('You have succesfully updated this user')
         }
-            
+
         catch (e) {
             next(e)
         }
-    } else if((!userId)){
+    } else if ((!user_id)) {
         res.status(400).send("You must include a userId number for the user you wish to update.")
     }
-    })
+})
 
 // Delete a User
-userRouter.delete('/', authorizationMiddleware(['Admin']), async (req: Request, res: Response, next: NextFunction) => {
-   
-        let { userId } = req.body
-    
-        if((userId = Number && userId))  {
-            
+userRouter.delete('/', async (req: Request, res: Response, next: NextFunction) => {
+
+    let { user_id } = req.body
+
+    if ((user_id = Number && user_id)) {
+
         let deletedUser: User = {
-            
+
             username: '',
             password: '',
-            firstName: '',
-            lastName: '',
-            role: new Role(),
-            userId,
+            user_id,
             email: '',
-            
+            homeState: '',
+            userImage: ''
+
         }
-        
+
         try {
             await deleteUser(deletedUser)
 
@@ -152,7 +131,7 @@ userRouter.delete('/', authorizationMiddleware(['Admin']), async (req: Request, 
         } catch (e) {
             next(e)
         }
-    }else if ((!userId)) {
+    } else if ((!user_id)) {
         res.status(400).send("You must include a userId number for the user you wish to delete.")
     }
-    })
+})

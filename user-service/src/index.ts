@@ -6,12 +6,12 @@ import { AuthenticationError } from './errors/authenticationError'
 import { loggingMiddleware } from './middleware/logging-middleware'
 import { sessionMiddleware } from './middleware/session-middleware'
 import { corsFilter } from './middleware/cors-filter'
-import { userTopic } from './messaging/index'
+// import { userTopic } from './messaging/index'
 import './event-listeners/new-user'
 import './event-listeners/updated-reimbursement'
 
 
-console.log(userTopic);
+// console.log(userTopic);
 
 const app = express()
 
