@@ -30,12 +30,12 @@ select * from states;
 
 create table polls(
 	poll_id serial primary key,
-	pollName text,
-	pollDate timestamp,
-	democratic_percent int,
-	republican_percent int,
+	pollName text not null,
+	pollDate timestamp not null,
+	democratic_percent int not null,
+	republican_percent int not null,
 	state_id int references states ("state_id"),
-	margin int
+	margin int not null
 );
 
 insert into polls(pollName, pollDate, democratic_percent, republican_percent, state_id, margin)
