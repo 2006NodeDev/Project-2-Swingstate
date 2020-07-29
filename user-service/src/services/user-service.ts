@@ -33,6 +33,4 @@ export async function saveOneUserService(newUser: User): Promise<User> {
         console.log(e)
         throw e
     }
-
-
 }
