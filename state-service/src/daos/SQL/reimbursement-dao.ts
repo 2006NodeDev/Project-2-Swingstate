@@ -3,8 +3,9 @@ import { connectionPool } from "."
 import { Reimbursement } from "../../models/Reimbursement"
 import { ReimbursementDTOtoReimbursementConverter } from "../../utils/ReimbursementDTO-to-Reimbursement-converter"
 import { InvalidEntryError } from "../../errors/InvalidEntryError"
-import { UserNotFoundError } from "../../errors/userNotFoundError"
+// import { UserNotFoundError } from "../../errors/stateNotFoundError"
 import { ResourceNotFoundError } from "../../errors/resourceNotFoundError"
+import { StateNotFoundError } from "../../errors/stateNotFoundError"
 
 
 // Get all Reimbursements
@@ -75,7 +76,7 @@ export async function updateReimbursement(updatedReimbursement: Reimbursement): 
         await client.query('BEGIN;')
 
         if (!updatedReimbursement.reimbursementId) {
-            throw new UserNotFoundError
+             throw new StateNotFoundError
         } else {
 
             if (updatedReimbursement.author) {

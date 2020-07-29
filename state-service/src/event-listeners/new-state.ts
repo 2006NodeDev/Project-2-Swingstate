@@ -1,13 +1,13 @@
 import { expressEventEmitter, customExpressEvents } from ".";
-import { User } from "../models/User";
+import { State } from "../models/State";
 import { userTopic } from "../messaging";
 
 
-expressEventEmitter.on(customExpressEvents.NEW_USER, (newUser: User) => {
+expressEventEmitter.on(customExpressEvents.NEW_STATE, (newState: State) => {
     
     setImmediate(async () => {
         try {
-            let res = await userTopic.publishJSON(newUser)
+            let res = await userTopic.publishJSON(newState)
             console.log(res);
             
         } catch (e) {
