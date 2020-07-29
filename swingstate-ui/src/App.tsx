@@ -33,8 +33,8 @@ function App() {
   
         <Route path='/login' render={(props) => (<LoginComponent changeCurrentUser={changeCurrentUser} {...props} />)} />
         <Route path='/register' component={RegisterComponent} />
-        <Route path='/profile/:userId' component={ProfileComponent} />
-        <Route path='/edit/:userId' component={EditUserComponent}/>
+        <Route path='/profile/:user_id' component={ProfileComponent} />
+        <Route path='/edit/:user_id' component={EditUserComponent}/>
         <Route path='/users' component={AllUsersComponent} />
         <Route path='/logout' component={LogoutComponent} />
         <Route path='/reimbursement/submit' component={SubmitReimbursementComponent} />
