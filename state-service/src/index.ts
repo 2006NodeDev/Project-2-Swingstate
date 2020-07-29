@@ -7,7 +7,7 @@ import { corsFilter } from './middleware/cors-filter'
 import './event-listeners/new-state'
 import './event-listeners/updated-reimbursement'
 import { stateRouter } from './routers/state-router'
-
+import { pollingRouter } from './routers/polling-router'
 
 //console.log(userTopic);
 
@@ -21,6 +21,7 @@ app.use(sessionMiddleware)
 
 app.use('/states', stateRouter)
 app.use('/reimbursements', reimbursementRouter)
+app.use('/polls', pollingRouter)
 
 app.get('/health', (req: Request, res: Response) => {
     res.sendStatus(200)

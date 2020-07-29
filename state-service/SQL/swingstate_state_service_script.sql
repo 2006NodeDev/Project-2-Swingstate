@@ -55,7 +55,7 @@ create table polls(
 	margin int not null
 );
 
-insert into polls(pollName, pollDate, democratic_percent, republican_percent, state_id, margin)
+insert into polls(poll_name, poll_date, democratic_percent, republican_percent, state_id, margin)
 	values ('YouGov', now(), 51, 40, 1, 51-40),
 			('Public Policy Polling', now(), 47, 39, 2, 47-39),
 			('YouGov', now(), 46, 42, 3, 46-42),
