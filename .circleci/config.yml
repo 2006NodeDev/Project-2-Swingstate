@@ -1,0 +1,33 @@
+version: 2.1
+orbs:
+  slack: circleci/slack@3.4.2
+jobs:
+  build-swingstate:
+    docker:
+    - image: circleci/node:12.18.2
+    steps:
+      - checkout
+      - run: 
+          working_directory: ~/Project-2-Swingstate
+          name: Install
+          command: |
+            npm install
+      - run: 
+          working_directory: ~/Project-2-Swingstate
+          name: Test
+          command: |
+            npm test
+      - run: 
+          working_directory: ~/Project-2-Swingstate
+          name: Build
+          command: |
+            npm run build
+      - slack/status:
+          channel: G017L6Z17NZ
+          mentions: 'CHANNEL'
+          success_message: 'Code is ready for you to pull from the testing branch'
+          failure_message: 'You should probably tell Tanique that the code failed'
+workflows:
+    build-and-test:
+      jobs:
+        - build-swingstate
