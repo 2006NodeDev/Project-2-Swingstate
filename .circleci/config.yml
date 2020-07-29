@@ -5,20 +5,19 @@ jobs:
   build-swingstate:
     docker:
     - image: circleci/node:12.18.2
+    -working_directory: ~/Project/Project-2-Swingstate/*
     steps:
-      - checkout
+      - checkout:
+          path: ~/Project-2-Swingstate
       - run: 
-          working_directory: ~/Project/Project-2-Swingstate/user-service
           name: Install
           command: |
             npm install
       - run: 
-          working_directory: ~/Project/Project-2-Swingstate/user-service
           name: Test
           command: |
             npm test
       - run: 
-          working_directory: ~/Project/Project-2-Swingstate/user-service
           name: Build
           command: |
             npm run build
