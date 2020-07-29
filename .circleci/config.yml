@@ -13,7 +13,6 @@ jobs:
           command: |
             npm install
       - slack/status:
-          channel: G017L6Z17NZ
           mentions: 'CHANNEL'
           success_message: 'Code is ready for you to pull from the testing branch'
           failure_message: 'You should probably tell Tanique that the code failed'
