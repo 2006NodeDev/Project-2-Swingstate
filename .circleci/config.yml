@@ -7,16 +7,6 @@ jobs:
     - image: circleci/node:12.18.2
     steps:
       - checkout
-      - run: 
-          working_directory: ~/Project/Project-2-Swingstate/*
-          name: Install
-          command: |
-            npm install
-      - run: 
-          working_directory: ~/Project/Project-2-Swingstate/*
-          name: Build
-          command: |
-            npm run build
       - slack/status:
           channel: G017L6Z17NZ
           mentions: 'CHANNEL'
