@@ -8,17 +8,17 @@ jobs:
     steps:
       - checkout
       - run: 
-          working_directory: ~/Project/Project-2-Swingstate
+          working_directory: ~/Project/Project-2-Swingstate/user-service
           name: Install
           command: |
             npm install
       - run: 
-          working_directory: ~/Project/Project-2-Swingstate
+          working_directory: ~/Project/Project-2-Swingstate/user-service
           name: Test
           command: |
             npm test
       - run: 
-          working_directory: ~/Project/Project-2-Swingstate
+          working_directory: ~/Project/Project-2-Swingstate/user-service
           name: Build
           command: |
             npm run build
