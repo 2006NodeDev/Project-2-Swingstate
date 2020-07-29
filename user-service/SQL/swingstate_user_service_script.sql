@@ -1,8 +1,6 @@
+drop schema if exists swingstate_user_service cascade;
 create schema swingstate_user_service;
 set schema 'swingstate_user_service';
-
-drop table user_state_bridge;
-drop table users;
 
 create table users(
 	"user_id" serial primary key,
