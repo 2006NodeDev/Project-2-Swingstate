@@ -14,7 +14,7 @@ export const userRouter = express.Router()
 // userRouter.use(authenticationMiddleware)
 
 // Get All Users
-userRouter.get('/', authorizationMiddleware(['Admin']), async (req: Request, res: Response, next: NextFunction) => {
+userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     
     try {
         let allUsers = await getAllUsersService() 
