@@ -1,6 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { userRouter} from './routers/user-router'
-import { reimbursementRouter } from './routers/reimbursement-router'
 import { getUserByUsernameAndPassword } from './daos/SQL/user-dao'
 import { AuthenticationError } from './errors/authenticationError'
 import { loggingMiddleware } from './middleware/logging-middleware'
@@ -8,7 +7,6 @@ import { sessionMiddleware } from './middleware/session-middleware'
 import { corsFilter } from './middleware/cors-filter'
 // import { userTopic } from './messaging/index'
 import './event-listeners/new-user'
-import './event-listeners/updated-reimbursement'
 
 
 // console.log(userTopic);
@@ -22,7 +20,6 @@ app.use(corsFilter)
 app.use(sessionMiddleware)
 
 app.use('/users', userRouter)
-app.use('/reimbursements', reimbursementRouter)
 
 app.get('/health', (req:Request,res:Response)=>{
     res.sendStatus(200)

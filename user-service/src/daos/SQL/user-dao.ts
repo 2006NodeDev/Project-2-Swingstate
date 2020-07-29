@@ -89,7 +89,7 @@ export async function saveOneUser(newUser:User):Promise<User>{
         let results = await client.query(`insert into swingstate_user_service.users ("username","password","email","homeState","userImage")
             values($1,$2,$3,$4,$5) returning "user_id" `, [newUser.username, newUser.password, newUser.email, newUser.homeState, newUser.userImage])
         
-        newUser.user_id = results.rows[0].user_id
+        newUser.user_id = results.rows[0].user_id  
 
         await client.query('COMMIT;')
 
