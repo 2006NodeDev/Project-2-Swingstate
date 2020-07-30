@@ -14,7 +14,13 @@ jobs:
             npm install
       - slack/status:
           mentions: 'CHANNEL'
-          success_message: 'Code is ready for you to pull from the testing branch'
+          only_for_branches: 'master'
+          success_message: 'The master branch has been updated'
+          failure_message: 'You should probably tell Tanique that the code failed'
+      - slack/status:
+          mentions: 'CHANNEL'
+          only_for_branches: 'testing'
+          success_message: 'New code is ready for you to pull from testing branch'
           failure_message: 'You should probably tell Tanique that the code failed'
 workflows:
     build-and-test:
