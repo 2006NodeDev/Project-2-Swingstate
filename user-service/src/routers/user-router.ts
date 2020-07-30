@@ -87,7 +87,7 @@ userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) =>
         updatedUser.username = username || undefined
         updatedUser.password = password || undefined
         updatedUser.user_id = user_id || undefined
-        updatedUser.role = role || undefined
+        // updatedUser.role = role || undefined
 
         try {
             await updateOneUser(updatedUser)

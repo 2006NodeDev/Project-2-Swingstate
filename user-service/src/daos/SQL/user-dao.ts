@@ -160,13 +160,13 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
             }
         }
 
-        if (updatedUser.role) {
-            let results = await client.query(``, [updatedUser.role, updatedUser.user_id])
+        // if (updatedUser.role) {
+        //     let results = await client.query(``, [updatedUser.role, updatedUser.user_id])
 
-            if(results.rowCount === 0) {
-                throw new Error('User not found')
-            }
-        }
+        //     if(results.rowCount === 0) {
+        //         throw new Error('User not found')
+        //     }
+        // }
     
         await client.query('COMMIT;')
 
