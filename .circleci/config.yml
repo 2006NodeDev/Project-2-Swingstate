@@ -1,6 +1,12 @@
 version: 2.1
 orbs:
   slack: circleci/slack@3.4.2
+triggers:
+  filters:
+    branches:
+      only:
+        - master
+        - testing
 jobs:
   build-swingstate:
     docker:
@@ -18,10 +24,5 @@ jobs:
           failure_message: 'You should probably tell Tanique that the code failed'
 workflows:
     build-and-test:
-      filters:
-             branches:
-               only:
-                 - master
-                 - testing
       jobs:
         - build-swingstate
