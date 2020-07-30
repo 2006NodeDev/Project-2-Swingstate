@@ -10,3 +10,5 @@ const sessionConfig:SessionOptions = {
 }
 
 export const sessionMiddleware = session(sessionConfig)
+
+//We shouldn't need this file after installing JWT

@@ -1,19 +1,17 @@
+drop schema if exists swingstate_user_service cascade;
 create schema swingstate_user_service;
 set schema 'swingstate_user_service';
-
-drop table user_state_bridge;
-drop table users;
 
 create table users(
 	"user_id" serial primary key,
 	"username" text unique not null,
 	"password" text not null,
 	"email" text not null,
-	"homeState" text,
-	"userImage" text
+	"home_state" text,
+	"user_image" text
 );
 
-insert into users ("username","password","email","homeState","userImage")
+insert into users ("username","password","email","home_state","user_image")
      values ('Alia','password','alia@mail@mail.com', 'Texas','http://dummyimage.com/241x101.jpg/dddddd/000000'),
 	        ('Emma','password','emma@mail@mail.com', 'New York','http://dummyimage.com/241x101.jpg/dddddd/000000'),
 			('Tanique','password','tanique@mail.com', 'Chicago','http://dummyimage.com/154x146.png/5fa2dd/ffffff'),
@@ -30,11 +28,11 @@ select * from users;
 create table user_state_bridge(
 	"user_id" int references users ("user_id"),
 	"state_id" int references swingstate_state_service.states ("state_id"),
-	"updateFrequency" int not null,
-	"pollingThreshold" int not null
+	"update_frequency" int not null,
+	"polling_threshold" int not null
 );
 
-insert into user_state_bridge ("user_id", "state_id", "updateFrequency", "pollingThreshold")
+insert into user_state_bridge ("user_id", "state_id", "update_frequency", "polling_threshold")
 	values (1, 1, 7, 50),
 			(2, 2, 7, 25),
 			(3, 3, 7, 75),

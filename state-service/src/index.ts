@@ -1,11 +1,9 @@
 import express, { Request, Response } from 'express'
-import { reimbursementRouter } from './routers/reimbursement-router'
 import { loggingMiddleware } from './middleware/logging-middleware'
 import { sessionMiddleware } from './middleware/session-middleware'
 import { corsFilter } from './middleware/cors-filter'
 // import { userTopic } from './messaging/index'
 import './event-listeners/new-state'
-import './event-listeners/updated-reimbursement'
 import { stateRouter } from './routers/state-router'
 import { pollingRouter } from './routers/polling-router'
 
@@ -20,7 +18,6 @@ app.use(corsFilter)
 app.use(sessionMiddleware)
 
 app.use('/states', stateRouter)
-app.use('/reimbursements', reimbursementRouter)
 app.use('/polls', pollingRouter)
 
 app.get('/health', (req: Request, res: Response) => {
@@ -40,7 +37,7 @@ app.use((err, req, res, next) => {
     }
 })
 
-app.listen(2020, () => {
+app.listen(2021, () => {
     console.log('Server Has Started');
 
 })
