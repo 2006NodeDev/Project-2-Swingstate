@@ -11,7 +11,6 @@ userRouter.use(authenticationMiddleware)
 
 // Get All Users
 userRouter.get('/', authorizationMiddleware(['Admin']), async (req: Request, res: Response, next: NextFunction) => {
-
     try {
         let allUsers = await getAllUsersService()
         res.json(allUsers)
@@ -51,6 +50,7 @@ userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
             email,
             homeState,
             userImage,
+            role: 'User'
         }
 
         try {
@@ -71,7 +71,7 @@ userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
 // Update a User
 userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) => {
 
-    let { user_id, username, password, email, homeState, userImage } = req.body
+    let { user_id, username, password, email, homeState, userImage, role } = req.body
 
     if ((user_id = Number && user_id)) {
         let updatedUser: User = {
@@ -81,11 +81,13 @@ userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) =>
             email,
             homeState,
             userImage,
+            role
         }
         updatedUser.email = email || undefined
         updatedUser.username = username || undefined
         updatedUser.password = password || undefined
         updatedUser.user_id = user_id || undefined
+        updatedUser.role = role || undefined
 
         try {
             await updateOneUser(updatedUser)
@@ -115,8 +117,8 @@ userRouter.delete('/', async (req: Request, res: Response, next: NextFunction) =
             user_id,
             email: '',
             homeState: '',
-            userImage: ''
-
+            userImage: '',
+            role: ''
         }
 
         try {

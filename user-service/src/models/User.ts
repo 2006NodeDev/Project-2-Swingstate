@@ -5,4 +5,5 @@ export class User {
   email: string
   homeState?: string
   userImage?: string
+  role: string 
 }

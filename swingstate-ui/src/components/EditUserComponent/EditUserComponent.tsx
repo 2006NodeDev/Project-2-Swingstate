@@ -53,6 +53,7 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
     const [password, changePassword] = useState('')
     const [homeState, changeHomeState] = useState('')
     const [email, changeEmail] = useState('')
+    const [role, changeRole] = useState('')
     let [userImage, changeUserImage] = useState(undefined)
 
     const updateUsername = (event: any) => {
@@ -77,6 +78,12 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
         event.preventDefault()
 
         changeEmail(event.currentTarget.value)
+    }
+
+    const updateRole = (event: any) => {
+        event.preventDefault()
+
+        changeRole(event.currentTarget.value)
     }
     
     const updateUserImage = (e: any) => {
@@ -106,7 +113,8 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
             password,
             homeState,
             email,
-            userImage
+            userImage,
+            role
         }
         await flamehazesocietyEditUser(editUser)
 
@@ -120,7 +128,7 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
                         <Grid item xs={12} sm={6} md={12} lg={6} className={classes.grid}>
                             <TextField id="username" label="Username" value={username} onChange={updateUsername} />
                             <TextField id="password" type='password' label="Password" value={password} onChange={updatePassword} />
-                            <TextField id="firstname" label="First Name" value={homeState} onChange={updateHomeState} />
+                            <TextField id="homestate" label="Home State" value={homeState} onChange={updateHomeState} />
                             {/* <TextField id="lastname" label="Last Name" value={lastName} onChange={updateLastname} /> */}
                             <TextField id="email" type='email' label="Email" value={email} onChange={updateEmail} />
                             <label htmlFor='file'>Profile Pic</label>
