@@ -3,7 +3,7 @@ export class UserDTO {
     username:string
     password: string
     email:string
-    homeState?:string
-    userImage?: string
+    home_state?:string
+    user_image?: string
     role: string
 } 
