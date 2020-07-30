@@ -3,7 +3,8 @@ import { User } from '../models/User'
 import { updateOneUser, deleteUser } from '../daos/SQL/user-dao'
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
 // import { authorizationMiddleware } from '../middleware/authorization-middleware'
-import { saveOneUserService, getUserByIDService, getAllUsersService } from '../services/user-service'
+import { saveOneUserService, getUserByIDService, getAllUsersService, getAdditionalUserInfoService } from '../services/user-service'
+import { AdditionalUserInfo } from '../models/additonalUserInfo'
 
 
 
@@ -34,6 +35,19 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
     } else {
         try {
             let user = await getUserByIDService(+id)
+            res.json(user)
+        } catch (e) {
+            next(e)
+        }
+    }
+})
+userRouter.get('/additional-user-info/:id', async (req: Request, res: Response, next: NextFunction) =>{
+    let {id} = req.params
+    if (isNaN(+id)) {
+        res.status(400).send('Id must be a number')
+    } else {
+        try {
+            let user:AdditionalUserInfo[] = await getAdditionalUserInfoService(+id)
             res.json(user)
         } catch (e) {
             next(e)

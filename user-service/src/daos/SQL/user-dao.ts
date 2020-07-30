@@ -1,10 +1,13 @@
 import { PoolClient } from "pg"
 import { connectionPool } from "."
 import { User } from "../../models/User"
+import { AdditionalUserInfo } from "../../models/additonalUserInfo"
 import { UserDTOtoUserConvertor } from "../../utils/UserDTO-to-User-converter"
+import { userInfoDTOToUserInfo } from "../../utils/AdditionalInfoDTO-to-AdditionalInfo"
 import { UserNotFoundError } from "../../errors/userNotFoundError"
 import { AuthenticationError } from "../../errors/authenticationError"
 import { InvalidEntryError } from "../../errors/InvalidEntryError"
+
 
 // Get All Users
 export async function getAllUsers(): Promise<User[]> {
@@ -200,5 +203,23 @@ export async function deleteUser(deletedUser:User):Promise<User>{
 
     }finally{
         client && client.release();
+    }
+}
+
+//get additional user info- their selected states, and info about their
+//polling preferences
+export async function getAdditionalInfoById(userId: number):Promise<AdditionalUserInfo[]>{
+    let client:PoolClient
+    try{
+        client = await connectionPool.connect()
+        let additionalInfo = await client.query(`select b."state_id", b."updateFrequency", b."pollingThreshold" from swingstate_user_service.user_state_bridge b where b.user_id = ${userId};`)
+        let reformattedInfo:AdditionalUserInfo[] = additionalInfo.rows.map((userInfoDTOToUserInfo))
+        console.log(reformattedInfo)
+        return reformattedInfo
+    }catch(e){
+        console.log(e)
+        throw new Error('Error with getting Additional Info using User Id')
+    }finally{
+        client && client.release()
     }
 }
