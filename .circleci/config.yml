@@ -2,12 +2,6 @@ version: 2.1
 orbs:
   slack: circleci/slack@3.4.2
 jobs:
-  triggers:
-  filters:
-    branches:
-      only:
-        - master
-        - testing
   build-swingstate:
     docker:
     - image: circleci/node:12.18.2
