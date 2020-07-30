@@ -12,7 +12,7 @@ export async function getAllStates(): Promise<State[]> {
     try {
         client = await connectionPool.connect()
 
-        let results = await client.query(`select s."state_id", s."stateName", s."democratic_candidate", s."republican_candidate", s."registration_link", s."voting_location", s."stateImage" from swingstate_state_service.states s order by s."state_id";`)
+        let results = await client.query(`select s."state_id", s."state_name", s."democratic_candidate", s."republican_candidate", s."registration_link", s."voting_location", s."state_image" from swingstate_state_service.states s order by s."state_id";`)
         return results.rows.map(StateDTOtoStateConvertor)
 
     } catch (e) {
@@ -31,7 +31,7 @@ export async function getStatesById(id: number): Promise<State> {
 
         client = await connectionPool.connect()
 
-        let results = await client.query(`select s."state_id", s."stateName", s."democratic_candidate", s."republican_candidate", s."registration_link", s."voting_location", s."stateImage" from swingstate_state_service.states s where s."state_id" = $1;`,
+        let results = await client.query(`select s."state_id", s."state_name", s."democratic_candidate", s."republican_candidate", s."registration_link", s."voting_location", s."state_image" from swingstate_state_service.states s where s."state_id" = $1;`,
             [id])
 
         if (results.rowCount === 0) {
@@ -59,7 +59,7 @@ export async function saveOneState(newState: State): Promise<State> {
 
         await client.query('BEGIN;')
 
-        let results = await client.query(`insert into swingstate_state_service.states ("stateName", "democratic_candidate", "republican_candidate", "registration_link", "voting_location", "stateImage")
+        let results = await client.query(`insert into swingstate_state_service.states ("state_name", "democratic_candidate", "republican_candidate", "registration_link", "voting_location", "state_image")
         values($1,$2,$3,$4,$5,$6) returning "state_id";`, [newState.stateName, newState.democraticCandidate, newState.republicanCandidate, newState.registrationLink, newState.votingLocation, newState.stateImage])
 
         newState.stateId = results.rows[0].state_id
@@ -94,7 +94,7 @@ export async function updateOneState(updatedState: State): Promise<State> {
         await client.query('BEGIN;')
 
         if (updatedState.stateName) {
-            let results = await client.query(`update swingstate_state_service.states set "stateName" = $1 where "state_id" = $2;`, [updatedState.stateName, updatedState.stateId])
+            let results = await client.query(`update swingstate_state_service.states set "state_name" = $1 where "state_id" = $2;`, [updatedState.stateName, updatedState.stateId])
 
             if (results.rowCount === 0) {
                 throw new Error('State not found')
@@ -134,7 +134,7 @@ export async function updateOneState(updatedState: State): Promise<State> {
         }
 
         if (updatedState.stateImage) {
-            let results = await client.query(`update swingstate_state_service.states set "stateImage" = $1 where "state_id" = $2;`, [updatedState.stateImage, updatedState.stateId])
+            let results = await client.query(`update swingstate_state_service.states set "state_image" = $1 where "state_id" = $2;`, [updatedState.stateImage, updatedState.stateId])
 
             if (results.rowCount === 0) {
                 throw new Error('State not found')
