@@ -5,4 +5,5 @@ export class UserDTO {
     email:string
     homeState?:string
     userImage?: string
+    role: string
 } 
