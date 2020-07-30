@@ -17,13 +17,12 @@ jobs:
           success_message: 'New code is ready for you to pull in the repository'
           failure_message: 'You should probably tell Tanique that the code failed'
 workflows:
-    build-and-test:
-      triggers:
+    triggers:
         filters:
              branches:
                only:
                  - master
                  - testing
-                 - circleci-project-setup
+    build-and-test:
       jobs:
         - build-swingstate
