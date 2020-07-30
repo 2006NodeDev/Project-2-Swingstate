@@ -4,15 +4,15 @@ set schema 'swingstate_state_service';
 
 create table states (
 	"state_id" serial primary key,
-	"stateName" text not null unique,
+	"state_name" text not null unique,
 	"democratic_candidate" text not null,
 	"republican_candidate" text not null,
 	"registration_link" text not null,
 	"voting_location" text,
-	"stateImage" text
+	"state_image" text
 );
 
-insert into states ("stateName", "democratic_candidate", "republican_candidate", "registration_link", "voting_location", "stateImage")
+insert into states ("state_name", "democratic_candidate", "republican_candidate", "registration_link", "voting_location", "state_image")
 	values ('Alabama', 'Doug Jones', 'Tommy Tuberville', 'https://www.sos.alabama.gov/alabama-votes/voter/register-to-vote', '600 Dexter Avenue, Montgomery, AL 36104', null),
 			('Arizona', 'Mark Kelly', 'Martha McSally', 'https://azsos.gov/elections/voting-election/register-vote-or-update-your-current-voter-information', '1700 W Washington St, Phoenix, AZ 85007', null),
 			('Colorado', 'John Hickenlooper', 'Corey Gardner', 'https://www.vote.org/register-to-vote/colorado/?gclid=Cj0KCQjwyur0BRDcARIsAEt86ICGJciURTJTKsqa-rRzlH-3J9VagjKS48d0ti2Fc_hCShv3sdsQDhwaApTmEALw_wcB', '200 E Colfax Ave, Denver, CO 80203', null),
@@ -28,15 +28,15 @@ select * from states;
 
 create table polls(
 	poll_id serial primary key,
-	pollName text not null,
-	pollDate timestamp default now(),
+	poll_name text not null,
+	poll_date timestamp default now(),
 	democratic_percent int not null,
 	republican_percent int not null,
 	state_id int references states ("state_id"),
 	margin int not null
 );
 
-insert into polls(pollName, pollDate, democratic_percent, republican_percent, state_id, margin)
+insert into polls(poll_name, poll_date, democratic_percent, republican_percent, state_id, margin)
 	values ('YouGov', now(), 51, 40, 1, 51-40),
 			('Public Policy Polling', now(), 47, 39, 2, 47-39),
 			('YouGov', now(), 46, 42, 3, 46-42),

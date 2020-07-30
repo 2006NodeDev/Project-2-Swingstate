@@ -6,10 +6,6 @@ import { updateOneUser, deleteUser } from '../daos/SQL/user-dao'
 import { saveOneUserService, getUserByIDService, getAllUsersService, getAdditionalUserInfoService } from '../services/user-service'
 import { AdditionalUserInfo } from '../models/additonalUserInfo'
 
-
-
-
-
 export const userRouter = express.Router()
 
 // userRouter.use(authenticationMiddleware)
