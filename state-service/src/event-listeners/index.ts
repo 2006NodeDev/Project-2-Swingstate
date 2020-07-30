@@ -4,5 +4,5 @@ export const expressEventEmitter = new EventEmitter()
 
 export const customExpressEvents = {
     NEW_STATE: 'NEW_STATE',
-    UPDATED_REIMBURSEMENT: 'UPDATED_REIMBURSEMENT'
+ 
 }
