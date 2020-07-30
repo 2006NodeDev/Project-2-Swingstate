@@ -14,6 +14,7 @@ jobs:
             npm install
       - slack/status:
           mentions: 'CHANNEL'
+          only_for_branches: 'master,testing'
           success_message: 'New code is ready for you to pull in the repository'
           failure_message: 'You should probably tell Tanique that the code failed'
 workflows:
