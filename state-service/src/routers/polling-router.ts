@@ -2,7 +2,7 @@ import express, { Request, Response} from 'express'
 import {getAllPollsService,getPollByIdService } from '../services/poll-service'
 export const pollingRouter = express.Router()
 
-pollingRouter.get('/allPolls', async(req:Request, res:Response) => {
+pollingRouter.get('/', async(req:Request, res:Response) => {
     let allPolls = await getAllPollsService()
     res.json(allPolls)
 })
