@@ -25,6 +25,7 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
   let [confirmPassword, changeConfirmPassword] = useState('')
   const [homeState, changeHomeState] = useState('')
   const [email, changeEmail] = useState('')
+  const [role, changeRole] = useState('')
   let [userImage, changeUserImage] = useState(undefined)
 
   const updateUsername = (event: any) => {
@@ -56,6 +57,11 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
     changeEmail(event.currentTarget.value)
   }
 
+  const updateRole = (event: any) => {
+    event.preventDefault()
+
+    changeRole(event.currentTarget.value)
+  }
 
   const updateUserImage = (e: any) => {
     let file: File = e.currentTarget.files[0]
@@ -85,7 +91,8 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
       password,
       email,
       homeState,
-      userImage
+      userImage,
+      role
     }
 
     await flamehazesocietyCreateNewUser(newUser)

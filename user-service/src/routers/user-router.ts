@@ -3,15 +3,17 @@ import { User } from '../models/User'
 import { updateOneUser, deleteUser } from '../daos/SQL/user-dao'
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
 // import { authorizationMiddleware } from '../middleware/authorization-middleware'
-import { saveOneUserService, getUserByIDService, getAllUsersService } from '../services/user-service'
+import { saveOneUserService, getUserByIDService, getAllUsersService, getAdditionalUserInfoService } from '../services/user-service'
+import { AdditionalUserInfo } from '../models/AdditonalUserInfo'
 
 export const userRouter = express.Router()
 
 // userRouter.use(authenticationMiddleware)
 
 // Get All Users
-userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
+userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  
     try {
         let allUsers = await getAllUsersService()
         res.json(allUsers)
@@ -36,6 +38,19 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
         }
     }
 })
+userRouter.get('/additional-user-info/:id', async (req: Request, res: Response, next: NextFunction) =>{
+    let {id} = req.params
+    if (isNaN(+id)) {
+        res.status(400).send('Id must be a number')
+    } else {
+        try {
+            let user:AdditionalUserInfo[] = await getAdditionalUserInfoService(+id)
+            res.json(user)
+        } catch (e) {
+            next(e)
+        }
+    }
+})
 
 // Save a New User
 userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
@@ -51,6 +66,7 @@ userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
             email,
             homeState,
             userImage,
+            role: 'User'
         }
 
         try {
@@ -71,7 +87,7 @@ userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
 // Update a User
 userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) => {
 
-    let { user_id, username, password, email, homeState, userImage } = req.body
+    let { user_id, username, password, email, homeState, userImage, role } = req.body
 
     if ((user_id = Number && user_id)) {
         let updatedUser: User = {
@@ -81,11 +97,13 @@ userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) =>
             email,
             homeState,
             userImage,
+            role
         }
         updatedUser.email = email || undefined
         updatedUser.username = username || undefined
         updatedUser.password = password || undefined
         updatedUser.user_id = user_id || undefined
+        // updatedUser.role = role || undefined
 
         try {
             await updateOneUser(updatedUser)
@@ -115,8 +133,8 @@ userRouter.delete('/', async (req: Request, res: Response, next: NextFunction) =
             user_id,
             email: '',
             homeState: '',
-            userImage: ''
-
+            userImage: '',
+            role: ''
         }
 
         try {

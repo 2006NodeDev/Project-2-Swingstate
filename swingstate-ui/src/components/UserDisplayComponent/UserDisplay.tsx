@@ -53,9 +53,9 @@ export const UserDisplayComponent: FunctionComponent<IUserDisplayProps> = (props
           <Typography className={classes.typography} variant='h4'>
             Email : {props.user.email}
           </Typography>
-          {/* <Typography className={classes.typography} variant='h4'>
-            Role : {props.user.role.role}
-          </Typography> */}
+          <Typography className={classes.typography} variant='h4'>
+            Role : {props.user.role}
+          </Typography>
         </Paper>
     </div >
   )

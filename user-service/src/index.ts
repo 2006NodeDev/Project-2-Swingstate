@@ -18,7 +18,6 @@ app.use(express.json({limit:'50mb'}))
 
 app.use(loggingMiddleware)
 app.use(corsFilter)
-//app.use(sessionMiddleware)
 // app.use(JWTVerifyMiddleware)
 
 app.use('/users', userRouter)
@@ -39,7 +38,6 @@ app.post('/login', async (req:Request, res:Response, next:NextFunction)=>{
             let user = await getUserByUsernameAndPassword(username, password)
             let token = jwt.sign(user,'thisIsASecret', {expiresIn: '1h'}) //THE SECRET should be in an env var
             res.header('Authorization', `Bearer ${token}`)
-            //req.session.user = user
             res.json(user)
         }catch(e){
             next(e)
