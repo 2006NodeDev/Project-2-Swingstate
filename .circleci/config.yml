@@ -18,10 +18,12 @@ jobs:
           failure_message: 'You should probably tell Tanique that the code failed'
 workflows:
     build-and-test:
-      filters:
+      triggers:
+        filters:
              branches:
                only:
                  - master
                  - testing
+                 - circleci-project-setup
       jobs:
         - build-swingstate
