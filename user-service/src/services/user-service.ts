@@ -1,5 +1,7 @@
-import { getAllUsers, getUserById, saveOneUser } from "../daos/SQL/user-dao";
+import { getAllUsers, getUserById, saveOneUser, getAdditionalInfoById } from "../daos/SQL/user-dao";
 import { User } from "../models/User";
+import {AdditionalUserInfo} from "../models/AdditonalUserInfo"
+//import {AdditionalUserInfo} from "../models/additonalUserInfo"
 // import { saveProfilePicture } from "../daos/CloudStorage/user-images";
 // import { bucketBaseUrl } from "../daos/CloudStorage";
 // import { expressEventEmitter, customExpressEvents } from "../event-listeners";
@@ -33,4 +35,8 @@ export async function saveOneUserService(newUser: User): Promise<User> {
         console.log(e)
         throw e
     }
+}
+
+export async function getAdditionalUserInfoService(userId: number):Promise<AdditionalUserInfo[]>{
+return await getAdditionalInfoById(userId)
 }

@@ -1,6 +1,12 @@
 version: 2.1
 orbs:
   slack: circleci/slack@3.4.2
+triggers:
+  filters:
+    branches:
+      only:
+        - master
+        - testing
 jobs:
   build-swingstate:
     docker:
@@ -14,7 +20,7 @@ jobs:
             npm install
       - slack/status:
           mentions: 'CHANNEL'
-          success_message: 'Code is ready for you to pull from the testing branch'
+          success_message: 'New code is ready for you to pull in the repository'
           failure_message: 'You should probably tell Tanique that the code failed'
 workflows:
     build-and-test:
