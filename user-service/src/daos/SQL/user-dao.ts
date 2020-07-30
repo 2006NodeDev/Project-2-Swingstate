@@ -1,7 +1,7 @@
 import { PoolClient } from "pg"
 import { connectionPool } from "."
 import { User } from "../../models/User"
-import { AdditionalUserInfo } from "../../models/additonalUserInfo"
+import { AdditionalUserInfo } from "../../models/AdditonalUserInfo"
 import { UserDTOtoUserConvertor } from "../../utils/UserDTO-to-User-converter"
 import { userInfoDTOToUserInfo } from "../../utils/AdditionalInfoDTO-to-AdditionalInfo"
 import { UserNotFoundError } from "../../errors/userNotFoundError"

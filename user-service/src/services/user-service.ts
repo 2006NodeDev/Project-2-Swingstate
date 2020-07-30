@@ -1,6 +1,6 @@
 import { getAllUsers, getUserById, saveOneUser, getAdditionalInfoById } from "../daos/SQL/user-dao";
 import { User } from "../models/User";
-import {AdditionalUserInfo} from "../models/additonalUserInfo"
+import {AdditionalUserInfo} from "../models/AdditonalUserInfo"
 //import {AdditionalUserInfo} from "../models/additonalUserInfo"
 // import { saveProfilePicture } from "../daos/CloudStorage/user-images";
 // import { bucketBaseUrl } from "../daos/CloudStorage";
