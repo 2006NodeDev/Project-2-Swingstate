@@ -8,6 +8,7 @@ import { UserNotFoundError } from "../../errors/userNotFoundError"
 import { AuthenticationError } from "../../errors/authenticationError"
 import { InvalidEntryError } from "../../errors/InvalidEntryError"
 
+const schema = process.env['SS_SCHEMA']||'swingstate_user_service';
 
 // Get All Users
 export async function getAllUsers(): Promise<User[]> {
@@ -16,7 +17,7 @@ export async function getAllUsers(): Promise<User[]> {
     try {
         client = await connectionPool.connect() 
      
-        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."home_state", u."user_image" from swingstate_user_service.users u;`)
+        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."home_state", u."user_image" from ${schema}.users u;`)
         return results.rows.map(UserDTOtoUserConvertor)
 
     } catch (e) {
@@ -35,7 +36,7 @@ export async function getUserById(id: number):Promise<User> {
       
         client = await connectionPool.connect()
       
-        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."home_state", u."user_image" from swingstate_user_service.users u where u."user_id" = $1;`,[id])
+        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."home_state", u."user_image" from ${schema}.users u where u."user_id" = $1;`,[id])
         
         if(results.rowCount === 0){
             throw new Error('User Not Found')
@@ -61,7 +62,7 @@ export async function getUserByUsernameAndPassword(username:string, password:str
     try {
         client = await connectionPool.connect()
 
-        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."home_state", u."user_image" from swingstate_user_service.users u where u."username" = $1 and u."password" = $2;`,[username, password])
+        let results = await client.query(`select u."user_id", u."username" , u."password" , u."email" , u."home_state", u."user_image" from ${schema}.users u where u."username" = $1 and u."password" = $2;`,[username, password])
         
         if(results.rowCount === 0){
             throw new Error('User Not Found')
@@ -89,7 +90,7 @@ export async function saveOneUser(newUser:User):Promise<User>{
 
         await client.query('BEGIN;')
 
-        let results = await client.query(`insert into swingstate_user_service.users ("username","password","email","home_state","user_image")
+        let results = await client.query(`insert into ${schema}.users ("username","password","email","home_state","user_image")
             values($1,$2,$3,$4,$5) returning "user_id" `, [newUser.username, newUser.password, newUser.email, newUser.homeState, newUser.userImage])
         
         newUser.user_id = results.rows[0].user_id  
@@ -124,7 +125,7 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         await client.query('BEGIN;')
     
         if (updatedUser.username) {
-            let results = await client.query(`update swingstate_user_service.users set "username" = $1 where "user_id" = $2;`, [updatedUser.username, updatedUser.user_id])
+            let results = await client.query(`update ${schema}.users set "username" = $1 where "user_id" = $2;`, [updatedUser.username, updatedUser.user_id])
 
            if(results.rowCount === 0){
                 throw new Error('User not found')
@@ -132,7 +133,7 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         }
 
         if (updatedUser.password) {
-            let results = await client.query(`update swingstate_user_service.users set "password" = $1 where "user_id" = $2;`, [updatedUser.password, updatedUser.user_id])
+            let results = await client.query(`update ${schema}.users set "password" = $1 where "user_id" = $2;`, [updatedUser.password, updatedUser.user_id])
 
             if(results.rowCount === 0){
                 throw new Error('User not found')
@@ -140,7 +141,7 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         }
 
         if (updatedUser.email) {
-            let results = await client.query(`update swingstate_user_service.users set "email" = $1 where "user_id" = $2;`, [updatedUser.email, updatedUser.user_id])
+            let results = await client.query(`update ${schema}.users set "email" = $1 where "user_id" = $2;`, [updatedUser.email, updatedUser.user_id])
 
             if(results.rowCount === 0){
                 throw new Error('User not found')
@@ -148,7 +149,7 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         }
 
         if (updatedUser.homeState) {
-            let results = await client.query(`update swingstate_user_service.users set "home_state" = $1 where "user_id" = $2;`, [updatedUser.homeState, updatedUser.user_id])
+            let results = await client.query(`update ${schema}.users set "home_state" = $1 where "user_id" = $2;`, [updatedUser.homeState, updatedUser.user_id])
 
            if(results.rowCount === 0){
                 throw new Error('User not found')
@@ -156,7 +157,7 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         }
 
         if (updatedUser.userImage) {
-            let results = await client.query(`update swingstate_user_service.users set "user_image" = $1 where "user_id" = $2;`, [updatedUser.userImage, updatedUser.user_id])
+            let results = await client.query(`update ${schema}.users set "user_image" = $1 where "user_id" = $2;`, [updatedUser.userImage, updatedUser.user_id])
 
            if(results.rowCount === 0){
                 throw new Error('User not found')
@@ -187,7 +188,7 @@ export async function deleteUser(deletedUser:User):Promise<User>{
     try{
         client = await connectionPool.connect()
       
-        let results = await client.query(`delete from swingstate_user_service.users where "user_id" = $1`, [deletedUser.user_id])
+        let results = await client.query(`delete from ${schema}.users where "user_id" = $1`, [deletedUser.user_id])
 
         if(results.rowCount === 0){
             throw new Error('User not found')
@@ -212,7 +213,7 @@ export async function getAdditionalInfoById(userId: number):Promise<AdditionalUs
     let client:PoolClient
     try{
         client = await connectionPool.connect()
-        let additionalInfo = await client.query(`select b."state_id", b."updateFrequency", b."pollingThreshold" from swingstate_user_service.user_state_bridge b where b.user_id = ${userId};`)
+        let additionalInfo = await client.query(`select b."state_id", b."updateFrequency", b."pollingThreshold" from ${schema}.user_state_bridge b where b.user_id = ${userId};`)
         let reformattedInfo:AdditionalUserInfo[] = additionalInfo.rows.map((userInfoDTOToUserInfo))
         console.log(reformattedInfo)
         return reformattedInfo
