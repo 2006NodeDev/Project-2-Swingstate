@@ -7,7 +7,7 @@ import { loggingMiddleware } from './middleware/logging-middleware'
 import { corsFilter } from './middleware/cors-filter'
 // import { userTopic } from './messaging/index'
 import './event-listeners/new-user'
-// import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
+import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
 import jwt from 'jsonwebtoken'
 
 // console.log(userTopic);
@@ -18,7 +18,7 @@ app.use(express.json({limit:'50mb'}))
 
 app.use(loggingMiddleware)
 app.use(corsFilter)
-// app.use(JWTVerifyMiddleware)
+app.use(JWTVerifyMiddleware)
 
 app.use('/users', userRouter)
 
