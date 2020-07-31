@@ -8,3 +8,5 @@ export const connectionPool:Pool = new Pool({
     port:5432,
     max:5
 })
+
+export const schema = process.env['SS_SCHEMA']||'swingstate_state_service';

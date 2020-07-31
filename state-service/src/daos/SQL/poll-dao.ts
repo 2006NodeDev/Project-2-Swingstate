@@ -1,8 +1,9 @@
 import { PoolClient } from "pg";
-import { connectionPool } from ".";
+import { connectionPool, schema } from ".";
 import {pollDTOtoPollConverter} from '../../utils/pollDTO-to-Poll-converter'
 import { Poll } from '../../models/Poll'
 import {PollNotFoundError} from '../../errors/pollNotFoundError'
+
 
 
 // Get all polls
@@ -10,7 +11,7 @@ export async function getAllPolls(): Promise<Poll[]>{
     let client : PoolClient
     try{
         client = await connectionPool.connect()
-        let result = await client.query('select * from swingstate_state_service.polls p order by p."poll_date"')
+        let result = await client.query(`select * from ${schema}.polls p order by p."poll_date"`)
         return result.rows.map(pollDTOtoPollConverter)
     }catch(e){
         console.log(e)
@@ -25,7 +26,7 @@ export async function getPollById(pollId:number): Promise<Poll>{
     let client : PoolClient
     try{
         client = await connectionPool.connect()
-        let result = await client.query(`select * from swingstate_state_service.polls p where p.poll_id =${pollId} order by p.poll_date;`)
+        let result = await client.query(`select * from ${schema}.polls p where p.poll_id =${pollId} order by p.poll_date;`)
         let formattedResult
         [formattedResult] = result.rows
         return pollDTOtoPollConverter(formattedResult)
@@ -44,7 +45,7 @@ export async function updateOnePoll(updatedPoll: Poll): Promise<Poll> {
         await client.query('BEGIN;')
 
         if (updatedPoll.pollName) {
-            let results = await client.query(`update swingstate_state_service.polls set "poll_name" = $1 where "poll_id" = $2;`, [updatedPoll.pollName, updatedPoll.pollId])
+            let results = await client.query(`update ${schema}.polls set "poll_name" = $1 where "poll_id" = $2;`, [updatedPoll.pollName, updatedPoll.pollId])
 
             if (results.rowCount === 0) {
                 throw new Error('Poll not found')
@@ -52,7 +53,7 @@ export async function updateOnePoll(updatedPoll: Poll): Promise<Poll> {
         }
 
         if (updatedPoll.pollDate) {
-            let results = await client.query(`update swingstate_state_service.polls set "poll_date" = $1 where "poll_id" = $2;`, [updatedPoll.pollDate, updatedPoll.pollId])
+            let results = await client.query(`update ${schema}.polls set "poll_date" = $1 where "poll_id" = $2;`, [updatedPoll.pollDate, updatedPoll.pollId])
 
             if (results.rowCount === 0) {
                 throw new Error('Poll not found')
@@ -60,7 +61,7 @@ export async function updateOnePoll(updatedPoll: Poll): Promise<Poll> {
         }
 
         if (updatedPoll.democraticPercent) {
-            let results = await client.query(`update swingstate_state_service.polls set "democratic_percent" = $1 where "poll_id" = $2;`, [updatedPoll.democraticPercent, updatedPoll.pollId])
+            let results = await client.query(`update ${schema}.polls set "democratic_percent" = $1 where "poll_id" = $2;`, [updatedPoll.democraticPercent, updatedPoll.pollId])
 
             if (results.rowCount === 0) {
                 throw new Error('Poll not found')
@@ -68,7 +69,7 @@ export async function updateOnePoll(updatedPoll: Poll): Promise<Poll> {
         }
 
         if (updatedPoll.republicanPercent) {
-            let results = await client.query(`update swingstate_state_service.polls set "republican_percent" = $1 where "poll_id" = $2;`, [updatedPoll.republicanPercent, updatedPoll.pollId])
+            let results = await client.query(`update ${schema}.polls set "republican_percent" = $1 where "poll_id" = $2;`, [updatedPoll.republicanPercent, updatedPoll.pollId])
 
             if (results.rowCount === 0) {
                 throw new Error('Poll not found')
@@ -76,7 +77,7 @@ export async function updateOnePoll(updatedPoll: Poll): Promise<Poll> {
         }
 
         if (updatedPoll.margin) {
-            let results = await client.query(`update swingstate_state_service.polls set "margin" = $1 where "poll_id" = $2;`, [updatedPoll.margin, updatedPoll.pollId])
+            let results = await client.query(`update ${schema}.polls set "margin" = $1 where "poll_id" = $2;`, [updatedPoll.margin, updatedPoll.pollId])
 
             if (results.rowCount === 0) {
                 throw new Error('Poll not found')

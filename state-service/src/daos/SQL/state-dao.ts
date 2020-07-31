@@ -1,5 +1,5 @@
 import { PoolClient } from "pg"
-import { connectionPool } from "."
+import { connectionPool, schema } from "."
 import { StateNotFoundError } from "../../errors/stateNotFoundError"
 import { InvalidEntryError } from "../../errors/InvalidEntryError"
 import { State } from "../../models/State"
@@ -59,7 +59,7 @@ export async function saveOneState(newState: State): Promise<State> {
 
         await client.query('BEGIN;')
 
-        let results = await client.query(`insert into swingstate_state_service.states ("state_name", "democratic_candidate", "republican_candidate", "registration_link", "voting_location", "state_image")
+        let results = await client.query(`insert into ${schema}.states ("state_name", "democratic_candidate", "republican_candidate", "registration_link", "voting_location", "state_image")
         values($1,$2,$3,$4,$5,$6) returning "state_id";`, [newState.stateName, newState.democraticCandidate, newState.republicanCandidate, newState.registrationLink, newState.votingLocation, newState.stateImage])
 
         newState.stateId = results.rows[0].state_id
@@ -94,7 +94,7 @@ export async function updateOneState(updatedState: State): Promise<State> {
         await client.query('BEGIN;')
 
         if (updatedState.stateName) {
-            let results = await client.query(`update swingstate_state_service.states set "state_name" = $1 where "state_id" = $2;`, [updatedState.stateName, updatedState.stateId])
+            let results = await client.query(`update ${schema}.states set "state_name" = $1 where "state_id" = $2;`, [updatedState.stateName, updatedState.stateId])
 
             if (results.rowCount === 0) {
                 throw new Error('State not found')
@@ -102,7 +102,7 @@ export async function updateOneState(updatedState: State): Promise<State> {
         }
 
         if (updatedState.democraticCandidate) {
-            let results = await client.query(`update swingstate_state_service.states set "democratic_candidate" = $1 where "state_id" = $2;`, [updatedState.democraticCandidate, updatedState.stateId])
+            let results = await client.query(`update ${schema}.states set "democratic_candidate" = $1 where "state_id" = $2;`, [updatedState.democraticCandidate, updatedState.stateId])
 
             if (results.rowCount === 0) {
                 throw new Error('State not found')
@@ -110,7 +110,7 @@ export async function updateOneState(updatedState: State): Promise<State> {
         }
 
         if (updatedState.republicanCandidate) {
-            let results = await client.query(`update swingstate_state_service.states set "republican_candidate" = $1 where "state_id" = $2;`, [updatedState.republicanCandidate, updatedState.stateId])
+            let results = await client.query(`update ${schema}.states set "republican_candidate" = $1 where "state_id" = $2;`, [updatedState.republicanCandidate, updatedState.stateId])
 
             if (results.rowCount === 0) {
                 throw new Error('State not found')
@@ -118,7 +118,7 @@ export async function updateOneState(updatedState: State): Promise<State> {
         }
 
         if (updatedState.registrationLink) {
-            let results = await client.query(`update swingstate_state_service.states set "registration_link" = $1 where "state_id" = $2;`, [updatedState.registrationLink, updatedState.stateId])
+            let results = await client.query(`update ${schema}.states set "registration_link" = $1 where "state_id" = $2;`, [updatedState.registrationLink, updatedState.stateId])
 
             if (results.rowCount === 0) {
                 throw new Error('State not found')
@@ -126,7 +126,7 @@ export async function updateOneState(updatedState: State): Promise<State> {
         }
 
         if (updatedState.votingLocation) {
-            let results = await client.query(`update swingstate_state_service.states set "voting_location" = $1 where "state_id" = $2;`, [updatedState.votingLocation, updatedState.stateId])
+            let results = await client.query(`update ${schema}.states set "voting_location" = $1 where "state_id" = $2;`, [updatedState.votingLocation, updatedState.stateId])
 
             if (results.rowCount === 0) {
                 throw new Error('State not found')
@@ -134,7 +134,7 @@ export async function updateOneState(updatedState: State): Promise<State> {
         }
 
         if (updatedState.stateImage) {
-            let results = await client.query(`update swingstate_state_service.states set "state_image" = $1 where "state_id" = $2;`, [updatedState.stateImage, updatedState.stateId])
+            let results = await client.query(`update ${schema}.states set "state_image" = $1 where "state_id" = $2;`, [updatedState.stateImage, updatedState.stateId])
 
             if (results.rowCount === 0) {
                 throw new Error('State not found')
@@ -165,7 +165,7 @@ export async function deleteState(deletedState: State): Promise<State> {
     try {
         client = await connectionPool.connect()
 
-        let results = await client.query(`delete from swingstate_state_service.states where "state_id" = $1;`, [deletedState.stateId])
+        let results = await client.query(`delete from ${schema}.states where "state_id" = $1;`, [deletedState.stateId])
 
         if (results.rowCount === 0) {
             throw new Error('State not found')
