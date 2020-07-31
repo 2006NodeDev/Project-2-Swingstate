@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-        backgroundColor: 'red',
+        backgroundColor: '#E0E0E0',
         color: 'black',
         fontFamily: 'Impact',
         fontSize: 16,
