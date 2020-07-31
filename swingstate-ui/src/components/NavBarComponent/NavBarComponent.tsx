@@ -52,8 +52,9 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
 
     if (props.user) {
         menuItems.push(
-            <MenuItem key={'profile'} onClick={handleClose}><Link to={`/profile/${(props.user) ? props.user.user_id : '0'}`}>My Profile</Link></MenuItem>
-            // <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.user_id}`}>Edit Profile</Link></MenuItem>, <MenuItem key={'submitReimbursement'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>
+            <MenuItem key={'profile'} onClick={handleClose}><Link to={`/profile/${(props.user) ? props.user.user_id : '0'}`}>My Profile</Link></MenuItem>,
+            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.user_id}`}>Edit Profile</Link></MenuItem>
+            //, <MenuItem key={'submitReimbursement'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>
             )
     }
     if (props.user && props.user.role === 'Admin') {
