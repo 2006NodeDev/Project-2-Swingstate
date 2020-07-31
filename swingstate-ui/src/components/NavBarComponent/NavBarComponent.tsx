@@ -57,11 +57,16 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     }
     if (props.user && props.user.role === 'Admin') {
         menuItems.push(<MenuItem key={'users'} onClick={handleClose}><Link to='/users'>All Users</Link></MenuItem>,)
+
     }
 
     //if (props.user && props.user.role.role === 'Finance Manager') {
         menuItems.push(<MenuItem key={'viewReimbursements'} onClick={handleClose}><Link to='/reimbursements'>View Reimbursements</Link></MenuItem>,<MenuItem key={'updateReimbursement'} onClick={handleClose}><Link to='/reimbursement/update'>Update Reimbursement</Link></MenuItem>)
     //}
+
+    // Added this for state service
+    menuItems.push(<MenuItem key={'states'} onClick={handleClose}><Link to='/states'>All States</Link></MenuItem>,)
+
     return (
         (props.user) ?
             <nav>

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { User } from './models/User';
 import { ProfileComponent } from './components/ProfileComponent/ProfileComponent';
 import { AllUsersComponent } from './components/AllUserComponent/AllUsersComponent';
+import { AllStatesComponent } from './components/AllStateComponent/AllStateComponent';
 import { RegisterComponent } from './components/RegisterComponent/RegisterComponent';
 import { EditUserComponent } from './components/EditUserComponent/EditUserComponent';
 import { ToastContainer } from 'react-toastify';
@@ -41,6 +42,8 @@ function App() {
         <Route path='/reimbursement/update' component={UpdateReimbursementComponent} />
         <Route path='/reimbursements' component={AllReimbursementComponent} />
         <Route path='/success' component={SuccessComponent} />
+        <Route path='/states' component={AllStatesComponent} />
+
         <ToastContainer position='bottom-right'/>
       </Router>
 
