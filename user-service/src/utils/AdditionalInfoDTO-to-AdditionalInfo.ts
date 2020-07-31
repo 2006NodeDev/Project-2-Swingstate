@@ -1,4 +1,4 @@
-import {AdditionalUserInfo} from '../models/additonalUserInfo'
+import {AdditionalUserInfo} from '../models/AdditonalUserInfo'
 
 export function userInfoDTOToUserInfo(additionalUserInfoDTO){
     let additionalUserInfo:AdditionalUserInfo = {
