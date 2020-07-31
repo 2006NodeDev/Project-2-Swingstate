@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     paper: {
-      backgroundColor: 'red',
+      backgroundColor: '#E0E0E0',
       padding: theme.spacing(1)
     },
     typography: {
