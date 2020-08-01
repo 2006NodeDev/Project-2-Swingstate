@@ -1,3 +1,5 @@
+import { stateAndPollingInfo } from "./StateAndPollingInfo";
+
 export interface User {
   user_id: number
   username: string
@@ -6,4 +8,5 @@ export interface User {
   homeState?: string
   userImage?: string
   role: string
+  stateAndPollingInfo?: stateAndPollingInfo
 }
