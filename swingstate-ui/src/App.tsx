@@ -16,6 +16,7 @@ import { SubmitReimbursementComponent } from './components/ReimbursementComponen
 import { UpdateReimbursementComponent } from './components/ReimbursementComponents/UpdateReimbursementComponent';
 import { AllReimbursementComponent } from './components/ReimbursementComponents/AllReimbursementComponent';
 import { SuccessComponent } from './components/SuccessComponent/SuccessComponent';
+import { AllPollsComponent } from './components/AllPollsComponent/AllPollsComponent';
 
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
         <Route path='/reimbursements' component={AllReimbursementComponent} />
         <Route path='/success' component={SuccessComponent} />
         <Route path='/states' component={AllStatesComponent} />
+        <Route path='/polls' component={AllPollsComponent} />
+
+        
+        
 
         <ToastContainer position='bottom-right'/>
       </Router>
