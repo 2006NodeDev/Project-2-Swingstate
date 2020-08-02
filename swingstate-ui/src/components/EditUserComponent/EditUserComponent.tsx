@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, SyntheticEvent } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { flamehazesocietyEditUser } from '../../remote/swingstate-api/edit-user'
+import { editCurrentUser } from '../../remote/swingstate-api/edit-user'
 import { Grid, makeStyles, Container } from '@material-ui/core'
 import { useParams } from 'react-router'
 import { User } from '../../models/User'
@@ -116,7 +116,7 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
             userImage,
             role
         }
-        await flamehazesocietyEditUser(editUser)
+        await editCurrentUser(editUser)
 
         props.history.push(`/profile/${user_id}`)
     }

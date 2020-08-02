@@ -14,13 +14,14 @@ const useStyles = makeStyles((theme: Theme) =>
             '& > *': {
                 margin: "auto",
                 marginTop: theme.spacing(5),
-                width: theme.spacing(40),
-                height: theme.spacing(35),
+                width: theme.spacing(60),
+                height: theme.spacing(40),
             },
         },
         paper: {
             backgroundColor: '#E0E0E0',
-            padding: theme.spacing(1)
+            padding: theme.spacing(1),
+            overflow: 'auto',
         },
         typography: {
             color: 'black',

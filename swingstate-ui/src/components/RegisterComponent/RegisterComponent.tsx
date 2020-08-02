@@ -12,7 +12,7 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { flamehazesocietyCreateNewUser } from '../../remote/swingstate-api/create-new-user';
+import { createNewUser } from '../../remote/swingstate-api/create-new-user';
 import { User } from '../../models/User';
 import { toast } from 'react-toastify'
 
@@ -95,7 +95,7 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
       role
     }
 
-    await flamehazesocietyCreateNewUser(newUser)
+    await createNewUser(newUser)
 
     props.history.push('/login')
   }

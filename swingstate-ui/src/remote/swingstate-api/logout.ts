@@ -1,7 +1,7 @@
 import { swingstateClient } from "."
 import { baseUrl } from "../../environment";
 
-export const flamehazesocietyLogOut = async () =>{
+export const swingstateLogOut = async () =>{
     try {
         let response = await swingstateClient.delete(`${baseUrl}/logout`)
 

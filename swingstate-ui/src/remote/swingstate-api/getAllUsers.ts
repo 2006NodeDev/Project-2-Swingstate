@@ -1,7 +1,7 @@
 import { swingstateClient } from ".";
 
 
-export const flamehazesocietyGetAllUsers = async () =>{
+export const getAllUsers = async () =>{
     try{
         let response = await swingstateClient.get('/users')
         return response.data

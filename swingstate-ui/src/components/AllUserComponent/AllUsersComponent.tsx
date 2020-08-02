@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { UserDisplayComponent } from '../UserDisplayComponent/UserDisplay'
 import { User } from '../../models/User'
-import { flamehazesocietyGetAllUsers } from '../../remote/swingstate-api/getAllUsers'
+import { getAllUsers } from '../../remote/swingstate-api/getAllUsers'
 import { Container, Grid, Paper, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -39,7 +39,7 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
 
     useEffect(() => {
         const getUsers = async () => {
-            let response = await flamehazesocietyGetAllUsers()
+            let response = await getAllUsers()
             changeAllUsers(response)
         }
 
