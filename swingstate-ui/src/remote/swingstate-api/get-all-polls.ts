@@ -1,9 +1,8 @@
 import { swingstateClient } from ".";
 
-
-export const getAllUsers = async () =>{
+export const getAllPolls = async () =>{
     try{
-        let response = await swingstateClient.get('/users')
+        let response = await swingstateClient.get('/polls')
         return response.data
     }catch(e){
         console.log(e);

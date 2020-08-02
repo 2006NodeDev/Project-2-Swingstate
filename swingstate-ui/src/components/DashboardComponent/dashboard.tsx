@@ -15,7 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import { mainListItems, secondaryListItems } from './listitems';
-import { flamehazesocietyGetUserById } from '../../remote/swingstate-api/getUsersById';
+import { getUserById } from '../../remote/swingstate-api/getUsersById';
 
 
 const drawerWidth = 300;
@@ -153,7 +153,7 @@ export const DashboardComponent: FunctionComponent<any> = (props) => {
         
         let getUser = async () => {
 
-            let userInfo = await flamehazesocietyGetUserById(user_id)
+            let userInfo = await getUserById(user_id)
             changeUserProfile(userInfo)
         }
 

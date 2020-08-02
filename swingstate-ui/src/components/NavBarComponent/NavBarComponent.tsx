@@ -49,6 +49,8 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     menuItems.push(<MenuItem key={'login'} onClick={handleClose}><Link to='/login'>Login</Link></MenuItem>)
     menuItems.push(<MenuItem key={'register'} onClick={handleClose}><Link to='/register'>Register</Link></MenuItem>)
     menuItems.push(<MenuItem key={'logout'} onClick={handleClose}><Link to='/logout'>Logout</Link></MenuItem>)
+    menuItems.push(<MenuItem key={'states'} onClick={handleClose}><Link to='/states'>All States</Link></MenuItem>)
+    menuItems.push(<MenuItem key={'polls'} onClick={handleClose}><Link to='/polls'>All Polls</Link></MenuItem>)
 
     if (props.user) {
         menuItems.push(

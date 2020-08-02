@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import { UserDisplayComponent } from '../UserDisplayComponent/UserDisplay'
-import { User } from '../../models/User'
-import { getAllUsers } from '../../remote/swingstate-api/getAllUsers'
-import { Container, Grid, Paper, makeStyles } from '@material-ui/core';
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import { makeStyles, Container, Grid, Paper } from '@material-ui/core';
 import clsx from 'clsx';
+import { Poll } from '../../models/Poll';
+import { getAllPolls } from '../../remote/swingstate-api/get-all-polls';
+import { PollDisplayComponent } from '../PollDisplayComponent/PollDisplayComponent';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,28 +29,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const AllUsersComponent: FunctionComponent<any> = (props) => {
+export const AllPollsComponent: FunctionComponent<any> = (props) => {
 
     const classes = useStyles();
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    let [allUsers, changeAllUsers] = useState<User[]>([])
+    let [allPolls, changeAllPolls] = useState<Poll[]>([])
 
     useEffect(() => {
-        const getUsers = async () => {
-            let response = await getAllUsers()
-            changeAllUsers(response)
+        const getStates = async () => {
+            let response = await getAllPolls()
+            changeAllPolls(response)
         }
 
-        if (allUsers.length === 0) {
-
-            getUsers()
+        if (allPolls.length === 0) {
+            getStates()
         }
     })
 
-    let userDisplays = allUsers.map((user) => {
-        return <UserDisplayComponent key={'user-key-' + user.user_id} user={user} />
+    let pollDisplays = allPolls.map((poll) => {
+        return <PollDisplayComponent key={'poll-key-' + poll.pollId} poll={poll} />
     })
 
     return (
@@ -59,7 +58,7 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
                 <Grid container spacing={6}>
                     <Grid item xs={12} md={12} lg={12}>
                         <Paper className={fixedHeightPaper}>
-                            {userDisplays}
+                            {pollDisplays}
                         </Paper>
                     </Grid>
                 </Grid>

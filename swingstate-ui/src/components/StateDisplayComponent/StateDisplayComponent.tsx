@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { Reimbursement } from '../../models/Reimbursement';
+import { State } from '../../models/State';
+import { makeStyles, Theme, createStyles, Paper, Typography } from '@material-ui/core';
 
-interface IReimbursementDisplayProps {
-    reimbursement: Reimbursement
+interface IStateDisplayProps {
+    state: State
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -16,13 +14,14 @@ const useStyles = makeStyles((theme: Theme) =>
             '& > *': {
                 margin: "auto",
                 marginTop: theme.spacing(5),
-                width: theme.spacing(40),
-                height: theme.spacing(40),
+                width: theme.spacing(65),
+                height: theme.spacing(50),
             },
         },
         paper: {
-            backgroundColor: 'red',
-            padding: theme.spacing(1)
+            backgroundColor: '#E0E0E0',
+            padding: theme.spacing(1),
+            overflow: 'auto',
         },
         typography: {
             color: 'black',
@@ -33,31 +32,28 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export const ReimbursementDisplayComponent: FunctionComponent<IReimbursementDisplayProps> = (props) => {
+export const StateDisplayComponent: FunctionComponent<IStateDisplayProps> = (props) => {
     let classes = useStyles()
     return (
         <div className={classes.root}>
             <Paper className={classes.paper} elevation={4}>
                 <Typography className={classes.typography} variant='h4'>
-                    ReimbursementId : {props.reimbursement.reimbursementId}
+                    StateId : {props.state.stateId}
                 </Typography>
                 <Typography className={classes.typography} variant='h4'>
-                    Author : {props.reimbursement.author}
+                    State : {props.state.stateName}
                 </Typography>
                 <Typography className={classes.typography} variant='h4'>
-                    Type : {props.reimbursement.type}
+                    Democratic Candidate : {props.state.democraticCandidate}
                 </Typography>
                 <Typography className={classes.typography} variant='h4'>
-                    Amount : {props.reimbursement.amount}
+                    Republican Candidate : {props.state.republicanCandidate}
                 </Typography>
                 <Typography className={classes.typography} variant='h4'>
-                    Description : {props.reimbursement.description}
+                    Voting Location : {props.state.votingLocation}
                 </Typography>
                 <Typography className={classes.typography} variant='h4'>
-                    Status : {props.reimbursement.status}
-                </Typography>
-                <Typography className={classes.typography} variant='h4'>
-                    Resolver : {props.reimbursement.resolver}
+                    Registration Link : {props.state.registrationLink}
                 </Typography>
             </Paper>
         </div >

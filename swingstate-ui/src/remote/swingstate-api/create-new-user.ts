@@ -2,7 +2,7 @@ import { swingstateClient } from ".";
 import { User} from "../../models/User";
 
 
-export const flamehazesocietyCreateNewUser = async (newUser:User) => {
+export const createNewUser = async (newUser:User) => {
     
     try{
         let response = await swingstateClient.post('/users', newUser)

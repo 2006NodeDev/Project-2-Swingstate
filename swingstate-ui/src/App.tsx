@@ -11,10 +11,9 @@ import { RegisterComponent } from './components/RegisterComponent/RegisterCompon
 import { EditUserComponent } from './components/EditUserComponent/EditUserComponent';
 import { ToastContainer } from 'react-toastify';
 import { LogoutComponent } from './components/LogoutComponent/LogoutComponent';
-import { SubmitReimbursementComponent } from './components/ReimbursementComponents/SubmitReimbursementComponent';
-import { UpdateReimbursementComponent } from './components/ReimbursementComponents/UpdateReimbursementComponent';
-import { AllReimbursementComponent } from './components/ReimbursementComponents/AllReimbursementComponent';
 import { SuccessComponent } from './components/SuccessComponent/SuccessComponent';
+import { AllStatesComponent } from './components/AllStatesComponent/AllStatesComponent';
+import { AllPollsComponent } from './components/AllPollsComponent/AllPollsComponent';
 
 
 function App() {
@@ -37,9 +36,8 @@ function App() {
         <Route path='/edit/:user_id' component={EditUserComponent}/>
         <Route path='/users' component={AllUsersComponent} />
         <Route path='/logout' component={LogoutComponent} />
-        <Route path='/reimbursement/submit' component={SubmitReimbursementComponent} />
-        <Route path='/reimbursement/update' component={UpdateReimbursementComponent} />
-        <Route path='/reimbursements' component={AllReimbursementComponent} />
+        <Route path='/states' component={AllStatesComponent} />
+        <Route path='/polls' component={AllPollsComponent} />
         <Route path='/success' component={SuccessComponent} />
         <ToastContainer position='bottom-right'/>
       </Router>

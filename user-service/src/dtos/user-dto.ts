@@ -6,4 +6,4 @@ export class UserDTO {
     home_state?:string
     user_image?: string
     role: string
-} 
+}  

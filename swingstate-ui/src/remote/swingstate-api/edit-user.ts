@@ -2,7 +2,7 @@ import { swingstateClient } from ".";
 import { User } from "../../models/User";
 
 
-export const flamehazesocietyEditUser = async (editUser:User) => {
+export const editCurrentUser = async (editUser:User) => {
 
     try{
         let response = await swingstateClient.patch(`/users`, editUser)

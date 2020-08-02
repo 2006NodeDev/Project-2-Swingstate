@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import { Container, Grid, Paper, makeStyles } from '@material-ui/core';
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import { makeStyles, Container, Grid, Paper } from '@material-ui/core';
+import { State } from '../../models/State';
 import clsx from 'clsx';
-import { flamehazesocietyGetAllReimbursements } from '../../remote/swingstate-api/get-all-reimbursements';
-import { Reimbursement } from '../../models/Reimbursement';
-import { ReimbursementDisplayComponent } from '../ReimbursementDisplay/ReimbursementDisplay';
+import { getAllStates } from '../../remote/swingstate-api/get-all-states';
+import { StateDisplayComponent } from '../StateDisplayComponent/StateDisplayComponent';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,28 +29,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const AllReimbursementComponent: FunctionComponent<any> = (props) => {
+export const AllStatesComponent: FunctionComponent<any> = (props) => {
 
     const classes = useStyles();
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    let [allReimbursements, changeAllReimbursements] = useState<Reimbursement[]>([])
+    let [allStates, changeAllStates] = useState<State[]>([])
 
     useEffect(() => {
-        const getUsers = async () => {
-            let response = await flamehazesocietyGetAllReimbursements()
-            changeAllReimbursements(response)
+        const getStates = async () => {
+            let response = await getAllStates()
+            changeAllStates(response)
         }
 
-        if (allReimbursements.length === 0) {
-
-            getUsers()
+        if (allStates.length === 0) {
+            getStates()
         }
     })
 
-    let reimbursementDisplays = allReimbursements.map((reimbursement) => {
-        return <ReimbursementDisplayComponent key={'reimbursement-key-' + reimbursement.reimbursementId} reimbursement={reimbursement} />
+    let stateDisplays = allStates.map((state) => {
+        return <StateDisplayComponent key={'state-key-' + state.stateId} state={state} />
     })
 
     return (
@@ -59,7 +58,7 @@ export const AllReimbursementComponent: FunctionComponent<any> = (props) => {
                 <Grid container spacing={6}>
                     <Grid item xs={12} md={12} lg={12}>
                         <Paper className={fixedHeightPaper}>
-                            {reimbursementDisplays}
+                            {stateDisplays}
                         </Paper>
                     </Grid>
                 </Grid>

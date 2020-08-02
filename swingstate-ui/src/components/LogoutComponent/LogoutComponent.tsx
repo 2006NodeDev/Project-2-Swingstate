@@ -1,6 +1,6 @@
 import React, { FunctionComponent, SyntheticEvent} from 'react'
 import { Button } from '@material-ui/core';
-import { flamehazesocietyLogOut } from '../../remote/swingstate-api/logout';
+import { swingstateLogOut } from '../../remote/swingstate-api/logout';
 
 
 export const LogoutComponent: FunctionComponent<any> = (props) => {
@@ -9,7 +9,7 @@ export const LogoutComponent: FunctionComponent<any> = (props) => {
 
         e.preventDefault()
 
-        let res = await flamehazesocietyLogOut()
+        let res = await swingstateLogOut()
 
         console.log(res)
 
