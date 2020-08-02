@@ -7,7 +7,7 @@ import { loggingMiddleware } from './middleware/logging-middleware'
 import { corsFilter } from './middleware/cors-filter'
 // import { userTopic } from './messaging/index'
 import './event-listeners/new-user'
-// import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
+import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
 import jwt from 'jsonwebtoken'
 
 // console.log(userTopic);
@@ -36,7 +36,7 @@ app.post('/login', async (req:Request, res:Response, next:NextFunction)=>{
     } else {
         try{
             let user = await getUserByUsernameAndPassword(username, password)
-            let token = jwt.sign(user,'thisIsASecret', {expiresIn: '1h'}) //THE SECRET should be in an env var
+            let token = jwt.sign(user, process.env['SECRET'], {expiresIn: '1h'}) //THE SECRET should be in an env var
             res.header('Authorization', `Bearer ${token}`)
             res.json(user)
         }catch(e){

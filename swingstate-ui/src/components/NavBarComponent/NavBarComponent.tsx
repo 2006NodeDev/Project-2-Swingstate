@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
         title: {
             flexGrow: 1,
             marginLeft: theme.spacing(15),
-            color: "black",
-            fontFamily: "fantasy"
+            color: "white",
+            fontFamily: "Impact"
         },
         bar: {
-            backgroundColor: "red",
+            backgroundColor: "#86449e",
         },
     }),
 );
@@ -53,7 +53,9 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     if (props.user) {
         menuItems.push(
             <MenuItem key={'profile'} onClick={handleClose}><Link to={`/profile/${(props.user) ? props.user.user_id : '0'}`}>My Profile</Link></MenuItem>,
-            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.user_id}`}>Edit Profile</Link></MenuItem>, <MenuItem key={'submitReimbursement'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>)
+            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.user_id}`}>Edit Profile</Link></MenuItem>
+            //, <MenuItem key={'submitReimbursement'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>
+            )
     }
     if (props.user && props.user.role === 'Admin') {
         menuItems.push(<MenuItem key={'users'} onClick={handleClose}><Link to='/users'>All Users</Link></MenuItem>,)
@@ -61,7 +63,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     }
 
     //if (props.user && props.user.role.role === 'Finance Manager') {
-        menuItems.push(<MenuItem key={'viewReimbursements'} onClick={handleClose}><Link to='/reimbursements'>View Reimbursements</Link></MenuItem>,<MenuItem key={'updateReimbursement'} onClick={handleClose}><Link to='/reimbursement/update'>Update Reimbursement</Link></MenuItem>)
+        // menuItems.push(<MenuItem key={'viewReimbursements'} onClick={handleClose}><Link to='/reimbursements'>View Reimbursements</Link></MenuItem>,<MenuItem key={'updateReimbursement'} onClick={handleClose}><Link to='/reimbursement/update'>Update Reimbursement</Link></MenuItem>)
     //}
 
     // Added this for state service

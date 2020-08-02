@@ -221,7 +221,7 @@ export async function getAdditionalInfoById(userId: number):Promise<AdditionalUs
     let client:PoolClient
     try{
         client = await connectionPool.connect()
-        let additionalInfo = await client.query(`select b."state_id", b."updateFrequency", b."pollingThreshold" from swingstate_user_service.user_state_bridge b where b.user_id = ${userId};`)
+        let additionalInfo = await client.query(`select b."state_id", b."update_frequency", b."polling_threshold" from swingstate_user_service.user_state_bridge b where b.user_id = ${userId};`)
         let reformattedInfo:AdditionalUserInfo[] = additionalInfo.rows.map((userInfoDTOToUserInfo))
         console.log(reformattedInfo)
         return reformattedInfo

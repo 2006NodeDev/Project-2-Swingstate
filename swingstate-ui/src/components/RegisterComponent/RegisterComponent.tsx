@@ -112,42 +112,6 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
           </Typography>
         <form autoComplete="off" onSubmit={registerSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="homeState"
-                label="Home State"
-                name="homeState"
-                value={homeState}
-                onChange={updateHomeState}
-              />
-            </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={lastName}
-                onChange={updateLastname}
-              /> 
-            </Grid> */}
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                value={email}
-                onChange={updateEmail}
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -187,6 +151,30 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
                 id="confirm-password"
                 value={confirmPassword}
                 onChange={updateConfirmPassword}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="homeState"
+                label="Home State"
+                name="homeState"
+                value={homeState}
+                onChange={updateHomeState}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                value={email}
+                onChange={updateEmail}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -248,7 +236,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#600080",
   },
   form: {
     width: '100%',
@@ -256,7 +244,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'red',
+    backgroundColor: '#E0E0E0',
     color: 'black',
     fontFamily: 'Impact',
     fontSize: 16,
