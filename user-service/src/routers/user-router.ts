@@ -38,13 +38,13 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
         }
     }
 })
-userRouter.get('/additional-user-info/:id', async (req: Request, res: Response, next: NextFunction) =>{
-    let {id} = req.params
-    if (isNaN(+id)) {
+userRouter.get('/additional-user-info/:userId', async (req: Request, res: Response, next: NextFunction) =>{
+    let {userId} = req.params
+    if (isNaN(+userId)) {
         res.status(400).send('Id must be a number')
     } else {
         try {
-            let user:AdditionalUserInfo[] = await getAdditionalUserInfoService(+id)
+            let user:AdditionalUserInfo[] = await getAdditionalUserInfoService(+userId)
             res.json(user)
         } catch (e) {
             next(e)
