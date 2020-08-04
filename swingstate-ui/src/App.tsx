@@ -46,7 +46,8 @@ function App() {
         <Route path='/states' component={AllStatesComponent} />
         <Route path='/polls' component={AllPollsComponent} />
         <Route path='/states/:user_id' component={AllStatesComponent} />
-        
+        <Route path='/polls/:user_id' component={AllPollsComponent} />
+
         
 
         <ToastContainer position='bottom-right'/>
