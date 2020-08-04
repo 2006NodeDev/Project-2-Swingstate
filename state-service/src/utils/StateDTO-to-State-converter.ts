@@ -9,6 +9,8 @@ export function StateDTOtoStateConvertor(sdto: StateDTO): State {
         republicanCandidate: sdto.republican_candidate,
         registrationLink: sdto.registration_link,
         votingLocation: sdto.voting_location,
+        latitude: sdto.latitude,
+        longitude: sdto.longitude,
         stateImage: sdto.state_image
     }
 }

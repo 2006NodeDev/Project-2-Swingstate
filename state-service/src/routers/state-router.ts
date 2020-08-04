@@ -36,7 +36,7 @@ stateRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) 
 // Save a New State
 stateRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
 
-    let { stateName, democraticCandidate, republicanCandidate, registrationLink, votingLocation, stateImage } = req.body
+    let { stateName, democraticCandidate, republicanCandidate, registrationLink, votingLocation, latitude, longitude, stateImage } = req.body
 
     if ((stateName = String && stateName) && (democraticCandidate = String && democraticCandidate) && (republicanCandidate = String && republicanCandidate) && (registrationLink = String && registrationLink) && (votingLocation = String && votingLocation)) {
 
@@ -47,6 +47,8 @@ stateRouter.post('/', async (req: Request, res: Response, next: NextFunction) =>
             republicanCandidate,
             registrationLink,
             votingLocation,
+            latitude,
+            longitude,
             stateImage
         }
 
@@ -75,7 +77,7 @@ stateRouter.post('/', async (req: Request, res: Response, next: NextFunction) =>
 // Update a State
 stateRouter.patch('/', async (req: Request, res: Response, next: NextFunction) => {
 
-    let { stateId, stateName, democraticCandidate, republicanCandidate, registrationLink, votingLocation, stateImage } = req.body
+    let { stateId, stateName, democraticCandidate, republicanCandidate, registrationLink, votingLocation, latitude, longitude, stateImage } = req.body
 
     if ((stateId = Number && stateId)) {
         let updatedState: State = {
@@ -85,6 +87,8 @@ stateRouter.patch('/', async (req: Request, res: Response, next: NextFunction) =
             republicanCandidate,
             registrationLink,
             votingLocation,
+            latitude,
+            longitude,
             stateImage
         }
         updatedState.stateName = stateName || undefined
@@ -121,7 +125,9 @@ stateRouter.delete('/', async (req: Request, res: Response, next: NextFunction) 
             democraticCandidate: '',
             republicanCandidate: '',
             registrationLink: '',
-            votingLocation: ''
+            votingLocation: '',
+            latitude: 0,
+            longitude: 0
         }
 
         try {
