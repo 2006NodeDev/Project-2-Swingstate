@@ -6,5 +6,5 @@ if(process.env['NODE_ENV'] === 'production'){
     baseUrl = 'http://34.86.143.125:2020'
 }else {
     //we are in test or dev, use the local address
-    baseUrl = 'http://localhost:80' //nginx.conf address
+    baseUrl = 'http://localhost:80' //nginx.conf address- change this back once when you push up
 }

@@ -39,7 +39,7 @@ function App() {
         <Route path='/logout' component={LogoutComponent} />
         <Route path='/states' component={AllStatesComponent} />
         <Route path='/polls' component={AllPollsComponent} />
-        <Route path='/my-states' component={MyStatesComponent} />
+        <Route path='/my-states/:user_id' component={MyStatesComponent} />
         <Route path='/success' component={SuccessComponent} />
         <ToastContainer position='bottom-right'/>
       </Router>
