@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { State } from '../../models/States'
 
-interface IUserDisplayProps {
+interface IStateDisplayProps {
   State: State
 }
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const StateDisplayComponent: FunctionComponent<IUserDisplayProps> = (props) => {
+export const StateDisplayComponent: FunctionComponent<IStateDisplayProps> = (props) => {
   let classes = useStyles()
   return (
     <div className={classes.root}>

@@ -45,7 +45,7 @@ function App() {
         <Route path='/success' component={SuccessComponent} />
         <Route path='/states' component={AllStatesComponent} />
         <Route path='/polls' component={AllPollsComponent} />
-
+        <Route path='/states/:user_id' component={AllStatesComponent} />
         
         
 

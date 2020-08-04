@@ -69,7 +69,9 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     // Added this for state service
     menuItems.push(<MenuItem key={'states'} onClick={handleClose}><Link to='/states'>All States</Link></MenuItem>,)
     menuItems.push(<MenuItem key={'polls'} onClick={handleClose}><Link to='/polls'>All Polls</Link></MenuItem>,)
+    menuItems.push(<MenuItem key={'StatesbyID'} onClick={handleClose}><Link to='/statesbyID'>All Polls</Link></MenuItem>,)
 
+    
     
     return (
         (props.user) ?
