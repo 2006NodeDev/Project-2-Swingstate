@@ -5,5 +5,7 @@ export class StateDTO {
     republican_candidate: string
     registration_link: string
     voting_location: string
+    latitude: number
+    longitude: number
     state_image?: string
 } 

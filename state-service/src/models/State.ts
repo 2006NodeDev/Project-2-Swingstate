@@ -5,5 +5,7 @@ export class State {
   republicanCandidate: string
   registrationLink: string
   votingLocation: string
+  latitude: number
+  longitude: number
   stateImage?: string
 }
