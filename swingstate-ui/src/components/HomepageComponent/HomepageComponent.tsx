@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Grid, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { Map } from '../MapComponents/MapComponent';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -73,6 +74,9 @@ export function HomepageComponent(props: any) {
                 </Grid>
                 <Grid item xs={12} md={12} lg={12}>
                     <h3 className={classes.h3}>Swingstate is an application designed to provide everything you need to know about swing states in the 2020 election.</h3>
+                </Grid>
+                <Grid item xs={12} md={12} lg={12}>
+                    <Map />
                 </Grid>
                 {/*<Grid item xs={12} md={12} lg={4}>
                     <img className={classes.mImage} alt='homepage-img' src='https://files.yande.re/sample/26957b25082ddfeb176c032a8260bcae/yande.re%2020349%20sample%20friagne%20margery_daw%20marianne%20ootsuka_mai%20sakai_yuuji%20shakugan_no_shana%20shana%20sword.jpg' />

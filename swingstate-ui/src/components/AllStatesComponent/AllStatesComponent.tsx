@@ -51,7 +51,7 @@ export const AllStatesComponent: FunctionComponent<any> = (props) => {
     let stateDisplays = allStates.map((state) => {
         return <StateDisplayComponent key={'state-key-' + state.stateId} state={state} />
     })
-
+    
     return (
         <div>
             <Container maxWidth="lg" className={classes.container}>

@@ -55,7 +55,8 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     if (props.user) {
         menuItems.push(
             <MenuItem key={'profile'} onClick={handleClose}><Link to={`/profile/${(props.user) ? props.user.user_id : '0'}`}>My Profile</Link></MenuItem>,
-            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.user_id}`}>Edit Profile</Link></MenuItem>
+            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.user_id}`}>Edit Profile</Link></MenuItem>,
+            <MenuItem key={'myState'} onClick={handleClose}><Link to={`/my-states/${props.user.user_id}`}>My States</Link></MenuItem> 
             //, <MenuItem key={'submitReimbursement'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>
             )
     }
