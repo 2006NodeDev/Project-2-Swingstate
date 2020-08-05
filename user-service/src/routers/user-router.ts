@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { User } from '../models/User'
-import { updateOneUser, deleteUser } from '../daos/SQL/user-dao'
+import { updateOneUser, deleteUser, getUserThresholds } from '../daos/SQL/user-dao'
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
 // import { authorizationMiddleware } from '../middleware/authorization-middleware'
 import { saveOneUserService, getUserByIDService, getAllUsersService, getAdditionalUserInfoService } from '../services/user-service'
@@ -108,7 +108,7 @@ userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) =>
         try {
             await updateOneUser(updatedUser)
 
-            res.send('You have succesfully updated this user')
+            res.send('You have succesfully upd ated this user')
         }
 
         catch (e) {
@@ -147,5 +147,16 @@ userRouter.delete('/', async (req: Request, res: Response, next: NextFunction) =
         }
     } else if ((!user_id)) {
         res.status(400).send("You must include a userId number for the user you wish to delete.")
+    }
+})
+userRouter.get('/user-thresholds/:stateId', async (req:Request, res:Response) =>{
+    let {stateId} = req.params
+
+    
+    try{
+    let userAndAdditionalInfo = await getUserThresholds(+stateId)
+    res.json(userAndAdditionalInfo)
+    }catch(e){
+        console.log(e)
     }
 })
