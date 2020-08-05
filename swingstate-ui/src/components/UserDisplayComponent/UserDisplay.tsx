@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
       fontFamily: 'monospace',
       fontSize: 18
-    }
+    },
   }),
 );
 
