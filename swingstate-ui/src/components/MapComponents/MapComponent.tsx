@@ -1,9 +1,9 @@
 import React, { useState, FunctionComponent, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
-import { Marker } from './Marker';
 import { State } from '../../models/State';
 import { getAllStates } from '../../remote/swingstate-api/get-all-states';
+import { Marker } from './Marker';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -22,8 +22,8 @@ export const Map: FunctionComponent<any> = (props) => {
 
     useEffect(() => {
         const getStates = async () => {
-            let response = await getAllStates()
-            changeAllStates(response)
+            let states = await getAllStates()
+            changeAllStates(states)
         }
 
         if (allStates.length === 0) {
@@ -37,7 +37,8 @@ export const Map: FunctionComponent<any> = (props) => {
             state={state}
             lat={state.latitude}
             lng={state.longitude}
-        />
+        >
+        </Marker>
     })
 
     const getMapOptions = (maps: any) => {
