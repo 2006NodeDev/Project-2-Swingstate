@@ -100,3 +100,30 @@ export async function updateOnePoll(updatedPoll: Poll): Promise<Poll> {
         client && client.release();
     }
 }
+
+export async function addNewPoll(newPoll: Poll): Promise<Poll> {
+    let client: PoolClient
+    try{
+        client = await connectionPool.connect()
+        let newlyCreatedPoll = await client.query(`insert into swingstate_state_service.polls(poll_name , poll_date , democratic_percent , republican_percent, state_id, margin)
+        values ('${ newPoll.pollName}', now(), ${newPoll.democraticPercent}, ${newPoll.republicanPercent}, ${newPoll.stateId}, ${newPoll.democraticPercent}-${newPoll.republicanPercent});`)
+
+        newlyCreatedPoll = await client.query('select * from swingstate_state_service.polls order by poll_id desc limit 1;')
+
+        let properlyFormattedPoll:Poll = pollDTOtoPollConverter(newlyCreatedPoll.rows[0])
+
+        return properlyFormattedPoll
+
+    }catch(e){
+
+        console.log(e)
+
+        throw(e)
+
+    }finally{
+
+        client && client.release()
+        
+    }
+
+}
