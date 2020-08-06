@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { makeStyles, Container, Grid, Paper } from '@material-ui/core';
+import { makeStyles, Container, Grid, Paper, Card, CardMedia } from '@material-ui/core';
 import { State } from '../../models/State';
 import clsx from 'clsx';
 import { getAllStates } from '../../remote/swingstate-api/get-all-states';
