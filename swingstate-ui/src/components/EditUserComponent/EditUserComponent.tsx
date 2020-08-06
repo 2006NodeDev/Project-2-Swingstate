@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useState, SyntheticEvent } from 'react'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import { editCurrentUser } from '../../remote/swingstate-api/edit-user'
-import { Grid, makeStyles, Container } from '@material-ui/core'
-import { useParams } from 'react-router'
-import { User } from '../../models/User'
-import { toast } from 'react-toastify'
+import React, { FunctionComponent, useState, SyntheticEvent } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { editCurrentUser } from '../../remote/swingstate-api/edit-user';
+import { Grid, makeStyles, Container } from '@material-ui/core';
+import { useParams } from 'react-router';
+import { User } from '../../models/User';
+import { toast } from 'react-toastify';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,29 +85,29 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
 
         changeRole(event.currentTarget.value)
     }
-    
+
     const updateUserImage = (e: any) => {
         let file: File = e.currentTarget.files[0]
         let reader = new FileReader()
-    
+
         reader.readAsDataURL(file)
-    
+
         reader.onload = () => {
-          console.log(reader.result)
-          changeUserImage(reader.result)
+            console.log(reader.result)
+            changeUserImage(reader.result)
         }
-      }
+    }
 
     const editSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
-       
+
         console.log(userImage);
 
         if (!user_id) {
             toast.error('You must include a userId')
         }
-        
-        let editUser:User = {
+
+        let editUser: User = {
             user_id,
             username,
             password,
@@ -129,7 +129,6 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
                             <TextField id="username" label="Username" value={username} onChange={updateUsername} />
                             <TextField id="password" type='password' label="Password" value={password} onChange={updatePassword} />
                             <TextField id="homestate" label="Home State" value={homeState} onChange={updateHomeState} />
-                            {/* <TextField id="lastname" label="Last Name" value={lastName} onChange={updateLastname} /> */}
                             <TextField id="email" type='email' label="Email" value={email} onChange={updateEmail} />
                             <label htmlFor='file'>Profile Pic</label>
                             <input type='file' name='file' accept='image/*' onChange={updateUserImage} />
