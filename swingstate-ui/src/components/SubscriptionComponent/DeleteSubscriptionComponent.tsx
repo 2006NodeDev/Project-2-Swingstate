@@ -29,7 +29,7 @@ export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
     checkedME: false,
     checkedMI: false,
     checkedMT: false,
-    checkedND: false,
+    checkedNC: false,
   });
 
   const updateUserId = (event: any) => {
@@ -159,7 +159,7 @@ export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
       await deleteSub(deletedSub)
     }
 
-    if (state.checkedND) {
+    if (state.checkedNC) {
       stateId = 10
       let deletedSub: AdditionalInfo = {
         userId,
@@ -230,7 +230,7 @@ export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
                   control={<Switch checked={state.checkedMT} onChange={handleChange} name="checkedMT" />}
                   label="Montana" />
                 <FormControlLabel
-                  control={<Switch checked={state.checkedND} onChange={handleChange} name="checkedND" color="primary" />}
+                  control={<Switch checked={state.checkedNC} onChange={handleChange} name="checkedND" color="primary" />}
                   label="N. Carolina" />
               </FormGroup>
             </Grid>

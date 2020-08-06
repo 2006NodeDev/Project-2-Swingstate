@@ -54,7 +54,6 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
     const [homeState, changeHomeState] = useState('')
     const [email, changeEmail] = useState('')
     const [role, changeRole] = useState('')
-
     let [userImage, changeUserImage] = useState(undefined)
 
     const updateUsername = (event: any) => {

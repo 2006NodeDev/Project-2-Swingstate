@@ -31,7 +31,7 @@ export const AddSubscriptionComponent: FunctionComponent<any> = (props) => {
     checkedME: false,
     checkedMI: false,
     checkedMT: false,
-    checkedND: false,
+    checkedNC: false,
   });
 
   const updateUserId = (event: any) => {
@@ -172,7 +172,7 @@ export const AddSubscriptionComponent: FunctionComponent<any> = (props) => {
       await addSub(newSub)
     }
 
-    if (state.checkedND) {
+    if (state.checkedNC) {
       stateId = 10
       let newSub: AdditionalInfo = {
         userId,
@@ -268,7 +268,7 @@ export const AddSubscriptionComponent: FunctionComponent<any> = (props) => {
                   control={<Switch checked={state.checkedMT} onChange={handleChange} name="checkedMT" />}
                   label="Montana" />
                 <FormControlLabel
-                  control={<Switch checked={state.checkedND} onChange={handleChange} name="checkedND" color="primary" />}
+                  control={<Switch checked={state.checkedNC} onChange={handleChange} name="checkedND" color="primary" />}
                   label="N. Carolina" />
               </FormGroup>
             </Grid>
