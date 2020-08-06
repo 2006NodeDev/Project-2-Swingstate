@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import FormGroup from '@material-ui/core/FormGroup';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -67,7 +68,7 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
         checkedME: false,
         checkedMI: false,
         checkedMT: false,
-        checkedND: false,
+        checkedNC: false,
       });
     let [userImage, changeUserImage] = useState(undefined)
 
@@ -153,37 +154,50 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
                             {/* <TextField id="lastname" label="Last Name" value={lastName} onChange={updateLastname} /> */}
                             <TextField id="email" type='email' label="Email" value={email} onChange={updateEmail} />
                             <FormGroup row>
-            <FormControlLabel
-                control={<Switch checked={state.checkedAL} onChange={handleChange} name="checkedAL" />}
-                label="Alabama"/>
-            <FormControlLabel
-                control={<Switch checked={state.checkedAZ} onChange={handleChange} name="checkedAZ" color="primary" />}
-                label="Arizona"/>
-            <FormControlLabel
-                control={<Switch checked={state.checkedCO} onChange={handleChange} name="checkedCO" />}
-                label="Colarado"/>
-            <FormControlLabel
-                control={<Switch checked={state.checkedGA} onChange={handleChange} name="checkedGA" color="primary" />}
-                label="Georgia"/>
-            <FormControlLabel
-                control={<Switch checked={state.checkedIA} onChange={handleChange} name="checkedIA" />}
-                label="Iowa"/>   
-            <FormControlLabel
-                control={<Switch checked={state.checkedKS} onChange={handleChange} name="checkedKS" color="primary" />}
-                label="Kansas"/>
-            <FormControlLabel
-                control={<Switch checked={state.checkedME} onChange={handleChange} name="checkedME" />}
-                label="Maine"/>
-            <FormControlLabel
-                control={<Switch checked={state.checkedMI} onChange={handleChange} name="checkedMI" color="primary" />}
-                label="Michigan"/>
-            <FormControlLabel
-                control={<Switch checked={state.checkedMT} onChange={handleChange} name="checkedMT" />}
-                label="Montana"/>
-            <FormControlLabel
-                control={<Switch checked={state.checkedND} onChange={handleChange} name="checkedND" color="primary" />}
-                label="N. Carolina"/>
-        </FormGroup>
+                                <Tooltip title="Alabama"><FormControlLabel
+                                    control={<Switch checked={state.checkedAL} onChange={handleChange} name="checkedAL" />}
+                                    label="AL"/>
+                                </Tooltip>
+                                <Tooltip title="Arizona"><FormControlLabel
+                                    control={<Switch checked={state.checkedAZ} onChange={handleChange} name="checkedAZ" color="primary" />}
+                                    label="AZ"/>
+                                </Tooltip>
+                                <Tooltip title="Colorado"><FormControlLabel
+                                    control={<Switch checked={state.checkedCO} onChange={handleChange} name="checkedCO" />}
+                                    label="CO"/>
+                                </Tooltip>
+                                <Tooltip title="Georgia"><FormControlLabel
+                                    control={<Switch checked={state.checkedGA} onChange={handleChange} name="checkedGA" color="primary" />}
+                                    label="GA"/>
+                                </Tooltip>
+                                <Tooltip title="Iowa">
+                                <FormControlLabel
+                                    control={<Switch checked={state.checkedIA} onChange={handleChange} name="checkedIA" />}
+                                    label="IA"/>
+                                </Tooltip>
+                            </FormGroup>
+                            <FormGroup row>   
+                                <Tooltip title="Kansas"><FormControlLabel
+                                    control={<Switch checked={state.checkedKS} onChange={handleChange} name="checkedKS" color="primary" />}
+                                    label="KS"/>
+                                </Tooltip>
+                                <Tooltip title="Maine"><FormControlLabel
+                                    control={<Switch checked={state.checkedME} onChange={handleChange} name="checkedME" />}
+                                    label="ME"/>
+                                </Tooltip>
+                                <Tooltip title="Michigan"><FormControlLabel
+                                    control={<Switch checked={state.checkedMI} onChange={handleChange} name="checkedMI" color="primary" />}
+                                    label="MI"/>
+                                </Tooltip>
+                                <Tooltip title="Montana"><FormControlLabel
+                                    control={<Switch checked={state.checkedMT} onChange={handleChange} name="checkedMT" />}
+                                    label="MT"/>
+                                </Tooltip>
+                                <Tooltip title="North Carolina"><FormControlLabel
+                                    control={<Switch checked={state.checkedNC} onChange={handleChange} name="checkedNC" color="primary" />}
+                                    label="NC"/>
+                                </Tooltip>
+                            </FormGroup>
                             <label htmlFor='file'>Profile Pic</label>
                             <input type='file' name='file' accept='image/*' onChange={updateUserImage} />
                             <img alt="" src={userImage} />
