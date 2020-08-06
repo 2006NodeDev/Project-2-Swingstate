@@ -9,15 +9,28 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { AdditionalInfo } from '../../models/AdditionalInfo';
-import { addSub } from '../../remote/swingstate-api/add-subscription';
 import { deleteSub } from '../../remote/swingstate-api/delete-subscription';
+import { FormGroup, FormControlLabel, Switch } from '@material-ui/core';
 
 export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
 
   const classes = useStyles();
 
-  const [userId, changeUserId] = useState(undefined)
-  const [stateId, changeStateId,] = useState(undefined)
+  let [userId, changeUserId] = useState(undefined)
+  let [stateId, changeStateId,] = useState(undefined)
+
+  const [state, setState] = React.useState({
+    checkedAL: false,
+    checkedAZ: false,
+    checkedCO: false,
+    checkedGA: false,
+    checkedIA: false,
+    checkedKS: false,
+    checkedME: false,
+    checkedMI: false,
+    checkedMT: false,
+    checkedND: false,
+  });
 
   const updateUserId = (event: any) => {
     event.preventDefault()
@@ -31,17 +44,132 @@ export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
     changeStateId(event.currentTarget.value)
   }
 
+  const handleChange = (event: any) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  }
+
   const deleteSubSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
-    let deletedSub: AdditionalInfo = {
-      userId,
-      stateId,
-      updateFrequency: undefined,
-      pollingThreshold: undefined,
+    if (state.checkedAL) {
+      stateId = 1
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
     }
 
-    await deleteSub(deletedSub)
+    if (state.checkedAZ) {
+      stateId = 2
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
+
+    if (state.checkedCO) {
+      stateId = 3
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
+
+    if (state.checkedGA) {
+      stateId = 4
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
+
+    if (state.checkedIA) {
+      stateId = 5
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
+
+    if (state.checkedKS) {
+      stateId = 6
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
+
+    if (state.checkedME) {
+      stateId = 7
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
+
+    if (state.checkedMI) {
+      stateId = 8
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
+
+    if (state.checkedMT) {
+      stateId = 9
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
+
+    if (state.checkedND) {
+      stateId = 10
+      let deletedSub: AdditionalInfo = {
+        userId,
+        stateId,
+        updateFrequency: undefined,
+        pollingThreshold: undefined,
+      }
+
+      await deleteSub(deletedSub)
+    }
 
     props.history.push('/success')
   }
@@ -72,17 +200,39 @@ export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="stateId"
-                label="stateId"
-                id="stateId"
-                value={stateId}
-                onChange={updateStateId}
-              />
+              <h3>Please select all the states you wish to unsubscribe from</h3>
+              <FormGroup row>
+                <FormControlLabel
+                  control={<Switch checked={state.checkedAL} onChange={handleChange} name="checkedAL" />}
+                  label="Alabama" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedAZ} onChange={handleChange} name="checkedAZ" color="primary" />}
+                  label="Arizona" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedCO} onChange={handleChange} name="checkedCO" />}
+                  label="Colarado" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedGA} onChange={handleChange} name="checkedGA" color="primary" />}
+                  label="Georgia" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedIA} onChange={handleChange} name="checkedIA" />}
+                  label="Iowa" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedKS} onChange={handleChange} name="checkedKS" color="primary" />}
+                  label="Kansas" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedME} onChange={handleChange} name="checkedME" />}
+                  label="Maine" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedMI} onChange={handleChange} name="checkedMI" color="primary" />}
+                  label="Michigan" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedMT} onChange={handleChange} name="checkedMT" />}
+                  label="Montana" />
+                <FormControlLabel
+                  control={<Switch checked={state.checkedND} onChange={handleChange} name="checkedND" color="primary" />}
+                  label="N. Carolina" />
+              </FormGroup>
             </Grid>
           </Grid>
           <Button
