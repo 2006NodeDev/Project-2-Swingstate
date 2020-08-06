@@ -1,7 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { getAllPollsService, getPollByIdService } from '../services/poll-service'
 import { Poll } from '../models/Poll'
-import { updateOnePoll } from '../daos/SQL/poll-dao'
+import { updateOnePoll, addNewPoll } from '../daos/SQL/poll-dao'
+//import { findUsersForStateID } from '../utils/retrieve-user-thersholds'
 export const pollingRouter = express.Router()
 
 pollingRouter.get('/', async (req: Request, res: Response) => {
@@ -59,4 +60,39 @@ pollingRouter.patch('/', async (req: Request, res: Response, next: NextFunction)
         res.status(400).send("You must include a pollId number for the poll you wish to update.")
     }
 })
+//add a new poll
+pollingRouter.post('/new-poll', async (req:Request, res:Response) =>{
+    let { pollId, pollDate, pollName, democraticPercent, republicanPercent, stateId, margin } = req.body
 
+        let updatedPoll: Poll = {
+            pollId,
+            pollName,
+            pollDate,
+            democraticPercent,
+            republicanPercent,
+            stateId,
+            margin,
+        }
+        updatedPoll.pollName = pollName || undefined
+        updatedPoll.pollDate = pollDate || undefined
+        updatedPoll.democraticPercent = democraticPercent || undefined
+        updatedPoll.republicanPercent = republicanPercent || undefined
+        updatedPoll.stateId = stateId || undefined
+        updatedPoll.margin = margin || undefined
+
+        try {
+            
+            let newPoll:Poll = await addNewPoll(updatedPoll)
+
+
+            //let userPollingThresholds = await findUsersForStateID(newPoll.stateId)
+            //The commented function above is designed to retrieve the users that care about the state this poll takes place in
+            //compare the margin for each user, and determine if this the difference between this poll's margin and previous poll is large enough to trigger an alert
+            //return (or console.log) the list of users that need to be alerted via pubsub)
+            res.json(newPoll)
+        }
+
+        catch (e) {
+            console.log(e)
+        }
+})

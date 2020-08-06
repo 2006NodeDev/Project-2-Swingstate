@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
       fontFamily: 'monospace',
       fontSize: 18
-    }
+    },
   }),
 );
 
@@ -47,9 +47,6 @@ export const UserDisplayComponent: FunctionComponent<IUserDisplayProps> = (props
           <Typography className={classes.typography} variant='h4'>
             Home State : {props.user.homeState}
           </Typography>
-          {/* <Typography className={classes.typography} variant='h4'>
-            Last Name : {props.user.lastName}
-          </Typography> */}
           <Typography className={classes.typography} variant='h4'>
             Email : {props.user.email}
           </Typography>

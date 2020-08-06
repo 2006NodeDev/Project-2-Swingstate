@@ -15,6 +15,8 @@ import { SuccessComponent } from './components/SuccessComponent/SuccessComponent
 import { AllStatesComponent } from './components/AllStatesComponent/AllStatesComponent';
 import { AllPollsComponent } from './components/AllPollsComponent/AllPollsComponent';
 import { MyStatesComponent } from './components/MyStatesComponent/MyStatesComponent';
+import { AddSubscriptionComponent } from './components/SubscriptionComponent/AddSubscriptionComponent';
+import { DeleteSubscriptionComponent } from './components/SubscriptionComponent/DeleteSubscriptionComponent';
 
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
         <Route path='/polls' component={AllPollsComponent} />
         <Route path='/my-states/:user_id' component={MyStatesComponent} />
         <Route path='/success' component={SuccessComponent} />
+        <Route path='/add-subscription' component={AddSubscriptionComponent} />
+        <Route path='/delete-subscription' component={DeleteSubscriptionComponent} />
         <ToastContainer position='bottom-right'/>
       </Router>
 

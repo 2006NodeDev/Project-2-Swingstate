@@ -232,3 +232,76 @@ export async function getAdditionalInfoById(userId: number):Promise<AdditionalUs
         client && client.release()
     }
 }
+
+//Submit a New State Subscription
+export async function newStateSubscription(newSub:AdditionalUserInfo):Promise<AdditionalUserInfo>{
+    let client:PoolClient
+    try{
+        client = await connectionPool.connect()
+
+        await client.query('BEGIN;')
+
+        let results = await client.query(`insert into swingstate_user_service.user_state_bridge ("user_id","state_id","update_frequency","polling_threshold")
+        values($1,$2,$3,$4);`, [newSub.userId, newSub.stateId, newSub.updateFrequency, newSub.pollingThreshold])  
+
+        await client.query('COMMIT;')
+
+        if (results.rowCount === 0) {
+            throw new Error('Not Submitted')
+        } else {
+            return newSub
+        }
+
+    }catch(e){
+        client && client.query('ROLLBACK;')
+        if(e.message === 'Not Submitted'){
+            throw new InvalidEntryError()
+        }
+        console.log(e)
+        throw new Error('Unhandled Error Occured')
+
+    }finally{
+        client && client.release();
+    }
+}
+
+// Delete a Subscription
+export async function deleteSub(deletedSub:AdditionalUserInfo):Promise<AdditionalUserInfo>{
+    let client:PoolClient
+    try{
+        client = await connectionPool.connect()
+      
+        let results = await client.query(`delete from swingstate_user_service.user_state_bridge where "state_id" = $1 and "user_id" = $2`, [deletedSub.stateId, deletedSub.userId])
+
+        if(results.rowCount === 0){
+            throw new Error('User not found')
+        }
+        return deletedSub
+
+    }catch(e){
+        if (e.message === 'User not found') {
+            throw new UserNotFoundError()
+        }
+        console.log(e)
+        throw new Error('Unhandled Error Occured')
+
+    }finally{
+        client && client.release();
+    }
+}
+
+export async function getUserThresholds(stateId: number) {
+    let client:PoolClient
+    try{
+        client = await connectionPool.connect()
+        let userAndAdditionalInfo = await client.query(`select b."polling_threshold", u."user_id" from swingstate_user_service.user_state_bridge b left join swingstate_user_service.users u on u."user_id"=b."user_id" where "state_id"=${stateId};
+        `)
+        let reformattedInfo = []
+        reformattedInfo = userAndAdditionalInfo.rows
+        return reformattedInfo
+
+    }catch(e){
+        console.log(e)
+        throw new Error('Error with getting user+additional info by state id')
+    }
+}
