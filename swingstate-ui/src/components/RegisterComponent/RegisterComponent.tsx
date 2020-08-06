@@ -14,7 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { createNewUser } from '../../remote/swingstate-api/create-new-user';
 import { User } from '../../models/User';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+
 
 export const RegisterComponent: FunctionComponent<any> = (props) => {
 
@@ -62,6 +63,7 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
 
     changeRole(event.currentTarget.value)
   }
+
 
   const updateUserImage = (e: any) => {
     let file: File = e.currentTarget.files[0]
@@ -250,3 +252,4 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
   },
 }));
+

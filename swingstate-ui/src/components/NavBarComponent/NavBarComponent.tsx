@@ -7,9 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import { Link } from 'react-router-dom'
-import { ProfilePictureComponent } from '../ProfilePictureComponent/ProfilePictureComponent'
+import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom';
+import { ProfilePictureComponent } from '../ProfilePictureComponent/ProfilePictureComponent';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             backgroundColor: "white",
-            color: "#86449e" 
+            color: "#86449e"
         },
         Link: {
-            textDecoration: ""
+            textDecoration: "none"
         },
         bar: {
             backgroundColor: "#86449e",
