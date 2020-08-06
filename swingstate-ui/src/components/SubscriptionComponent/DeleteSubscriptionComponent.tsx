@@ -224,8 +224,6 @@ export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
                     control={<Switch checked={state.checkedIA} onChange={handleChange} name="checkedIA" />}
                     label="IA" />
                 </Tooltip>
-              </FormGroup>
-              <FormGroup row>
                 <Tooltip title="Kansas"><FormControlLabel
                   control={<Switch checked={state.checkedKS} onChange={handleChange} name="checkedKS" color="primary" />}
                   label="KS" />
