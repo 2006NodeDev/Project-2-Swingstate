@@ -15,16 +15,16 @@ create table states (
 );
 
 insert into states ("state_name", "democratic_candidate", "republican_candidate", "registration_link", "voting_location", "latitude", "longitude", "state_image")
-	values ('Alabama', 'Doug Jones', 'Tommy Tuberville', 'https://www.sos.alabama.gov/alabama-votes/voter/register-to-vote', '600 Dexter Avenue, Montgomery, AL 36104', 32.3774, -86.3005, null),
-			('Arizona', 'Mark Kelly', 'Martha McSally', 'https://azsos.gov/elections/voting-election/register-vote-or-update-your-current-voter-information', '1700 W Washington St, Phoenix, AZ 85007', 33.4481, -112.0971, null),
-			('Colorado', 'John Hickenlooper', 'Corey Gardner', 'https://www.vote.org/register-to-vote/colorado/?gclid=Cj0KCQjwyur0BRDcARIsAEt86ICGJciURTJTKsqa-rRzlH-3J9VagjKS48d0ti2Fc_hCShv3sdsQDhwaApTmEALw_wcB', '200 E Colfax Ave, Denver, CO 80203', 39.7393, -104.9848, null),
-			('Georgia', 'Jon Ossoff', 'David Perdue', 'https://sos.ga.gov/index.php/Elections/register_to_vote', '206 Washington St SW, Atlanta, GA 30334', 33.7488, -84.3881, null),
-			('Iowa', 'Theresa Greenfield', 'Joni Ernst', 'https://mymvd.iowadot.gov/Account/Login?ReturnUrl=%2fVoterRegistration', '1007 E Grand Ave, Des Moines, IA 50319', 41.5912, -93.6036, null),
-			('Kansas', 'Barbara Bollier', 'Lance Berland', 'http://www.voteks.org/before-you-vote/how-do-i-register.html.aspx', 'SW 8th & SW Van Buren, Topeka, KS 66612', 39.0482, -95.6781, null),
-			('Maine', 'Sarah Gideon', 'Susan Collins', 'https://www.maine.gov/sos/cec/elec/voter-info/votreg.html', 'Maine State House, Augusta, ME 04330', 44.3072, -69.7818, null),
-			('Michigan', 'Gary Peters', 'Jonathan James', 'https://mvic.sos.state.mi.us/RegisterVoter', '100 N Capitol Ave, Lansing, MI 48933', 42.7336, -84.5554, null),
-			('Montana', 'Steve Bullock', 'Steve Daines', 'https://sosmt.gov/elections/vote/', '1301 East Sixth Avenue, Helena, MT 59601', 46.5856, -112.0178, null),
-			('North Carolina', 'Cal Cunningham', 'Thom Tillis', 'https://www.ncsbe.gov/Voters/Registering-to-Vote', '1 E Edenton St, Raleigh, NC 27601', 35.7804, -78.6391, null);
+	values ('Alabama', 'Doug Jones', 'Tommy Tuberville', 'https://www.sos.alabama.gov/alabama-votes/voter/register-to-vote', '600 Dexter Avenue, Montgomery, AL 36104', 32.3774, -86.3005, 'https://img2.pngio.com/alabama-outline-png-graphic-free-alabama-outline-png-free-alabama-state-png-820_673.png'),
+			('Arizona', 'Mark Kelly', 'Martha McSally', 'https://azsos.gov/elections/voting-election/register-vote-or-update-your-current-voter-information', '1700 W Washington St, Phoenix, AZ 85007', 33.4481, -112.0971, 'https://www.nicepng.com/png/detail/71-719209_arizona-map-outline-png-shape-state-stencil-clip.png'),
+			('Colorado', 'John Hickenlooper', 'Corey Gardner', 'https://www.vote.org/register-to-vote/colorado/?gclid=Cj0KCQjwyur0BRDcARIsAEt86ICGJciURTJTKsqa-rRzlH-3J9VagjKS48d0ti2Fc_hCShv3sdsQDhwaApTmEALw_wcB', '200 E Colfax Ave, Denver, CO 80203', 39.7393, -104.9848, 'https://i.pinimg.com/originals/e4/5d/fb/e45dfb8084db55834c90dad3b44a24f1.png'),
+			('Georgia', 'Jon Ossoff', 'David Perdue', 'https://sos.ga.gov/index.php/Elections/register_to_vote', '206 Washington St SW, Atlanta, GA 30334', 33.7488, -84.3881, 'https://suncatcherstudio.com/uploads/patterns/us-states/outlines/thin/blank/png/georgia-blank-outline-444444.png'),
+			('Iowa', 'Theresa Greenfield', 'Joni Ernst', 'https://mymvd.iowadot.gov/Account/Login?ReturnUrl=%2fVoterRegistration', '1007 E Grand Ave, Des Moines, IA 50319', 41.5912, -93.6036, 'https://www.clipartkey.com/mpngs/m/113-1137106_clip-art-iowa-state-map-outline.png'),
+			('Kansas', 'Barbara Bollier', 'Lance Berland', 'http://www.voteks.org/before-you-vote/how-do-i-register.html.aspx', 'SW 8th & SW Van Buren, Topeka, KS 66612', 39.0482, -95.6781, 'https://i.pinimg.com/originals/8a/64/66/8a6466f7e8755ae9fc7debdc17771e3c.png'),
+			('Maine', 'Sarah Gideon', 'Susan Collins', 'https://www.maine.gov/sos/cec/elec/voter-info/votreg.html', 'Maine State House, Augusta, ME 04330', 44.3072, -69.7818, 'https://www.netclipart.com/pp/m/58-584360_state-silhouette-maine-svg.png'),
+			('Michigan', 'Gary Peters', 'Jonathan James', 'https://mvic.sos.state.mi.us/RegisterVoter', '100 N Capitol Ave, Lansing, MI 48933', 42.7336, -84.5554, 'https://media.discordapp.net/attachments/438959227302576131/735002326380576849/6902204.png'),
+			('Montana', 'Steve Bullock', 'Steve Daines', 'https://sosmt.gov/elections/vote/', '1301 East Sixth Avenue, Helena, MT 59601', 46.5856, -112.0178, 'https://www.pngkit.com/png/detail/307-3079885_montana-montana-state-outline-png.png'),
+			('North Carolina', 'Cal Cunningham', 'Thom Tillis', 'https://www.ncsbe.gov/Voters/Registering-to-Vote', '1 E Edenton St, Raleigh, NC 27601', 35.7804, -78.6391, 'https://media.discordapp.net/attachments/438959227302576131/735001470612668486/snapshot-nc.png');
 
 select * from states;
 

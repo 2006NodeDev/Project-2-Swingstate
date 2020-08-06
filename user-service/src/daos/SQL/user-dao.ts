@@ -290,3 +290,18 @@ export async function deleteSub(deletedSub:AdditionalUserInfo):Promise<Additiona
     }
 }
 
+export async function getUserThresholds(stateId: number) {
+    let client:PoolClient
+    try{
+        client = await connectionPool.connect()
+        let userAndAdditionalInfo = await client.query(`select b."polling_threshold", u."user_id" from swingstate_user_service.user_state_bridge b left join swingstate_user_service.users u on u."user_id"=b."user_id" where "state_id"=${stateId};
+        `)
+        let reformattedInfo = []
+        reformattedInfo = userAndAdditionalInfo.rows
+        return reformattedInfo
+
+    }catch(e){
+        console.log(e)
+        throw new Error('Error with getting user+additional info by state id')
+    }
+}
