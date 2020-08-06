@@ -77,7 +77,7 @@ export const AddSubscriptionComponent: FunctionComponent<any> = (props) => {
                 required
                 fullWidth
                 id="userId"
-                label="userId"
+                label="userId (Your ID)"
                 name="userId"
                 value={userId}
                 onChange={updateUserId}
@@ -90,7 +90,7 @@ export const AddSubscriptionComponent: FunctionComponent<any> = (props) => {
                 required
                 fullWidth
                 name="stateId"
-                label="stateId"
+                label="stateId (Can be found on the All States page)"
                 id="stateId"
                 value={stateId}
                 onChange={updateStateId}
@@ -103,7 +103,7 @@ export const AddSubscriptionComponent: FunctionComponent<any> = (props) => {
                 required
                 fullWidth
                 name="update-frequency"
-                label="Update Frequency"
+                label="Update Frequency (Valid # of days are: 3, 7, 14, 21)"
                 id="update-frequency"
                 value={updateFrequency}
                 onChange={updateUpdateFrequency}
@@ -115,7 +115,7 @@ export const AddSubscriptionComponent: FunctionComponent<any> = (props) => {
                 required
                 fullWidth
                 id="polling-threshold"
-                label="polling Threshold"
+                label="Polling Threshold (Valid percentages are: 10, 25, 50, 75)"
                 name="polling-threshold"
                 value={pollingThreshold}
                 onChange={updatePollingThreshold}

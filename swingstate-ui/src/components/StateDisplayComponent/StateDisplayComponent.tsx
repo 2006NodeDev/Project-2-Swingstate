@@ -52,9 +52,9 @@ export const StateDisplayComponent: FunctionComponent<IStateDisplayProps> = (pro
                     title={props.state.stateName}
                 />
                 <CardContent>
-                {/* <Typography className={classes.typography} variant='h4'>
+                <Typography className={classes.typography} variant='h4'>
                     StateId : {props.state.stateId}
-                </Typography> */}
+                </Typography>
                 <Typography className={classes.title} variant="h5" component="h2">
                     {props.state.stateName}
                 </Typography>
