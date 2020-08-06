@@ -11,6 +11,7 @@ import Container from '@material-ui/core/Container';
 import { AdditionalInfo } from '../../models/AdditionalInfo';
 import { deleteSub } from '../../remote/swingstate-api/delete-subscription';
 import { FormGroup, FormControlLabel, Switch } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
 
@@ -202,36 +203,49 @@ export const DeleteSubscriptionComponent: FunctionComponent<any> = (props) => {
             <Grid item xs={12}>
               <h3>Please select all the states you wish to unsubscribe from</h3>
               <FormGroup row>
-                <FormControlLabel
+                <Tooltip title="Alabama"><FormControlLabel
                   control={<Switch checked={state.checkedAL} onChange={handleChange} name="checkedAL" />}
-                  label="Alabama" />
-                <FormControlLabel
+                  label="AL" />
+                </Tooltip>
+                <Tooltip title="Arizona"><FormControlLabel
                   control={<Switch checked={state.checkedAZ} onChange={handleChange} name="checkedAZ" color="primary" />}
-                  label="Arizona" />
-                <FormControlLabel
+                  label="AZ" />
+                </Tooltip>
+                <Tooltip title="Colorado"><FormControlLabel
                   control={<Switch checked={state.checkedCO} onChange={handleChange} name="checkedCO" />}
-                  label="Colarado" />
-                <FormControlLabel
+                  label="CO" />
+                </Tooltip>
+                <Tooltip title="Georgia"><FormControlLabel
                   control={<Switch checked={state.checkedGA} onChange={handleChange} name="checkedGA" color="primary" />}
-                  label="Georgia" />
-                <FormControlLabel
-                  control={<Switch checked={state.checkedIA} onChange={handleChange} name="checkedIA" />}
-                  label="Iowa" />
-                <FormControlLabel
+                  label="GA" />
+                </Tooltip>
+                <Tooltip title="Iowa">
+                  <FormControlLabel
+                    control={<Switch checked={state.checkedIA} onChange={handleChange} name="checkedIA" />}
+                    label="IA" />
+                </Tooltip>
+              </FormGroup>
+              <FormGroup row>
+                <Tooltip title="Kansas"><FormControlLabel
                   control={<Switch checked={state.checkedKS} onChange={handleChange} name="checkedKS" color="primary" />}
-                  label="Kansas" />
-                <FormControlLabel
+                  label="KS" />
+                </Tooltip>
+                <Tooltip title="Maine"><FormControlLabel
                   control={<Switch checked={state.checkedME} onChange={handleChange} name="checkedME" />}
-                  label="Maine" />
-                <FormControlLabel
+                  label="ME" />
+                </Tooltip>
+                <Tooltip title="Michigan"><FormControlLabel
                   control={<Switch checked={state.checkedMI} onChange={handleChange} name="checkedMI" color="primary" />}
-                  label="Michigan" />
-                <FormControlLabel
+                  label="MI" />
+                </Tooltip>
+                <Tooltip title="Montana"><FormControlLabel
                   control={<Switch checked={state.checkedMT} onChange={handleChange} name="checkedMT" />}
-                  label="Montana" />
-                <FormControlLabel
-                  control={<Switch checked={state.checkedNC} onChange={handleChange} name="checkedND" color="primary" />}
-                  label="N. Carolina" />
+                  label="MT" />
+                </Tooltip>
+                <Tooltip title="North Carolina"><FormControlLabel
+                  control={<Switch checked={state.checkedNC} onChange={handleChange} name="checkedNC" color="primary" />}
+                  label="NC" />
+                </Tooltip>
               </FormGroup>
             </Grid>
           </Grid>
