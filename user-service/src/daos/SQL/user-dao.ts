@@ -233,6 +233,7 @@ export async function getAdditionalInfoById(userId: number):Promise<AdditionalUs
     }
 }
 
+<<<<<<< HEAD
 //Submit a New State Subscription
 export async function newStateSubscription(newSub:AdditionalUserInfo):Promise<AdditionalUserInfo>{
     let client:PoolClient
@@ -290,11 +291,17 @@ export async function deleteSub(deletedSub:AdditionalUserInfo):Promise<Additiona
     }
 }
 
+=======
+>>>>>>> 0ddaf39e1732048b1796fc1755c6e022b910da74
 export async function getUserThresholds(stateId: number) {
     let client:PoolClient
     try{
         client = await connectionPool.connect()
+<<<<<<< HEAD
         let userAndAdditionalInfo = await client.query(`select b."polling_threshold", u."user_id" from swingstate_user_service.user_state_bridge b left join swingstate_user_service.users u on u."user_id"=b."user_id" where "state_id"=${stateId};
+=======
+        let userAndAdditionalInfo = await client.query(`select b."polling_threshold", u."user_id", u."email" from swingstate_user_service.user_state_bridge b left join swingstate_user_service.users u on u."user_id"=b."user_id" where "state_id"=${stateId};
+>>>>>>> 0ddaf39e1732048b1796fc1755c6e022b910da74
         `)
         let reformattedInfo = []
         reformattedInfo = userAndAdditionalInfo.rows
@@ -304,4 +311,8 @@ export async function getUserThresholds(stateId: number) {
         console.log(e)
         throw new Error('Error with getting user+additional info by state id')
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0ddaf39e1732048b1796fc1755c6e022b910da74

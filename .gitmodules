@@ -1,0 +1,3 @@
+[submodule "emma-project1"]
+	path = emma-project1
+	url = https://github.com/2006NodeDev/eSkinner15-p1-frontend.git

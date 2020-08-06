@@ -2,7 +2,13 @@ import express, { Request, Response, NextFunction } from 'express'
 import { getAllPollsService, getPollByIdService } from '../services/poll-service'
 import { Poll } from '../models/Poll'
 import { updateOnePoll, addNewPoll } from '../daos/SQL/poll-dao'
+<<<<<<< HEAD
 //import { findUsersForStateID } from '../utils/retrieve-user-thersholds'
+=======
+import { userServiceGetThresholdByStateId } from '../remote/user-service/get-thresholds-by-state-id'
+import { UserAndPollingThreshold } from '../models/UserAndPollingThreshold'
+import { userAndThresholdDTOConverter } from '../utils/userAndThresholdDTO-to-userAndThreshold'
+>>>>>>> 0ddaf39e1732048b1796fc1755c6e022b910da74
 export const pollingRouter = express.Router()
 
 pollingRouter.get('/', async (req: Request, res: Response) => {
@@ -81,6 +87,7 @@ pollingRouter.post('/new-poll', async (req:Request, res:Response) =>{
         updatedPoll.margin = margin || undefined
 
         try {
+<<<<<<< HEAD
             
             let newPoll:Poll = await addNewPoll(updatedPoll)
 
@@ -92,6 +99,24 @@ pollingRouter.post('/new-poll', async (req:Request, res:Response) =>{
             res.json(newPoll)
         }
 
+=======
+            //places the poll into our postgreSQL database
+            let newPoll:Poll = await addNewPoll(updatedPoll)
+            //querryies the user service for the thresholds and users associated with the state the poll is from
+            let userPollingThresholds:[] = await userServiceGetThresholdByStateId(newPoll.stateId)
+            //reformats the SQL information into a more js-readable format
+            let reformattedThresholds:UserAndPollingThreshold[] = userPollingThresholds.map(userAndThresholdDTOConverter)
+            //checks to see if the margin of the poll exceeds the threshold set by the user
+            for(let threshold of reformattedThresholds){
+                if(threshold.pollingThreshold <= newPoll.margin){
+                    //to laura- this is where you can build your pubsub function- you can access the userId and their email through the 'threshold' object
+                    console.log(`Send a pubSub querry for the user with the following userId: ${threshold.userId} and email: ${threshold.email}`)
+                }
+            }
+            res.json(newPoll)
+        }
+
+>>>>>>> 0ddaf39e1732048b1796fc1755c6e022b910da74
         catch (e) {
             console.log(e)
         }

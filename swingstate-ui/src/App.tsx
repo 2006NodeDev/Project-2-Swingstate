@@ -17,6 +17,7 @@ import { AllPollsComponent } from './components/AllPollsComponent/AllPollsCompon
 import { MyStatesComponent } from './components/MyStatesComponent/MyStatesComponent';
 import { AddSubscriptionComponent } from './components/SubscriptionComponent/AddSubscriptionComponent';
 import { DeleteSubscriptionComponent } from './components/SubscriptionComponent/DeleteSubscriptionComponent';
+import { NewPollComponenet } from './components/NewPollComponenet/NewPollComponent';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path='/logout' component={LogoutComponent} />
         <Route path='/states' component={AllStatesComponent} />
         <Route path='/polls' component={AllPollsComponent} />
+        <Route path='/new-poll' component={NewPollComponenet}/>
         <Route path='/my-states/:user_id' component={MyStatesComponent} />
         <Route path='/success' component={SuccessComponent} />
         <Route path='/add-subscription' component={AddSubscriptionComponent} />

@@ -1,9 +1,9 @@
 export interface Poll {
-    pollId:number
+    pollId?:number
     pollName:string
-    pollDate:Date 
+    pollDate?:Date
     democraticPercent:number
     republicanPercent:number
     stateId:number
-    margin:number
+    margin?:number
 }

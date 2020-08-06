@@ -1,6 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { User } from '../models/User'
+<<<<<<< HEAD
 import { updateOneUser, deleteUser, newStateSubscription, deleteSub, getUserThresholds } from '../daos/SQL/user-dao'
+=======
+import { updateOneUser, deleteUser, getUserThresholds } from '../daos/SQL/user-dao'
+>>>>>>> 0ddaf39e1732048b1796fc1755c6e022b910da74
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
 // import { authorizationMiddleware } from '../middleware/authorization-middleware'
 import { saveOneUserService, getUserByIDService, getAllUsersService, getAdditionalUserInfoService } from '../services/user-service'
@@ -149,6 +153,7 @@ userRouter.delete('/', async (req: Request, res: Response, next: NextFunction) =
         res.status(400).send("You must include a userId number for the user you wish to delete.")
     }
 })
+<<<<<<< HEAD
 
 // Save a New Subscription
 userRouter.post('/additional-user-info/subscription', async (req: Request, res: Response, next: NextFunction) => {
@@ -210,6 +215,8 @@ userRouter.delete('/additional-user-info/subscription', async (req: Request, res
         res.status(400).send("You must include a userId number for the subscription you wish to unsubscribe from.")
     }
 })
+=======
+>>>>>>> 0ddaf39e1732048b1796fc1755c6e022b910da74
 userRouter.get('/user-thresholds/:stateId', async (req:Request, res:Response) =>{
     let {stateId} = req.params
 
@@ -220,4 +227,8 @@ userRouter.get('/user-thresholds/:stateId', async (req:Request, res:Response) =>
     }catch(e){
         console.log(e)
     }
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> 0ddaf39e1732048b1796fc1755c6e022b910da74
