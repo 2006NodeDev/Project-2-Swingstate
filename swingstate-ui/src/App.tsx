@@ -15,6 +15,7 @@ import { SuccessComponent } from './components/SuccessComponent/SuccessComponent
 import { AllStatesComponent } from './components/AllStatesComponent/AllStatesComponent';
 import { AllPollsComponent } from './components/AllPollsComponent/AllPollsComponent';
 import { MyStatesComponent } from './components/MyStatesComponent/MyStatesComponent';
+import { NewPollComponenet } from './components/NewPollComponenet/NewPollComponent';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path='/logout' component={LogoutComponent} />
         <Route path='/states' component={AllStatesComponent} />
         <Route path='/polls' component={AllPollsComponent} />
+        <Route path='/new-poll' component={NewPollComponenet}/>
         <Route path='/my-states/:user_id' component={MyStatesComponent} />
         <Route path='/success' component={SuccessComponent} />
         <ToastContainer position='bottom-right'/>
