@@ -61,7 +61,7 @@ export const NewPollComponenet: FunctionComponent<any> = (props) => {
 
     await createNewPoll(newPoll)
 
-    props.history.push('/login')
+    props.history.push('/polls')
   }
 
   return (
