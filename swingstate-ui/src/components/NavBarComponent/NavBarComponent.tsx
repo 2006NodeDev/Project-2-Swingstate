@@ -7,9 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import { Link } from 'react-router-dom'
-import { ProfilePictureComponent } from '../ProfilePictureComponent/ProfilePictureComponent'
+import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom';
+import { ProfilePictureComponent } from '../ProfilePictureComponent/ProfilePictureComponent';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -24,6 +24,13 @@ const useStyles = makeStyles((theme: Theme) =>
             marginLeft: theme.spacing(15),
             color: "white",
             fontFamily: "Impact"
+        },
+        button: {
+            backgroundColor: "white",
+            color: "#86449e"
+        },
+        Link: {
+            textDecoration: "none"
         },
         bar: {
             backgroundColor: "#86449e",
@@ -58,7 +65,9 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
             <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.user_id}`}>Edit Profile</Link></MenuItem>,
             <MenuItem key={'myState'} onClick={handleClose}><Link to={`/my-states/${props.user.user_id}`}>My States</Link></MenuItem>,
             <MenuItem key={'addSub'} onClick={handleClose}><Link to={`/add-subscription`}>Add Subscription</Link></MenuItem>,
-            <MenuItem key={'deleteSub'} onClick={handleClose}><Link to={`/delete-subscription`}>Delete Subscription</Link></MenuItem>
+            <MenuItem key={'deleteSub'} onClick={handleClose}><Link to={`/delete-subscription`}>Delete Subscription</Link></MenuItem>,
+            <MenuItem key={'myState'} onClick={handleClose}><Link to={`/my-states/${props.user.user_id}`}>My States</Link></MenuItem>, 
+            <MenuItem key={'newPoll'} onClick={handleClose}> <Link to={`/new-poll`}>Submit A New Poll</Link></MenuItem>
             )
     }
     if (props.user && props.user.role === 'Admin') {
@@ -104,8 +113,8 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
                         <Typography variant="h4" className={classes.title}>
                             Swingstate
                 </Typography>
-                        <Button><Link color="inherit" to='/login'>Login</Link></Button>
-                        <Button><Link color="inherit" to='/register'>Register</Link></Button>
+                        <Button className={classes.button}><Link to='/login'>Login</Link></Button>
+                        <Button className={classes.button}><Link to='/register'>Register</Link></Button>
                     </Toolbar>
                 </AppBar>
             </nav>

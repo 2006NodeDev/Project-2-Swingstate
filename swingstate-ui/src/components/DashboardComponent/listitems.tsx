@@ -3,69 +3,67 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import { Link } from 'react-router-dom';
+import MapTwoToneIcon from '@material-ui/icons/MapTwoTone';
+import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
+import PollTwoToneIcon from '@material-ui/icons/PollTwoTone';
+import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
 
+{/*did not include login, register, or my profile since you already have to be
+  logged in to get to this menu and it appears that this menu only shows up on the profile page */}
 export const mainListItems = (
   <div>
+    <ListSubheader inset>Navigation:</ListSubheader>
     <ListItem button component={Link} to="/home">
       <ListItemIcon>
-        <DashboardIcon />
+        <HomeTwoToneIcon />
       </ListItemIcon>
       <ListItemText primary="Home" />
     </ListItem>
-    <ListItem button>
+
+    <ListItem button component={Link} to="/states">
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <MapTwoToneIcon />
       </ListItemIcon>
-      <ListItemText primary="Store" />
+      <ListItemText primary="All States" />
     </ListItem>
-    <ListItem button>
+
+    <ListItem button component={Link} to="/polls">
       <ListItemIcon>
-        <PeopleIcon />
+        <PollTwoToneIcon />
       </ListItemIcon>
-      <ListItemText primary="Social Hub" />
+      <ListItemText primary="All Polls" />
     </ListItem>
-    <ListItem button>
+
+    <ListItem button component={Link} to="/add-subscription">
       <ListItemIcon>
-        <BarChartIcon />
+        <AddAlertOutlinedIcon />
       </ListItemIcon>
-      <ListItemText primary="Stats" />
+      <ListItemText primary="Add Subscription" />
     </ListItem>
-    <ListItem button>
+
+    <ListItem button component={Link} to="/delete-subscription">
       <ListItemIcon>
-        <LayersIcon />
+        <DeleteOutlinedIcon />
       </ListItemIcon>
-      <ListItemText primary="Documents" />
+      <ListItemText primary="Delete Subscription" />
+    </ListItem>
+
+    <ListItem button component={Link} to="/logout">
+      <ListItemIcon>
+        <ExitToAppTwoToneIcon />
+      </ListItemIcon>
+      <ListItemText primary="Logout" />
     </ListItem>
   </div>
 );
 
+/* Deleted reimbursement links in laurabranch_07
+Let me know if you want me to move some of the links from above to secondary links.
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Reimbursements</ListSubheader>
-    <ListItem button component={Link} to="/reimbursement/submit">
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Submit Reimbursement" />
-    </ListItem>
-    <ListItem button component={Link} to="/reimbursement/update">
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Update Reimbursement" />
-    </ListItem>
-    <ListItem button component={Link} to="/reimbursements">
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="View Reimbursements" />
-    </ListItem>
+
   </div>
-);
+);*/

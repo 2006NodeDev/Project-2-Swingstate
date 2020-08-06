@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import { mainListItems, secondaryListItems } from './listitems';
+import { mainListItems } from './listitems';
 import { getUserById } from '../../remote/swingstate-api/getUsersById';
 
 
@@ -184,8 +184,6 @@ export const DashboardComponent: FunctionComponent<any> = (props) => {
                     </div>
                     <Divider />
                     <List>{mainListItems}</List>
-                    <Divider />
-                    <List>{secondaryListItems}</List>
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
