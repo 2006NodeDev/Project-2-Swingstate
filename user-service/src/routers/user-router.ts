@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { User } from '../models/User'
-import { updateOneUser, deleteUser } from '../daos/SQL/user-dao'
+import { updateOneUser, deleteUser, newStateSubscription, deleteSub } from '../daos/SQL/user-dao'
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
 // import { authorizationMiddleware } from '../middleware/authorization-middleware'
 import { saveOneUserService, getUserByIDService, getAllUsersService, getAdditionalUserInfoService } from '../services/user-service'
@@ -147,5 +147,66 @@ userRouter.delete('/', async (req: Request, res: Response, next: NextFunction) =
         }
     } else if ((!user_id)) {
         res.status(400).send("You must include a userId number for the user you wish to delete.")
+    }
+})
+
+// Save a New Subscription
+userRouter.post('/additional-user-info/subscription', async (req: Request, res: Response, next: NextFunction) => {
+
+    let { userId, stateId, updateFrequency, pollingThreshold } = req.body
+
+    if ((userId = Number && userId) && (stateId = Number && stateId) && (updateFrequency = Number && updateFrequency) && (pollingThreshold = Number && pollingThreshold)) {
+
+        let newSub: AdditionalUserInfo = {
+            userId,
+            stateId,
+            updateFrequency,
+            pollingThreshold,  
+        }
+
+        try {
+            let savedUser = await newStateSubscription(newSub)
+            res.json(savedUser)
+        } catch (e) {
+            next(e)
+        }
+    } else if ((!userId)) {
+        res.status(400).send("You must include a userId.")
+    } else if ((!stateId)) {
+        res.status(400).send("You must include a stateId.")
+    } else if ((!updateFrequency)) {
+        res.status(400).send("You must include an update frequency.")
+    }else if ((!pollingThreshold)) {
+        res.status(400).send("You must include a polling threshold.")
+    }
+})
+
+// Delete a subscription
+userRouter.delete('/additional-user-info/subscription', async (req: Request, res: Response, next: NextFunction) => {
+
+    let { userId, stateId } = req.body
+
+    if ((userId = Number && userId) && (stateId = Number && stateId)) {
+
+        let deletedSub: AdditionalUserInfo = {
+
+            userId,
+            stateId,
+            updateFrequency: 0,
+            pollingThreshold: 0,
+        }
+
+        try {
+            await deleteSub(deletedSub)
+
+            res.send('You have succesfully deleted this subscription')
+
+        } catch (e) {
+            next(e)
+        }
+    } else if ((!stateId)) {
+        res.status(400).send("You must include a stateId number for the subscription you wish to unsubscribe from.")
+    }else if ((!userId)) {
+        res.status(400).send("You must include a userId number for the subscription you wish to unsubscribe from.")
     }
 })
