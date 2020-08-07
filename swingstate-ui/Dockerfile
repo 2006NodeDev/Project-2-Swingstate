@@ -18,7 +18,7 @@ FROM nginx
 
 #!/bin/sh
 
-COPY nginx.conf ./nginx-1.19.1/conf/nginx.conf
+COPY nginx.conf ./nginx/nginx.conf
 
 ## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
