@@ -1,4 +1,5 @@
-FROM node:12.18
+# stage1 as builder
+FROM node:10-alpine as builder
 
 # copy the package.json to install dependencies
 COPY package.json package-lock.json ./
@@ -14,11 +15,11 @@ COPY . .
 RUN npm run build
 
 
-FROM nginx
+FROM nginx:alpine
 
 #!/bin/sh
 
-COPY nginx.conf swingstate-ui/nginx/nginx.conf
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 ## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
