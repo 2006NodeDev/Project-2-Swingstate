@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1beta1 # for versions before 1.14 use extensions/
 kind: Ingress
 metadata:
   name: swingstate-ingress
-  namespace: project-2-swingstate
 spec:
   rules:
   - http:
