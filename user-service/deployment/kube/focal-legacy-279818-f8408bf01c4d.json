@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "focal-legacy-279818",
+  "private_key_id": "f8408bf01c4d114442f165809c3b87c3a69a2653",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC3wWFNQvDfBpQ9\nXBpCyE7W60n1ya7oQg5A4QS+1ViKE+wr/LzW/v98jtoxL152RzUD7xUxN8KqCv08\n3YM0F/ghs4O1FunLyr0M71KGPE5yNn23R7F1lSJNIRA6mF/w2mATrIdMBif9BWoA\n+UCguqb76OymH1YxhCofQpl1WCwPEShWdip+nwxzYwyIoCtIMl1WP3B32giZ36hd\nLtE0ap0YG1ooWymegz3HzdSEQRwHP/jqYH7QlFusm3sPB1j8JJwe89VIjkLEdZaA\n0jg75YTImGmGusGWfoT/ISd0LObn+R8DnIlapOlYjjDUfE7zHYyuER82GuIIheTn\nzWEJNwPxAgMBAAECggEAAZRhnR/KEQq+D7x409Hjvpx5b2nXTXMS6wscJrVQDGjR\nLwweRfVddiFGviU/eUIRsjnWC20kqOBNDr7DO9mIZibERzReGGTC5QdyJMoELR5r\njH2q6H06lSHngS9x5LDF4mlpZNWJNrc7EuzRmcgc+x2kmiV7ENQnZgslJVF3mH4M\nKLmGWx5daANnebXVjKvTEdc33Xhr5rx4q5v4Uhb6g1LvcriDnFOnjh18vgbLxFmv\nxijBPlJ3MwGjAuKjnVqGX16FsS+5NQz09Du/Fx05rOIzEvymbZfIwUikO/xB9ezp\nWel8WxVq04ccMv+Dsyl/j9i1Z2hQ/302UDjxM9pngQKBgQDht8rUIJHONbZsP4p6\njWGLrAEzH2tRsIKCk5llJT2gabmz+HLNDiPCk7uVSkLqsv7IxPfIPN9Ytd4HudUc\ncdCygSqYUt1PBYGVePSS8OoKPYf5TDnpg9hnoKu3IfJCxN99vQMCxIcj5dhetcap\n/6yQRbotRf2u8dTSzdHVDTrIMQKBgQDQaGXj9nX41Egmrimfdb8ofqjuXSFaif8v\naCnuOAy8BK9Xniy2YY/8W96CeNqPGNzD1z0FYZIgV6jS6wZF2+MBAm16NaFS0a33\ng/DPjxz5GiUTgIzPjlIeeV9Vy2NkRFRoC1E15ekZ73kciUiq8siHA7yPnsoHnGsR\nkC6WeMjHwQKBgQDGzxd7l+RU+MJgvea+4uBUIYA9AyOHpCyPzmmByTdqnzTN67tS\nGW4t5+mFKQ+foWEAfVyxpcwjWqzhqTCoCSeE0nguCm6bN4JXoV3qPwAlXOTzE8y+\nfT6Sp9YXS3MSlE01dtG8ElXlrIDTitAc0/GucXv2fHthJ+gIdPio6yonQQKBgQCI\nzb70oXhXWqHyIilYb2aIInyp26BlWmiUqf+8TDavxTOEhGQ9ZFWsBnJNmx99B4kD\nVWrM+Xt+l4xOx9BaUzj0FK/gpQu83b8g1w9gcEVIj4z+/Edyh64IKwwVuWkJDIGL\nusIYa09UowoRXVzCOpS/bAh/DnD4BgmSgd7TD35dAQKBgQDHgeXa78QusFyvoAga\nJZ+cgY1Y3Ho1vem11zqW49t1y4Uy+A2/T2T7XWYqp1xaFX0i3FsJKBYA1SIYn7CE\nlNtFRzbVQUBD1UUqdasK7VMBrNxIeIx9731eYVj7/vB37UF9q4jyFBZ/GnH3uUOy\nSYGBagusRFU5lx8ptTDn7hYZMA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "flamehazesociety-neurogrammert@focal-legacy-279818.iam.gserviceaccount.com",
+  "client_id": "116790883796299763706",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/flamehazesociety-neurogrammert%40focal-legacy-279818.iam.gserviceaccount.com"
+}
