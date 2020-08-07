@@ -1,0 +1,46 @@
+apiVersion: apis/v1
+kind: Deployment
+metadata:
+  name: swing-state-user-service-deployment
+  labels:
+    app: swing-state
+    service: user-service
+    deployment: uat
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: swing-state
+      service: user-service
+  template:
+    metadata:
+      labels:
+        app: swing-state
+        service: user-service
+    containers:
+    - name: swing-state-user-service
+      image: this needs to be done!
+      imagePullPolicy: Always
+      env:
+      - name: LB_USER
+        value: "postgres"
+      - name: LB_DATABASE
+        value: "postgres"
+      - name: LB_HOST
+        value: 35.236.243.7
+      - name: LB_PASSWORD
+        value: "NGT122791!"
+      ports:
+      - containerPorts: 2020
+      livenessProbe:
+          httpGet:
+            path: /health
+            port: 2020
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 2020
+          initialDelaySeconds: 3
+          periodSeconds: 3
