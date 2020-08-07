@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: swingstate-deployment
-  namespace: project-2-swingstate
   labels: 
     app: swingstate
     service: swingstate-service
@@ -20,8 +19,14 @@ spec:
         service: swingstate-service
     spec:
       containers:
-      - name: swingstate-app
-        image: gcr.io/focal-legacy-279818/swingstate-app:p2
+      - name: swingstate-service
+        image: gcr.io/focal-legacy-279818/swingstate-app
         imagePullPolicy: Always
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
