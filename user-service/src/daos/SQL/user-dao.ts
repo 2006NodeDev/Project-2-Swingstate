@@ -7,6 +7,7 @@ import { userInfoDTOToUserInfo } from "../../utils/AdditionalInfoDTO-to-Addition
 import { UserNotFoundError } from "../../errors/userNotFoundError"
 import { AuthenticationError } from "../../errors/authenticationError"
 import { InvalidEntryError } from "../../errors/InvalidEntryError"
+import { logger, errorLogger } from "../../utils/loggers"
 
 
 // Get All Users
@@ -21,7 +22,8 @@ export async function getAllUsers(): Promise<User[]> {
         return results.rows.map(UserDTOtoUserConvertor)
 
     } catch (e) {
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally {
@@ -47,7 +49,8 @@ export async function getUserById(id: number):Promise<User> {
         if(e.message === 'User Not Found'){
             throw new UserNotFoundError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally { 
@@ -73,7 +76,8 @@ export async function getUserByUsernameAndPassword(username:string, password:str
         if(e.message === 'User Not Found'){
             throw new AuthenticationError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally {
@@ -108,7 +112,8 @@ export async function saveOneUser(newUser:User):Promise<User>{
         if(e.message === 'Not Submitted'){
             throw new InvalidEntryError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     }finally{
@@ -182,7 +187,8 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         if (e.message === 'User not found') {
             throw new UserNotFoundError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     }finally{
@@ -207,7 +213,8 @@ export async function deleteUser(deletedUser:User):Promise<User>{
         if (e.message === 'User not found') {
             throw new UserNotFoundError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     }finally{
@@ -223,10 +230,11 @@ export async function getAdditionalInfoById(userId: number):Promise<AdditionalUs
         client = await connectionPool.connect()
         let additionalInfo = await client.query(`select b."state_id", b."update_frequency", b."polling_threshold" from swingstate_user_service.user_state_bridge b where b.user_id = ${userId};`)
         let reformattedInfo:AdditionalUserInfo[] = additionalInfo.rows.map((userInfoDTOToUserInfo))
-        console.log(reformattedInfo)
+        //logger.debug(reformattedInfo)
         return reformattedInfo
     }catch(e){
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Error with getting Additional Info using User Id')
     }finally{
         client && client.release()
@@ -257,7 +265,8 @@ export async function newStateSubscription(newSub:AdditionalUserInfo):Promise<Ad
         if(e.message === 'Not Submitted'){
             throw new InvalidEntryError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     }finally{
@@ -282,7 +291,8 @@ export async function deleteSub(deletedSub:AdditionalUserInfo):Promise<Additiona
         if (e.message === 'User not found') {
             throw new UserNotFoundError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     }finally{
@@ -301,8 +311,8 @@ export async function getUserThresholds(stateId: number) {
         return reformattedInfo
 
     }catch(e){
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Error with getting user+additional info by state id')
     }
 }
-

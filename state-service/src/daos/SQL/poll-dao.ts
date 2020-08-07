@@ -3,6 +3,7 @@ import { connectionPool } from ".";
 import {pollDTOtoPollConverter} from '../../utils/pollDTO-to-Poll-converter'
 import { Poll } from '../../models/Poll'
 import {PollNotFoundError} from '../../errors/pollNotFoundError'
+import { logger, errorLogger } from "../../utils/loggers";
 
 
 // Get all polls
@@ -13,7 +14,8 @@ export async function getAllPolls(): Promise<Poll[]>{
         let result = await client.query('select * from swingstate_state_service.polls p order by p."poll_date"')
         return result.rows.map(pollDTOtoPollConverter)
     }catch(e){
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('An error occured while retrieving all polls')
     }finally{
         client && client.release()
@@ -30,7 +32,8 @@ export async function getPollById(pollId:number): Promise<Poll>{
         [formattedResult] = result.rows
         return pollDTOtoPollConverter(formattedResult)
     }catch(e){
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('An error occured while retrieving a poll by Id')
     }
 }
@@ -93,7 +96,8 @@ export async function updateOnePoll(updatedPoll: Poll): Promise<Poll> {
         if (e.message === 'Poll not found') {
             throw new PollNotFoundError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally {
@@ -115,9 +119,8 @@ export async function addNewPoll(newPoll: Poll): Promise<Poll> {
         return properlyFormattedPoll
 
     }catch(e){
-
-        console.log(e)
-
+        logger.error(e)
+        errorLogger.error(e)
         throw(e)
 
     }finally{

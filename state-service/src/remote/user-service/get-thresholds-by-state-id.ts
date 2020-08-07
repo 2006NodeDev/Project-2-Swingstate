@@ -1,4 +1,5 @@
 import { userServiceBaseClient } from "."
+import { logger, errorLogger } from "../../utils/loggers"
 
 
 export const userServiceGetThresholdByStateId = async (stateId:number /*, token: str */) =>{
@@ -6,6 +7,7 @@ export const userServiceGetThresholdByStateId = async (stateId:number /*, token:
         let thresholds = await userServiceBaseClient.get(`/user-thresholds/${stateId}`)
         return thresholds.data
     }catch(e){
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
     }
 }

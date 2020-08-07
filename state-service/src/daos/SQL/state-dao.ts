@@ -4,6 +4,7 @@ import { StateNotFoundError } from "../../errors/stateNotFoundError"
 import { InvalidEntryError } from "../../errors/InvalidEntryError"
 import { State } from "../../models/State"
 import { StateDTOtoStateConvertor } from "../../utils/StateDTO-to-State-converter"
+import { logger, errorLogger } from "../../utils/loggers"
 
 // Get All States
 export async function getAllStates(): Promise<State[]> {
@@ -16,7 +17,8 @@ export async function getAllStates(): Promise<State[]> {
         return results.rows.map(StateDTOtoStateConvertor)
 
     } catch (e) {
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally {
@@ -43,7 +45,8 @@ export async function getStatesById(id: number): Promise<State> {
         if (e.message === 'State Not Found') {
             throw new StateNotFoundError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally {
@@ -77,7 +80,8 @@ export async function saveOneState(newState: State): Promise<State> {
         if (e.message === 'Not Submitted') {
             throw new InvalidEntryError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally {
@@ -151,7 +155,8 @@ export async function updateOneState(updatedState: State): Promise<State> {
         if (e.message === 'State not found') {
             throw new StateNotFoundError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally {
@@ -176,7 +181,8 @@ export async function deleteState(deletedState: State): Promise<State> {
         if (e.message === 'State not found') {
             throw new StateNotFoundError()
         }
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw new Error('Unhandled Error Occured')
 
     } finally {

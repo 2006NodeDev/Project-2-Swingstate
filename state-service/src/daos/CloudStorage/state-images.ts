@@ -1,21 +1,23 @@
 import { imageBucket } from ".";
+import { logger, errorLogger } from "../../utils/loggers";
 
 export async function saveProfilePicture(contentType:string, imageBase64Data:string, fileName:string){
     try{
 
         let newImage = imageBucket.file(fileName)
 
-        console.log(newImage);
+        logger.info(newImage);
         
         await newImage.save(Buffer.from(imageBase64Data, 'base64'), {
             metadata:{
                 contentType
             }
         })
-        console.log('post file save')
+        logger.debug(`${fileName} was saved to storage bucket`)
 
     } catch(e){
-        console.log(e);
+        errorLogger.error(e);
+        logger.error(e)
         throw e  
     }
    
