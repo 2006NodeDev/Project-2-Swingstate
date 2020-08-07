@@ -5,9 +5,10 @@ import { corsFilter } from './middleware/cors-filter'
 import './event-listeners/new-state'
 import { stateRouter } from './routers/state-router'
 import { pollingRouter } from './routers/polling-router'
-import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
+import { logger, errorLogger } from './utils/loggers'
+//import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
 
-//console.log(userTopic);
+//logger.info(userTopic);
 
 const app = express()
 
@@ -15,7 +16,7 @@ app.use(express.json({ limit: '50mb' }))
 
 app.use(loggingMiddleware)
 app.use(corsFilter)
-app.use(JWTVerifyMiddleware)
+//app.use(JWTVerifyMiddleware)
 
 app.use('/states', stateRouter)
 app.use('/polls', pollingRouter)
@@ -31,13 +32,21 @@ app.use((err, req, res, next) => {
         res.status(err.statusCode).send(err.message)
     } else {
 
-        console.log(err)
+        logger.error(err);
+        errorLogger.error(err);
 
         res.status(500).send('Oops, Something went wrong')
     }
 })
 
 app.listen(2021, () => {
-    console.log('Server Has Started');
+    logger.info('Server Has Started');
 
+})
+
+//Uncaught Errors write out a fatal log, then close the program
+process.on('uncaughtException', err => {
+    logger.fatal(`Uncaught Exception: ${err.message} ${err.stack}`)
+    errorLogger.fatal(`Uncaught Exception: ${err.message} ${err.stack}`)
+    process.exit(1)
 })
