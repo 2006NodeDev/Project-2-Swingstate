@@ -5,7 +5,7 @@ import { corsFilter } from './middleware/cors-filter'
 import './event-listeners/new-state'
 import { stateRouter } from './routers/state-router'
 import { pollingRouter } from './routers/polling-router'
-import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
+//import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
 
 //console.log(userTopic);
 
@@ -15,7 +15,7 @@ app.use(express.json({ limit: '50mb' }))
 
 app.use(loggingMiddleware)
 app.use(corsFilter)
-app.use(JWTVerifyMiddleware)
+//app.use(JWTVerifyMiddleware)
 
 app.use('/states', stateRouter)
 app.use('/polls', pollingRouter)
