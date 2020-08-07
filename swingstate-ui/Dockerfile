@@ -14,17 +14,17 @@ COPY . .
 RUN npm run build
 
 
-FROM nginx:alpine
+FROM nginx
 
 #!/bin/sh
 
-COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ../nginx-1.19.1/conf/nginx.conf
 
 ## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
+RUN rm -rf ../nginx-1.19.1/html/*
 
 # Copy from the stahg 1
-COPY --from=builder /react-ui/build /usr/share/nginx/html
+COPY --from=builder /react-ui/build ../nginx-1.19.1/html
 
 EXPOSE 3000 80
 
