@@ -18,7 +18,7 @@ FROM nginx
 
 #!/bin/sh
 
-COPY nginx.conf swingstate-ui/nginx/nginx.conf
+COPY nginx.conf ./nginx/nginx.conf
 
 ## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
