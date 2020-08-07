@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swingstate-state-service-deployment
+  labels:
+    app: swingstate
+    service: state-service
+    deployment: uat
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: swingstate
+  template:
+    metadata:
+      labels:
+        app: swingstate
+        service: state-service
+    spec:
+      containers:
+      - name: swingstate-state-service
+        image: gcr.io/focal-legacy-279818/swingstate-state-service
+        imagePullPolicy: Always
+        env:
+        - name: LB_HOST
+          value: "35.236.243.7"
+        - name: LB_DATABASE
+          value: "postgres"
+        - name: LB_USER
+          value: "postgres"
+        - name: LB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: swingstate-state-service-secrets
+              key: password
+        ports:
+        - containerPort: 2021
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 2021
+          initialDelaySeconds: 3
+          periodSeconds: 3
