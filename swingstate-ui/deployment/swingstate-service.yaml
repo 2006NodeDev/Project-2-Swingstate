@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: swingstate-service
+  namespace: project-2-swingstate
+spec:
+  type: NodePort
+  selector:
+    app: swingstate
+    service: swingstate-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
