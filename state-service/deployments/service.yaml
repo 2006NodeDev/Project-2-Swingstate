@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: swingstate-state-service-service
+spec:
+  type: ClusterIP
+  selector:
+    app: swingstate
+    service: state-service
+    deployment: uat
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 2021
