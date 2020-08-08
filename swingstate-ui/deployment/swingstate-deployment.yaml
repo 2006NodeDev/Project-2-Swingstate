@@ -20,13 +20,7 @@ spec:
     spec:
       containers:
       - name: swingstate-service
-        image: gcr.io/focal-legacy-279818/swingstate-app
+        image: gcr.io/focal-legacy-279818/swingstate-app:p2
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 3
-          periodSeconds: 3
