@@ -50,7 +50,8 @@ var cors_filter_1 = require("./middleware/cors-filter");
 require("./event-listeners/new-user");
 var jwt_verify_middleware_1 = require("./middleware/jwt-verify-middleware");
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-// console.log(userTopic);
+var loggers_1 = require("./utils/loggers");
+// logger.debug(userTopic);
 var app = express_1.default();
 app.use(express_1.default.json({ limit: '50mb' }));
 app.use(logging_middleware_1.loggingMiddleware);
@@ -92,11 +93,18 @@ app.use(function (err, req, res, next) {
         res.status(err.statusCode).send(err.message);
     }
     else {
-        console.log(err);
+        loggers_1.logger.error(err);
+        loggers_1.errorLogger.error(err);
         res.status(500).send('Oops, Something went wrong');
     }
 });
 app.listen(2020, function () {
-    console.log('Server Has Started');
+    loggers_1.logger.info('Server Has Started');
+});
+//Uncaught Errors write out a fatal log, then close the program
+process.on('uncaughtException', function (err) {
+    loggers_1.logger.fatal("Uncaught Exception: " + err.message + " " + err.stack);
+    loggers_1.errorLogger.fatal("Uncaught Exception: " + err.message + " " + err.stack);
+    process.exit(1);
 });
 //# sourceMappingURL=index.js.map

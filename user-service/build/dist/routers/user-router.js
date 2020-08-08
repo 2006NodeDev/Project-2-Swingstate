@@ -327,7 +327,7 @@ exports.userRouter.delete('/additional-user-info/subscription', function (req, r
         }
     });
 }); });
-exports.userRouter.get('/user-thresholds/:stateId', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.userRouter.get('/user-thresholds/:stateId', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var stateId, userAndAdditionalInfo, e_9;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -343,7 +343,7 @@ exports.userRouter.get('/user-thresholds/:stateId', function (req, res) { return
                 return [3 /*break*/, 4];
             case 3:
                 e_9 = _a.sent();
-                console.log(e_9);
+                next(e_9);
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }

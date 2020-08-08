@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAdditionalUserInfoService = exports.saveOneUserService = exports.getUserByIDService = exports.getAllUsersService = void 0;
 var user_dao_1 = require("../daos/SQL/user-dao");
+var loggers_1 = require("../utils/loggers");
 //import {AdditionalUserInfo} from "../models/additonalUserInfo"
 // import { saveProfilePicture } from "../daos/CloudStorage/user-images";
 // import { bucketBaseUrl } from "../daos/CloudStorage";
@@ -82,7 +83,8 @@ function saveOneUserService(newUser) {
                     return [2 /*return*/, savedUser];
                 case 2:
                     e_1 = _a.sent();
-                    console.log(e_1);
+                    loggers_1.logger.error(e_1);
+                    loggers_1.errorLogger.error(e_1);
                     throw e_1;
                 case 3: return [2 /*return*/];
             }
