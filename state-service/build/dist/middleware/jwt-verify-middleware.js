@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JWTVerifyMiddleware = void 0;
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var loggers_1 = require("../utils/loggers");
 exports.JWTVerifyMiddleware = function (req, res, next) {
     var _a;
     try {
@@ -15,7 +16,8 @@ exports.JWTVerifyMiddleware = function (req, res, next) {
         next();
     }
     catch (e) {
-        console.log(e);
+        loggers_1.logger.error(e);
+        loggers_1.errorLogger.error(e);
         next(e);
     }
 };

@@ -41,6 +41,7 @@ var _1 = require(".");
 var stateNotFoundError_1 = require("../../errors/stateNotFoundError");
 var InvalidEntryError_1 = require("../../errors/InvalidEntryError");
 var StateDTO_to_State_converter_1 = require("../../utils/StateDTO-to-State-converter");
+var loggers_1 = require("../../utils/loggers");
 // Get All States
 function getAllStates() {
     return __awaiter(this, void 0, void 0, function () {
@@ -58,7 +59,8 @@ function getAllStates() {
                     return [2 /*return*/, results.rows.map(StateDTO_to_State_converter_1.StateDTOtoStateConvertor)];
                 case 3:
                     e_1 = _a.sent();
-                    console.log(e_1);
+                    loggers_1.logger.error(e_1);
+                    loggers_1.errorLogger.error(e_1);
                     throw new Error('Unhandled Error Occured');
                 case 4:
                     client && client.release();
@@ -92,7 +94,8 @@ function getStatesById(id) {
                     if (e_2.message === 'State Not Found') {
                         throw new stateNotFoundError_1.StateNotFoundError();
                     }
-                    console.log(e_2);
+                    loggers_1.logger.error(e_2);
+                    loggers_1.errorLogger.error(e_2);
                     throw new Error('Unhandled Error Occured');
                 case 4:
                     client && client.release();
@@ -137,7 +140,8 @@ function saveOneState(newState) {
                     if (e_3.message === 'Not Submitted') {
                         throw new InvalidEntryError_1.InvalidEntryError();
                     }
-                    console.log(e_3);
+                    loggers_1.logger.error(e_3);
+                    loggers_1.errorLogger.error(e_3);
                     throw new Error('Unhandled Error Occured');
                 case 6:
                     client && client.release();
@@ -225,7 +229,8 @@ function updateOneState(updatedState) {
                     if (e_4.message === 'State not found') {
                         throw new stateNotFoundError_1.StateNotFoundError();
                     }
-                    console.log(e_4);
+                    loggers_1.logger.error(e_4);
+                    loggers_1.errorLogger.error(e_4);
                     throw new Error('Unhandled Error Occured');
                 case 17:
                     client && client.release();
@@ -259,7 +264,8 @@ function deleteState(deletedState) {
                     if (e_5.message === 'State not found') {
                         throw new stateNotFoundError_1.StateNotFoundError();
                     }
-                    console.log(e_5);
+                    loggers_1.logger.error(e_5);
+                    loggers_1.errorLogger.error(e_5);
                     throw new Error('Unhandled Error Occured');
                 case 4:
                     client && client.release();

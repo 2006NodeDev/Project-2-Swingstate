@@ -40,6 +40,7 @@ exports.addNewPoll = exports.updateOnePoll = exports.getPollById = exports.getAl
 var _1 = require(".");
 var pollDTO_to_Poll_converter_1 = require("../../utils/pollDTO-to-Poll-converter");
 var pollNotFoundError_1 = require("../../errors/pollNotFoundError");
+var loggers_1 = require("../../utils/loggers");
 // Get all polls
 function getAllPolls() {
     return __awaiter(this, void 0, void 0, function () {
@@ -57,7 +58,8 @@ function getAllPolls() {
                     return [2 /*return*/, result.rows.map(pollDTO_to_Poll_converter_1.pollDTOtoPollConverter)];
                 case 3:
                     e_1 = _a.sent();
-                    console.log(e_1);
+                    loggers_1.logger.error(e_1);
+                    loggers_1.errorLogger.error(e_1);
                     throw new Error('An error occured while retrieving all polls');
                 case 4:
                     client && client.release();
@@ -87,7 +89,8 @@ function getPollById(pollId) {
                     return [2 /*return*/, pollDTO_to_Poll_converter_1.pollDTOtoPollConverter(formattedResult)];
                 case 3:
                     e_2 = _a.sent();
-                    console.log(e_2);
+                    loggers_1.logger.error(e_2);
+                    loggers_1.errorLogger.error(e_2);
                     throw new Error('An error occured while retrieving a poll by Id');
                 case 4: return [2 /*return*/];
             }
@@ -163,7 +166,8 @@ function updateOnePoll(updatedPoll) {
                     if (e_3.message === 'Poll not found') {
                         throw new pollNotFoundError_1.PollNotFoundError();
                     }
-                    console.log(e_3);
+                    loggers_1.logger.error(e_3);
+                    loggers_1.errorLogger.error(e_3);
                     throw new Error('Unhandled Error Occured');
                 case 15:
                     client && client.release();
@@ -194,7 +198,8 @@ function addNewPoll(newPoll) {
                     return [2 /*return*/, properlyFormattedPoll];
                 case 4:
                     e_4 = _a.sent();
-                    console.log(e_4);
+                    loggers_1.logger.error(e_4);
+                    loggers_1.errorLogger.error(e_4);
                     throw (e_4);
                 case 5:
                     client && client.release();
