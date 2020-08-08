@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = require(".");
 var messaging_1 = require("../messaging");
+var loggers_1 = require("../utils/loggers");
 _1.expressEventEmitter.on(_1.customExpressEvents.NEW_USER, function (newUser) {
     setImmediate(function () { return __awaiter(void 0, void 0, void 0, function () {
         var res, e_1;
@@ -48,11 +49,12 @@ _1.expressEventEmitter.on(_1.customExpressEvents.NEW_USER, function (newUser) {
                     return [4 /*yield*/, messaging_1.userTopic.publishJSON(newUser)];
                 case 1:
                     res = _a.sent();
-                    console.log(res);
+                    loggers_1.logger.debug("pub sub message id is " + res);
                     return [3 /*break*/, 3];
                 case 2:
                     e_1 = _a.sent();
-                    console.log(e_1);
+                    loggers_1.logger.error(e_1);
+                    loggers_1.errorLogger.error(e_1);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }

@@ -43,6 +43,7 @@ var AdditionalInfoDTO_to_AdditionalInfo_1 = require("../../utils/AdditionalInfoD
 var userNotFoundError_1 = require("../../errors/userNotFoundError");
 var authenticationError_1 = require("../../errors/authenticationError");
 var InvalidEntryError_1 = require("../../errors/InvalidEntryError");
+var loggers_1 = require("../../utils/loggers");
 // Get All Users
 function getAllUsers() {
     return __awaiter(this, void 0, void 0, function () {
@@ -60,7 +61,8 @@ function getAllUsers() {
                     return [2 /*return*/, results.rows.map(UserDTO_to_User_converter_1.UserDTOtoUserConvertor)];
                 case 3:
                     e_1 = _a.sent();
-                    console.log(e_1);
+                    loggers_1.logger.error(e_1);
+                    loggers_1.errorLogger.error(e_1);
                     throw new Error('Unhandled Error Occured');
                 case 4:
                     client && client.release();
@@ -94,7 +96,8 @@ function getUserById(id) {
                     if (e_2.message === 'User Not Found') {
                         throw new userNotFoundError_1.UserNotFoundError();
                     }
-                    console.log(e_2);
+                    loggers_1.logger.error(e_2);
+                    loggers_1.errorLogger.error(e_2);
                     throw new Error('Unhandled Error Occured');
                 case 4:
                     client && client.release();
@@ -128,7 +131,8 @@ function getUserByUsernameAndPassword(username, password) {
                     if (e_3.message === 'User Not Found') {
                         throw new authenticationError_1.AuthenticationError();
                     }
-                    console.log(e_3);
+                    loggers_1.logger.error(e_3);
+                    loggers_1.errorLogger.error(e_3);
                     throw new Error('Unhandled Error Occured');
                 case 4:
                     client && client.release();
@@ -173,7 +177,8 @@ function saveOneUser(newUser) {
                     if (e_4.message === 'Not Submitted') {
                         throw new InvalidEntryError_1.InvalidEntryError();
                     }
-                    console.log(e_4);
+                    loggers_1.logger.error(e_4);
+                    loggers_1.errorLogger.error(e_4);
                     throw new Error('Unhandled Error Occured');
                 case 6:
                     client && client.release();
@@ -265,7 +270,8 @@ function updateOneUser(updatedUser) {
                     if (e_5.message === 'User not found') {
                         throw new userNotFoundError_1.UserNotFoundError();
                     }
-                    console.log(e_5);
+                    loggers_1.logger.error(e_5);
+                    loggers_1.errorLogger.error(e_5);
                     throw new Error('Unhandled Error Occured');
                 case 15:
                     client && client.release();
@@ -299,7 +305,8 @@ function deleteUser(deletedUser) {
                     if (e_6.message === 'User not found') {
                         throw new userNotFoundError_1.UserNotFoundError();
                     }
-                    console.log(e_6);
+                    loggers_1.logger.error(e_6);
+                    loggers_1.errorLogger.error(e_6);
                     throw new Error('Unhandled Error Occured');
                 case 4:
                     client && client.release();
@@ -326,11 +333,12 @@ function getAdditionalInfoById(userId) {
                 case 2:
                     additionalInfo = _a.sent();
                     reformattedInfo = additionalInfo.rows.map((AdditionalInfoDTO_to_AdditionalInfo_1.userInfoDTOToUserInfo));
-                    console.log(reformattedInfo);
+                    //logger.debug(reformattedInfo)
                     return [2 /*return*/, reformattedInfo];
                 case 3:
                     e_7 = _a.sent();
-                    console.log(e_7);
+                    loggers_1.logger.error(e_7);
+                    loggers_1.errorLogger.error(e_7);
                     throw new Error('Error with getting Additional Info using User Id');
                 case 4:
                     client && client.release();
@@ -374,7 +382,8 @@ function newStateSubscription(newSub) {
                     if (e_8.message === 'Not Submitted') {
                         throw new InvalidEntryError_1.InvalidEntryError();
                     }
-                    console.log(e_8);
+                    loggers_1.logger.error(e_8);
+                    loggers_1.errorLogger.error(e_8);
                     throw new Error('Unhandled Error Occured');
                 case 6:
                     client && client.release();
@@ -408,7 +417,8 @@ function deleteSub(deletedSub) {
                     if (e_9.message === 'User not found') {
                         throw new userNotFoundError_1.UserNotFoundError();
                     }
-                    console.log(e_9);
+                    loggers_1.logger.error(e_9);
+                    loggers_1.errorLogger.error(e_9);
                     throw new Error('Unhandled Error Occured');
                 case 4:
                     client && client.release();
@@ -437,7 +447,8 @@ function getUserThresholds(stateId) {
                     return [2 /*return*/, reformattedInfo];
                 case 3:
                     e_10 = _a.sent();
-                    console.log(e_10);
+                    loggers_1.logger.error(e_10);
+                    loggers_1.errorLogger.error(e_10);
                     throw new Error('Error with getting user+additional info by state id');
                 case 4: return [2 /*return*/];
             }
