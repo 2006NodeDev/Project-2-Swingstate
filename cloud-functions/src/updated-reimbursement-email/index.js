@@ -11,8 +11,8 @@ const transporter = nodemailer.createTransport({
 const messageTemplate = {
   from: process.env['EMAIL'],
   to: '',
-  subject: 'Your Reimbursement Has Been Updated',
-  text: 'Hello! Your reimbursement has been updated. Log in to your account to see the updates.'
+  subject: 'Your polling threshold has been exceeded',
+  text: 'Hello, one of your tracked states have recieved a new poll that exceeds your set threshold. Log in to your account to view the change. Thank you.'
 }
 
 /**
@@ -25,7 +25,7 @@ exports.updatedReimbursementEmail = (event, context) => {
 
   let updatedReimbursement = JSON.parse(Buffer.from(event.data, 'base64').toString())
 
-  messageTemplate.to = updatedReimbursement.email
+  messageTemplate.to = newAlert.email
 
   transporter.sendMail(messageTemplate)
 };

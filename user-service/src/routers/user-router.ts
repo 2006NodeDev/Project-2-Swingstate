@@ -210,7 +210,7 @@ userRouter.delete('/additional-user-info/subscription', async (req: Request, res
         res.status(400).send("You must include a userId number for the subscription you wish to unsubscribe from.")
     }
 })
-userRouter.get('/user-thresholds/:stateId', async (req:Request, res:Response) =>{
+userRouter.get('/user-thresholds/:stateId', async (req:Request, res:Response, next:NextFunction) =>{
     let {stateId} = req.params
 
     
@@ -218,7 +218,7 @@ userRouter.get('/user-thresholds/:stateId', async (req:Request, res:Response) =>
     let userAndAdditionalInfo = await getUserThresholds(+stateId)
     res.json(userAndAdditionalInfo)
     }catch(e){
-        console.log(e)
+        next(e)
     }
 })
 

@@ -1,14 +1,17 @@
 import { expressEventEmitter, customExpressEvents } from ".";
-import { User } from "../models/User";
-import { userTopic } from "../messaging";
+import { pollTopic } from "../messaging";
 import { logger, errorLogger } from "../utils/loggers";
+import { UserAndPollingThreshold } from "../models/UserAndPollingThreshold";
 
 
-expressEventEmitter.on(customExpressEvents.NEW_USER, (newUser: User) => {
+expressEventEmitter.on(customExpressEvents.NEW_POLL, (newAlert: UserAndPollingThreshold) => {
     
     setImmediate(async () => {
         try {
-            let res = await userTopic.publishJSON(newUser)
+            let res = await pollTopic.publishJSON({
+                type:'newAlert',
+                payload:newAlert
+            })
             logger.debug(`pub sub message id is ${res}`);
             
         } catch (e) {

@@ -9,8 +9,9 @@ import { corsFilter } from './middleware/cors-filter'
 import './event-listeners/new-user'
 import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
 import jwt from 'jsonwebtoken'
+import { logger, errorLogger } from './utils/loggers'
 
-// console.log(userTopic);
+// logger.debug(userTopic);
 
 const app = express()
 
@@ -52,13 +53,21 @@ app.use((err, req, res, next) => {
         res.status(err.statusCode).send(err.message)
     } else {
        
-        console.log(err)
+        logger.error(err)
+        errorLogger.error(err)
         
         res.status(500).send('Oops, Something went wrong')
     }
 })
 
 app.listen(2020, () => {
-    console.log('Server Has Started');
+    logger.info('Server Has Started');
     
+})
+
+//Uncaught Errors write out a fatal log, then close the program
+process.on('uncaughtException', err => {
+    logger.fatal(`Uncaught Exception: ${err.message} ${err.stack}`)
+    errorLogger.fatal(`Uncaught Exception: ${err.message} ${err.stack}`)
+    process.exit(1)
 })

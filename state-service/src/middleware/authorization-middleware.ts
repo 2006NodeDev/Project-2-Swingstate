@@ -1,5 +1,7 @@
 // import { Request, Response, NextFunction } from "express";
 
+// import { logger } from "../utils/loggers";
+
 
 
 // export function authorizationMiddleware(roles: string[], userId?: boolean){
@@ -7,7 +9,7 @@
 //         let allowed = false
        
 //             if(req.user.role == roles){
-//                 console.log(roles);
+//                 logger.debug(roles);
                 
 //                 allowed = true
 
