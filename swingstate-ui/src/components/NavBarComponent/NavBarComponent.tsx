@@ -65,9 +65,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
             <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.user_id}`}>Edit Profile</Link></MenuItem>,
             <MenuItem key={'myState'} onClick={handleClose}><Link to={`/my-states/${props.user.user_id}`}>My States</Link></MenuItem>,
             <MenuItem key={'addSub'} onClick={handleClose}><Link to={`/add-subscription`}>Add Subscription</Link></MenuItem>,
-            <MenuItem key={'deleteSub'} onClick={handleClose}><Link to={`/delete-subscription`}>Delete Subscription</Link></MenuItem>,
-            <MenuItem key={'myState'} onClick={handleClose}><Link to={`/my-states/${props.user.user_id}`}>My States</Link></MenuItem>, 
-            <MenuItem key={'newPoll'} onClick={handleClose}> <Link to={`/new-poll`}>Submit A New Poll</Link></MenuItem>
+            <MenuItem key={'deleteSub'} onClick={handleClose}><Link to={`/delete-subscription`}>Delete Subscription</Link></MenuItem>, <MenuItem key={'newPoll'} onClick={handleClose}> <Link to={`/new-poll`}>Submit A New Poll</Link></MenuItem>
             )
     }
     if (props.user && props.user.role === 'Admin') {

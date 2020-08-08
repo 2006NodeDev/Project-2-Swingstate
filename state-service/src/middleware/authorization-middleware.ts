@@ -1,32 +1,34 @@
-import { Request, Response, NextFunction } from "express";
+// import { Request, Response, NextFunction } from "express";
+
+// import { logger } from "../utils/loggers";
 
 
 
-export function authorizationMiddleware(roles: string[], userId?: boolean){
-    return (req:Request, res:Response, next:NextFunction) => {
-        let allowed = false
+// export function authorizationMiddleware(roles: string[], userId?: boolean){
+//     return (req:Request, res:Response, next:NextFunction) => {
+//         let allowed = false
        
-            if(req.session.user.role.role == roles){
-                console.log(roles);
+//             if(req.user.role == roles){
+//                 logger.debug(roles);
                 
-                allowed = true
+//                 allowed = true
 
-            }
-        if(userId){
-            let id = +req.params.userId
+//             }
+//         if(userId){
+//             let id = +req.params.userId
 
-            if(!isNaN(id)){
-                if(req.session.user.userId == id) {
-                    allowed = true
-                }
-            }
-        }
+//             if(!isNaN(id)){
+//                 if(req.user.userId == id) {
+//                     allowed = true
+//                 }
+//             }
+//         }
         
-        if(allowed){
-            next()
-        }else{
-            res.status(401).send('The incoming token has expired');
-        }
-    }
+//         if(allowed){
+//             next()
+//         }else{
+//             res.status(401).send('The incoming token has expired');
+//         }
+//     }
 
-}
+// }

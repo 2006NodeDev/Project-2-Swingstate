@@ -1,8 +1,8 @@
 import { saveProfilePicture } from "../daos/CloudStorage/state-images";
 import { bucketBaseUrl } from "../daos/CloudStorage";
-import { expressEventEmitter, customExpressEvents } from "../event-listeners";
 import { State } from "../models/State";
 import { getAllStates, getStatesById, saveOneState } from "../daos/SQL/state-dao";
+import { logger, errorLogger } from "../utils/loggers";
 
 export async function getAllStatesService(): Promise<State[]> {
     return await getAllStates()
@@ -27,10 +27,10 @@ export async function saveOneStateService(newState: State): Promise<State> {
         let savedState = await saveOneState(newState)
 
         await saveProfilePicture(contentType, imageBase64Data, `states/${newState.stateName}/profile.${contentType}`)
-        expressEventEmitter.emit(customExpressEvents.NEW_STATE, newState)
         return savedState
     } catch (e) {
-        console.log(e)
+        logger.error(e)
+        errorLogger.error(e)
         throw e
     }
 

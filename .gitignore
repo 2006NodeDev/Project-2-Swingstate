@@ -9,6 +9,9 @@ node_modules
 /.pnp
 .pnp.js
 
+#logs
+logs
+
 # testing
 /coverage
 nginx-1.19.1
