@@ -45,6 +45,8 @@ var poll_service_1 = require("../services/poll-service");
 var poll_dao_1 = require("../daos/SQL/poll-dao");
 var get_thresholds_by_state_id_1 = require("../remote/user-service/get-thresholds-by-state-id");
 var userAndThresholdDTO_to_userAndThreshold_1 = require("../utils/userAndThresholdDTO-to-userAndThreshold");
+var loggers_1 = require("../utils/loggers");
+var event_listeners_1 = require("../event-listeners");
 exports.pollingRouter = express_1.default.Router();
 exports.pollingRouter.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var allPolls;
@@ -58,7 +60,7 @@ exports.pollingRouter.get('/', function (req, res) { return __awaiter(void 0, vo
         }
     });
 }); });
-exports.pollingRouter.get('/:pollId', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.pollingRouter.get('/:pollId', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var pollId, poll, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -76,7 +78,7 @@ exports.pollingRouter.get('/:pollId', function (req, res) { return __awaiter(voi
                 return [3 /*break*/, 4];
             case 3:
                 e_1 = _a.sent();
-                console.log(e_1);
+                next(e_1);
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
@@ -128,7 +130,7 @@ exports.pollingRouter.patch('/', function (req, res, next) { return __awaiter(vo
     });
 }); });
 //add a new poll
-exports.pollingRouter.post('/new-poll', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.pollingRouter.post('/new-poll', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, pollId, pollDate, pollName, democraticPercent, republicanPercent, stateId, margin, updatedPoll, newPoll, userPollingThresholds, reformattedThresholds, _i, reformattedThresholds_1, threshold, e_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -168,14 +170,15 @@ exports.pollingRouter.post('/new-poll', function (req, res) { return __awaiter(v
                     threshold = reformattedThresholds_1[_i];
                     if (threshold.pollingThreshold <= newPoll.margin) {
                         //to laura- this is where you can build your pubsub function- you can access the userId and their email through the 'threshold' object
-                        console.log("Send a pubSub querry for the user with the following userId: " + threshold.userId + " and email: " + threshold.email);
+                        event_listeners_1.expressEventEmitter.emit(event_listeners_1.customExpressEvents.NEW_POLL, reformattedThresholds);
+                        loggers_1.logger.debug("Send a pubSub querry for the user with the following userId: " + threshold.userId + " and email: " + threshold.email);
                     }
                 }
                 res.json(newPoll);
                 return [3 /*break*/, 5];
             case 4:
                 e_3 = _b.sent();
-                console.log(e_3);
+                next(e_3);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }

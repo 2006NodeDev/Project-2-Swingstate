@@ -39,8 +39,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.saveOneStateService = exports.getStateByIDService = exports.getAllStatesService = void 0;
 var state_images_1 = require("../daos/CloudStorage/state-images");
 var CloudStorage_1 = require("../daos/CloudStorage");
-var event_listeners_1 = require("../event-listeners");
 var state_dao_1 = require("../daos/SQL/state-dao");
+var loggers_1 = require("../utils/loggers");
 function getAllStatesService() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -82,11 +82,11 @@ function saveOneStateService(newState) {
                     return [4 /*yield*/, state_images_1.saveProfilePicture(contentType, imageBase64Data, "states/" + newState.stateName + "/profile." + contentType)];
                 case 2:
                     _b.sent();
-                    event_listeners_1.expressEventEmitter.emit(event_listeners_1.customExpressEvents.NEW_STATE, newState);
                     return [2 /*return*/, savedState];
                 case 3:
                     e_1 = _b.sent();
-                    console.log(e_1);
+                    loggers_1.logger.error(e_1);
+                    loggers_1.errorLogger.error(e_1);
                     throw e_1;
                 case 4: return [2 /*return*/];
             }

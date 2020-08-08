@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userServiceGetThresholdByStateId = void 0;
 var _1 = require(".");
+var loggers_1 = require("../../utils/loggers");
 exports.userServiceGetThresholdByStateId = function (stateId /*, token: str */) { return __awaiter(void 0, void 0, void 0, function () {
     var thresholds, e_1;
     return __generator(this, function (_a) {
@@ -50,7 +51,8 @@ exports.userServiceGetThresholdByStateId = function (stateId /*, token: str */) 
                 return [2 /*return*/, thresholds.data];
             case 2:
                 e_1 = _a.sent();
-                console.log(e_1);
+                loggers_1.logger.error(e_1);
+                loggers_1.errorLogger.error(e_1);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

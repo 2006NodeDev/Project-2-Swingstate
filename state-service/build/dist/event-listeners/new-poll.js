@@ -1,5 +1,4 @@
 "use strict";
-//import { Response } from "express";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -37,36 +36,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findUsersForStateID = void 0;
-var loggers_1 = require("./loggers");
-function findUsersForStateID(stateId) {
-    return __awaiter(this, void 0, void 0, function () {
-        var http;
-        var _this = this;
+var _1 = require(".");
+var messaging_1 = require("../messaging");
+var loggers_1 = require("../utils/loggers");
+_1.expressEventEmitter.on(_1.customExpressEvents.NEW_POLL, function (newAlert) {
+    setImmediate(function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res, e_1;
         return __generator(this, function (_a) {
-            http = require('http');
-            http.get("http://localhost:80/users/", function (resp) { return __awaiter(_this, void 0, void 0, function () {
-                var data;
-                return __generator(this, function (_a) {
-                    data = '';
-                    resp.on('data', function (chunk) {
-                        data += chunk;
-                    });
-                    //logger.debug(data)
-                    //logger.debug(JSON.parse(data))
-                    // The whole response has been received. Print out the result.
-                    resp.on('end', function () {
-                        loggers_1.logger.debug(JSON.parse(data).explanation);
-                    });
-                    return [2 /*return*/];
-                });
-            }); }).on("error", function (err) {
-                loggers_1.logger.error("Error: " + err.message);
-                loggers_1.errorLogger.error(err);
-            });
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, messaging_1.pollTopic.publishJSON({
+                            type: 'newAlert',
+                            payload: newAlert
+                        })];
+                case 1:
+                    res = _a.sent();
+                    loggers_1.logger.debug("pub sub message id is " + res);
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_1 = _a.sent();
+                    loggers_1.logger.error(e_1);
+                    loggers_1.errorLogger.error(e_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
         });
-    });
-}
-exports.findUsersForStateID = findUsersForStateID;
-//# sourceMappingURL=retrieve-user-thersholds.js.map
+    }); });
+});
+//# sourceMappingURL=new-poll.js.map

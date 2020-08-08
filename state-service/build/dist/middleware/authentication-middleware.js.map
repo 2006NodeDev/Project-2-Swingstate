@@ -1,1 +1,1 @@
-{"version":3,"file":"authentication-middleware.js","sourceRoot":"","sources":["../../../src/middleware/authentication-middleware.ts"],"names":[],"mappings":"AAAA,6DAA6D;AAE7D,0FAA0F;AAC1F,sBAAsB;AACtB,+CAA+C;AAC/C,cAAc;AACd,gGAAgG;AAChG,iBAAiB;AACjB,QAAQ;AACR,IAAI"}
+{"version":3,"file":"authentication-middleware.js","sourceRoot":"","sources":["../../../src/middleware/authentication-middleware.ts"],"names":[],"mappings":"AAAA,6DAA6D;AAC7D,6CAA6C;AAE7C,0FAA0F;AAC1F,sBAAsB;AACtB,+CAA+C;AAC/C,cAAc;AACd,iGAAiG;AACjG,iBAAiB;AACjB,QAAQ;AACR,IAAI"}

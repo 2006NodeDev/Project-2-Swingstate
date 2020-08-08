@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.saveProfilePicture = void 0;
 var _1 = require(".");
+var loggers_1 = require("../../utils/loggers");
 function saveProfilePicture(contentType, imageBase64Data, fileName) {
     return __awaiter(this, void 0, void 0, function () {
         var newImage, e_1;
@@ -46,7 +47,7 @@ function saveProfilePicture(contentType, imageBase64Data, fileName) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     newImage = _1.imageBucket.file(fileName);
-                    console.log(newImage);
+                    loggers_1.logger.info(newImage);
                     return [4 /*yield*/, newImage.save(Buffer.from(imageBase64Data, 'base64'), {
                             metadata: {
                                 contentType: contentType
@@ -54,11 +55,12 @@ function saveProfilePicture(contentType, imageBase64Data, fileName) {
                         })];
                 case 1:
                     _a.sent();
-                    console.log('post file save');
+                    loggers_1.logger.debug(fileName + " was saved to storage bucket");
                     return [3 /*break*/, 3];
                 case 2:
                     e_1 = _a.sent();
-                    console.log(e_1);
+                    loggers_1.errorLogger.error(e_1);
+                    loggers_1.logger.error(e_1);
                     throw e_1;
                 case 3: return [2 /*return*/];
             }
