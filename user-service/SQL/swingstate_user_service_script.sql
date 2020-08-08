@@ -17,7 +17,7 @@ insert into users ("username","password","email","home_state","user_image","role
 	        ('Emma','password','emma@mail@mail.com', 'New York','http://dummyimage.com/241x101.jpg/dddddd/000000', 'Admin'),
 			('Tanique','password','tanique@mail.com', 'Chicago','http://dummyimage.com/154x146.png/5fa2dd/ffffff', 'Admin'),
 			('Cecilia','password','cecilia@mail.com', 'Ohio','http://dummyimage.com/154x146.png/5fa2dd/ffffff', 'Admin'),
-			('Laura','password','laura@mail.com', 'Florida','http://dummyimage.com/154x146.png/5fa2dd/ffffff', 'Admin'),
+			('Laura','password','node2006@lsquaredmath.us', 'Florida','http://dummyimage.com/154x146.png/5fa2dd/ffffff', 'Admin'),
 			('zkenford5', 'iYkNkvw', 'ttremmel5@google.ca', 'New Jersey', 'http://dummyimage.com/130x176.bmp/dddddd/000000', 'User'),
             ('aparradine6', 'wuc5DB', 'sgermann6@baidu.com', 'California', 'http://dummyimage.com/156x247.png/cc0000/ffffff', 'User'),
             ('bkardos7', 'lQLYKuOqE', 'nsante7@ocn.ne.jp', 'Oregon', 'http://dummyimage.com/246x147.bmp/dddddd/000000', 'User'),
@@ -46,6 +46,12 @@ insert into user_state_bridge ("user_id", "state_id", "update_frequency", "polli
 			(5, 10, 3, 10);
 
 select * from user_state_bridge;
+    
+    
+  	
+select * from
+	 ( select * from users natural join roles) as Adminteam order by roleid, userid;
+
 
 
 

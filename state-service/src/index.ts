@@ -1,13 +1,18 @@
 import express, { Request, Response } from 'express'
 import { loggingMiddleware } from './middleware/logging-middleware'
 import { corsFilter } from './middleware/cors-filter'
-// import { userTopic } from './messaging/index'
+//import { userTopic } from './messaging/index'
 import './event-listeners/new-state'
 import { stateRouter } from './routers/state-router'
 import { pollingRouter } from './routers/polling-router'
 import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
+import './messaging/index'
+import { pollTopic } from './messaging/index'
 
-//console.log(userTopic);
+console.log(pollTopic);
+/*pollTopic2.then((e)=>{
+    console.log(e);
+})*/
 
 const app = express()
 
