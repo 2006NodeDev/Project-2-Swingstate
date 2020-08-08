@@ -1,14 +1,16 @@
 import express, { Request, Response } from 'express'
 import { loggingMiddleware } from './middleware/logging-middleware'
 import { corsFilter } from './middleware/cors-filter'
-// import { userTopic } from './messaging/index'
-import './event-listeners/new-state'
+import './event-listeners/new-poll'
+import './messaging/index'
+import './messaging/user-service-event-listeners'
 import { stateRouter } from './routers/state-router'
 import { pollingRouter } from './routers/polling-router'
 import { logger, errorLogger } from './utils/loggers'
-//import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
+import { pollTopic } from './messaging/index'
+// import { JWTVerifyMiddleware } from './middleware/jwt-verify-middleware'
 
-//logger.info(userTopic);
+logger.info(pollTopic);
 
 const app = express()
 
@@ -16,7 +18,7 @@ app.use(express.json({ limit: '50mb' }))
 
 app.use(loggingMiddleware)
 app.use(corsFilter)
-//app.use(JWTVerifyMiddleware)
+// app.use(JWTVerifyMiddleware)
 
 app.use('/states', stateRouter)
 app.use('/polls', pollingRouter)

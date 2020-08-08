@@ -6,6 +6,7 @@ import { userServiceGetThresholdByStateId } from '../remote/user-service/get-thr
 import { UserAndPollingThreshold } from '../models/UserAndPollingThreshold'
 import { userAndThresholdDTOConverter } from '../utils/userAndThresholdDTO-to-userAndThreshold'
 import { logger } from '../utils/loggers'
+import { expressEventEmitter, customExpressEvents } from '../event-listeners'
 export const pollingRouter = express.Router()
 
 pollingRouter.get('/', async (req: Request, res: Response) => {
@@ -94,6 +95,9 @@ pollingRouter.post('/new-poll', async (req:Request, res:Response, next: NextFunc
             for(let threshold of reformattedThresholds){
                 if(threshold.pollingThreshold <= newPoll.margin){
                     //to laura- this is where you can build your pubsub function- you can access the userId and their email through the 'threshold' object
+
+                    expressEventEmitter.emit(customExpressEvents.NEW_POLL, reformattedThresholds)
+
                     logger.debug(`Send a pubSub querry for the user with the following userId: ${threshold.userId} and email: ${threshold.email}`)
                 }
             }
