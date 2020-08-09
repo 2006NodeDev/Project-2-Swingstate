@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: swingstate-user-service-service
+  name: user-server-service
+  namespace: p2-swingstate
 spec:
   type: ClusterIP
   selector:
     app: swingstate
-    service: user-service
+    service: user-server
     deployment: uat
   ports:
     - protocol: TCP
