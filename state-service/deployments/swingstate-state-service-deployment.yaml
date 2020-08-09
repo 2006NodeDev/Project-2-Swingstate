@@ -1,10 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: swingstate-state-service-deployment
+  name: state-server-deployment
+  namespace: p2-swingstate
   labels:
     app: swingstate
-    service: state-service
+    service: state-server
     deployment: uat
 spec:
   replicas: 2
@@ -15,11 +16,11 @@ spec:
     metadata:
       labels:
         app: swingstate
-        service: state-service
+        service: state-server
     spec:
       containers:
-      - name: swingstate-state-service
-        image: gcr.io/focal-legacy-279818/swingstate-state-service
+      - name: state-server
+        image: gcr.io/focal-legacy-279818/state-server
         imagePullPolicy: Always
         env:
         - name: LB_HOST
@@ -31,11 +32,17 @@ spec:
         - name: LB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: swingstate-state-service-secrets
+              name: state-service-secrets
               key: password
         ports:
         - containerPort: 2021
         livenessProbe:
+          httpGet:
+            path: /health
+            port: 2021
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
           httpGet:
             path: /health
             port: 2021

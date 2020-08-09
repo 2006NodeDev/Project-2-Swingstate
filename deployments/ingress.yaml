@@ -1,17 +1,18 @@
 apiVersion: networking.k8s.io/v1beta1 # for versions before 1.14 use extensions/v1beta1
 kind: Ingress
 metadata:
-  name: swingstate-ingress
-  namespace: swingstate-demos
+  name: ingress
+  namespace: p2-swingstate
 spec:
   rules:
-  - http:
+  - host: swingstate.neurogrammer.com
+    http:
       paths:
       - path: /user-service/*
         backend:
-          serviceName: swingstate-user-service-service
+          serviceName: user-server-service
           servicePort: 2020
       - path: /state-service/*
         backend:
-          serviceName: swingstate-state-service-service
+          serviceName: state-server-service
           servicePort: 2021
