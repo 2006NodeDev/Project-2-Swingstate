@@ -37,7 +37,7 @@ app.post('/login', async (req:Request, res:Response, next:NextFunction)=>{
     } else {
         try{
             let user = await getUserByUsernameAndPassword(username, password)
-            let token = jwt.sign(user, process.env['SECRET'], {expiresIn: '1h'}) //THE SECRET should be in an env var
+            let token = jwt.sign(user, process.env['SECRET'], {expiresIn: '12h'}) //THE SECRET should be in an env var
             res.header('Authorization', `Bearer ${token}`)
             res.json(user)
         }catch(e){
