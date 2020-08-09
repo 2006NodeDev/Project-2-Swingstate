@@ -34,7 +34,7 @@ spec:
               name: swingstate-user-service-secrets
               key: password
         ports:
-        - containerPorts: 2020
+        - containerPort: 2020
         livenessProbe:
           httpGet:
             path: /health
