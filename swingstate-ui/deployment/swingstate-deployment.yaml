@@ -23,4 +23,4 @@ spec:
         image: gcr.io/focal-legacy-279818/swingstate-app:p2
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 80

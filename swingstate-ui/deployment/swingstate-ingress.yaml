@@ -9,8 +9,8 @@ spec:
       - path: /user-service/*
         backend:
           serviceName: swingstate-service
-          servicePort: 80
+          servicePort: 2020
       - path: /state-service/*
         backend:
           serviceName: swingstate-service
-          servicePort: 80
+          servicePort: 2021
